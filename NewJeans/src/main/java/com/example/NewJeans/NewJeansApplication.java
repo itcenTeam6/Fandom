@@ -9,5 +9,5 @@ public class NewJeansApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(NewJeansApplication.class, args);
 	}
-		//hhh
+
 }
