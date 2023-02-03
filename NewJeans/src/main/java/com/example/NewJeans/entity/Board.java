@@ -1,10 +1,9 @@
-package com.example.NewJeans.Entity;
+package com.example.NewJeans.entity;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 @Getter @Setter @ToString
