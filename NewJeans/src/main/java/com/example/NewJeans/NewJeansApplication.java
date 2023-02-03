@@ -11,5 +11,5 @@ public class NewJeansApplication {
 	}
 
 
-	//main test
+	//test2
 }
