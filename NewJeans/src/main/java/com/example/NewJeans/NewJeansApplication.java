@@ -10,6 +10,4 @@ public class NewJeansApplication {
 		SpringApplication.run(NewJeansApplication.class, args);
 	}
 
-
-	//branch test1
 }
