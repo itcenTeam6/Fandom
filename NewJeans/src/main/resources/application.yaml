@@ -1,0 +1,46 @@
+server:
+  port: 8085
+  servlet:
+    jsp:
+      init-parameters:
+        development: true
+
+logging:
+  level:
+    root: info
+    com:
+      example:
+        NewJeans: trace
+    org:
+      hibernate: info
+
+spring:
+  # DB source
+  datasource:
+    url: jdbc:mariadb://localhost:3306/demodb
+    username: root
+    password: mariadb
+
+  # JPA config
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        direct: org.hibernate.dialect.MariaDB106Dialect
+    show-sql: true
+    hibernate:
+      database: mysql
+      generate-ddl: true
+      ddl-auto: create
+
+  # JSP
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
+
+  # thymeleaf
+#  thymeleaf:
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    cache: false

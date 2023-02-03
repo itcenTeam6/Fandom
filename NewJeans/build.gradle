@@ -1,0 +1,55 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.8'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// jsp 설정
+	implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
+	implementation 'javax.servlet:jstl'
+
+	// thymeleaf 설정
+//	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	// 입력값 검증 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// mariadb JDBC 드라이버
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+	// spring jpa
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// spring security module
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// json web token 라이브러리
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
