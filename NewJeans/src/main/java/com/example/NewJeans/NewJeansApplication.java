@@ -10,5 +10,5 @@ public class NewJeansApplication {
 		SpringApplication.run(NewJeansApplication.class, args);
 	}
 
-	//커밋 체크
+	//커밋 체크2
 }
