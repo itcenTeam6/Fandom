@@ -1,6 +1,7 @@
 package com.example.NewJeans.service;
 
 import com.example.NewJeans.dto.request.CreateIdolImgRequestDTO;
+import com.example.NewJeans.dto.request.ModifyIdolImgRequestDTO;
 import com.example.NewJeans.dto.response.DetailIdolImgResponseDTO;
 import com.example.NewJeans.dto.response.ListIdolImgResponseDTO;
 import com.example.NewJeans.entity.IdolImg;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -52,6 +54,25 @@ public class IdolImgService {
                 .collect(Collectors.toList());
 
         return ListIdolImgResponseDTO.builder().idolImages(listImgResponseDTOs).build();
+    }
+
+    public DetailIdolImgResponseDTO update(Long imageId, ModifyIdolImgRequestDTO modifyIdolImgRequestDTO){
+        IdolImg idolImg = findVerifiedIdolImg(imageId);
+        Optional.ofNullable(modifyIdolImgRequestDTO.getIdolName())
+                .ifPresent(idolImg::setIdolName);
+        Optional.ofNullable(modifyIdolImgRequestDTO.getImgPath())
+                .ifPresent(idolImg::setImgPath);
+        Optional.ofNullable(modifyIdolImgRequestDTO.getMsType())
+                .ifPresent(idolImg::setMsType);
+        idolImg.setImgDate(LocalDateTime.now());
+
+        IdolImg savedIdolImg = idolImgRepository.save(idolImg);
+        return new DetailIdolImgResponseDTO(savedIdolImg);
+    }
+
+    public void remove(Long imageId){
+        IdolImg idolImg = findVerifiedIdolImg(imageId);
+        idolImgRepository.delete(idolImg);
     }
 
     public IdolImg findVerifiedIdolImg(Long imageId){

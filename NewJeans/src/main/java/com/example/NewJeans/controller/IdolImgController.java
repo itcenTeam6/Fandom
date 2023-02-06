@@ -1,7 +1,8 @@
-package com.example.NewJeans.Controller;
+package com.example.NewJeans.controller;
 
 
 import com.example.NewJeans.dto.request.CreateIdolImgRequestDTO;
+import com.example.NewJeans.dto.request.ModifyIdolImgRequestDTO;
 import com.example.NewJeans.dto.response.DetailIdolImgResponseDTO;
 import com.example.NewJeans.dto.response.ListIdolImgResponseDTO;
 import com.example.NewJeans.service.IdolImgService;
@@ -29,7 +30,7 @@ public class IdolImgController {
     //멤버쉽 이미지 등록
     @PostMapping
     public ResponseEntity<?> createImage(Model model, Authentication authentication,
-                                      @Validated CreateIdolImgRequestDTO createIdolImgRequestDTO,
+                                      @Validated @RequestBody CreateIdolImgRequestDTO createIdolImgRequestDTO,
                                       BindingResult result){
         authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
 
@@ -61,19 +62,21 @@ public class IdolImgController {
     // 멤버쉽 이미지 상세 보기
     @GetMapping("/{image-id}")
     public ResponseEntity<?> getImage(Model model,
-                           @Positive @PathVariable("image-id") int imageId,
+                           @Positive @PathVariable("image-id") Long imageId,
                            Authentication authentication){
         authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
+        log.info("이미지 상세 보기 실행");
+        DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.findIdolImg(imageId);
 
 
-
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(detailIdolImgResponseDTO);
     }
 
     // 관리자가 이미지 수정
     @RequestMapping(value="/{image-id}",method = {RequestMethod.PUT,RequestMethod.PATCH})
     public ResponseEntity<?> updateImage(Model model,
-                              @Positive @PathVariable("image-id") int imageId,
+                              @Positive @PathVariable("image-id") Long imageId,
+                              @Validated @RequestBody ModifyIdolImgRequestDTO modifyIdolImgRequestDTO,
                               Authentication authentication,
                               BindingResult result){
         authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
@@ -84,18 +87,20 @@ public class IdolImgController {
             return ResponseEntity.badRequest().build();
         }
 
+        DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.update(imageId, modifyIdolImgRequestDTO);
 
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(detailIdolImgResponseDTO);
     }
 
     // 관리자가 이미지 삭제
     @DeleteMapping("/{image-id}")
     public ResponseEntity<?> removeImage(Model model,
-                              @Positive @PathVariable("image-id")int imageId,
+                              @Positive @PathVariable("image-id")Long imageId,
                               Authentication authentication){
         authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
 
+        idolImgService.remove(imageId);
 
         return ResponseEntity.ok().build();
     }

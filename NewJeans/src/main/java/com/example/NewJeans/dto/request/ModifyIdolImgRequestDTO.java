@@ -1,6 +1,7 @@
 package com.example.NewJeans.dto.request;
 
 
+import com.example.NewJeans.entity.IdolImg;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -16,4 +17,6 @@ public class ModifyIdolImgRequestDTO {
     private String msType;
     @NotBlank
     private String idolName;
+
+
 }
