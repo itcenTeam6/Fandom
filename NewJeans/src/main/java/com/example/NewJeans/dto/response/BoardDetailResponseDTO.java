@@ -3,6 +3,7 @@ package com.example.NewJeans.dto.response;
 import com.example.NewJeans.entity.Board;
 import com.example.NewJeans.entity.IdolImg;
 import com.example.NewJeans.entity.Member;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -23,13 +24,13 @@ public class BoardDetailResponseDTO {
 
     private String boardFile;
 
+    @JsonFormat(pattern = "MM월 dd일 a hh시 mm분")
     private LocalDateTime boardDate;
 
     private int boardCnt;
 
     private int boardLike;
 
-    private IdolImg idolImg;
 
     public BoardDetailResponseDTO(Board entity){
 

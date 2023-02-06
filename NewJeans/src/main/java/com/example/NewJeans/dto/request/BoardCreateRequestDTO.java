@@ -6,6 +6,7 @@ import com.example.NewJeans.entity.Member;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Getter@Setter@ToString
 @NoArgsConstructor
@@ -14,21 +15,16 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public class BoardCreateRequestDTO {
 
+
     @NotBlank
     private String boardContent;
 
     private String boardFile;
 
-    private Idol idol;
-
-    private Member member;
-
     public Board toEntity(){
             return Board.builder()
                     .boardContent(this.boardContent)
                     .boardFile(this.boardFile)
-                    //.idol(this.idol)
-                   // .member(this.member)
                     .build();
     }
 
