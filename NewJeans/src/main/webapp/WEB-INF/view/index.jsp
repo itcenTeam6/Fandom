@@ -61,6 +61,7 @@
                 </a>
             </h1>
             <h2 class="intro-text">Welcome</h2>
+            <h2 class="intro-text">Login</h2>
             <a href="#" class="menu-open"><span class="menu-txt">MENU</span> <span class="lnr lnr-menu menu-img"></span></a>
         </div>
         <!-- gnb -->
