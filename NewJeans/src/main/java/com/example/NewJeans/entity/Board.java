@@ -6,10 +6,14 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter @Setter @ToString
-@AllArgsConstructor @NoArgsConstructor @ EqualsAndHashCode
-@Builder @Entity
-//@Table(name = "Board")
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@Builder
+@Entity
 public class Board {
 
     @Id
@@ -23,7 +27,7 @@ public class Board {
 
     @CreationTimestamp
     private LocalDateTime boardDate;
-    
+
     private int boardCnt;
 
     private int boardLike;
@@ -34,5 +38,5 @@ public class Board {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberID")
-    private  Member member;
+    private Member member;
 }

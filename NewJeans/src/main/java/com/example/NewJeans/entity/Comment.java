@@ -7,19 +7,19 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter@Setter@ToString
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "cmtID")
 @Builder
 
 @Entity
-//@Table(name = "Comment")
 public class Comment {
 
     @Id
-    @GeneratedValue(generator = "system-uuid") // 중복없는 랜덤문자로 pk 생성전략
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cmtID;
 
     @ManyToOne(fetch = FetchType.LAZY)
