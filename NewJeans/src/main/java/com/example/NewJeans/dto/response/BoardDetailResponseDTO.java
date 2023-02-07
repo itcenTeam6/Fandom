@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -32,6 +34,8 @@ public class BoardDetailResponseDTO {
 
     private int boardLike;
 
+    private List<CommentResponseDTO> comments;
+
 
     public BoardDetailResponseDTO(Board entity){
 
@@ -42,6 +46,7 @@ public class BoardDetailResponseDTO {
         this.boardDate=entity.getBoardDate();
         this.boardCnt=entity.getBoardCnt();
         this.boardLike=entity.getBoardLike();
+        this.comments=entity.getComments().stream().map(CommentResponseDTO::new).collect(Collectors.toList());
 
 
     }

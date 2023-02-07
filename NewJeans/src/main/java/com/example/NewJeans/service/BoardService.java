@@ -30,13 +30,15 @@ public class BoardService {
 
     //게시판 목록 조회  페이징 처리 필요
     @Transactional
-    public BoardListResponseDTO retrieve(Long idolId,int page, int size, String sort){ //Long memId,
+    public BoardListResponseDTO retrieve(Long idolId){ //Long memId,,int page, int size, String sort
 
         // Optional<Board> entityList = boardRepository.findByIdolId(idolId);//아이돌 번호에 맞는 게시판 목록 불러옴
         //페이징처리
-        Page<Board> pageBoards = boardRepository.findAll(PageRequest.of(page - 1, size, Sort.by(sort).descending()));
+       // Page<Board> pageBoards = boardRepository.findAll(PageRequest.of(page - 1, size, Sort.by(sort).descending()));
+        // List<Board> listBoards= pageBoards.getContent();
 
-        List<Board> listBoards= pageBoards.getContent();
+        Optional<Board> listBoards = boardRepository.findById(idolId);
+
 
         List<BoardDetailResponseDTO> dtoList = listBoards.stream()
                 .map(BoardDetailResponseDTO::new)
@@ -110,6 +112,10 @@ public class BoardService {
        // return retrieve();
         return null;
     }
+
+
+    //게시물 조회수
+
 
 
     }

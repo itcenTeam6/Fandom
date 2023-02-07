@@ -3,6 +3,7 @@ package com.example.NewJeans.Controller;
 
 import com.example.NewJeans.dto.request.BoardCreateRequestDTO;
 import com.example.NewJeans.dto.request.BoardModifyRequestDTO;
+import com.example.NewJeans.dto.response.BoardDetailResponseDTO;
 import com.example.NewJeans.dto.response.BoardListResponseDTO;
 import com.example.NewJeans.entity.Idol;
 import com.example.NewJeans.service.BoardService;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,34 +27,57 @@ public class BoardController {
 
     private final BoardService boardService;
 
+
     //게시글 목록 요청  idolID로 idol별 게시물 페이지 요청
+//    @GetMapping("/{idol-id}")
+//    public ResponseEntity<?> retrieveBoardList(
+//            //@AuthenticationPrincipal Long memId,
+//            Model model,
+//            @PathVariable("idol-id") Long idolId,
+//            @RequestParam(name = "page", required = false, defaultValue = "1")int page,
+//            @RequestParam(name = "size", required = false, defaultValue = "10")int size,
+//            @RequestParam(name = "sort", required = false, defaultValue = "idolID")String sort
+//    )
+//    {
+//        log.info("/board/{} Get request!",idolId);
+//
+//        try {
+//            BoardListResponseDTO responseDTO = boardService.retrieve(idolId,page,size,sort); //memId
+//            return ResponseEntity.ok().body(responseDTO);
+//
+//        } catch (Exception e) {
+//            return ResponseEntity.internalServerError()
+//                    .body(BoardListResponseDTO.builder().error(e.getMessage()));
+//
+//        }
+//
+//    }
     @GetMapping("/{idol-id}")
-    public ResponseEntity<?> retrieveBoardList(
+    public String retrieveBoardList(
             //@AuthenticationPrincipal Long memId,
-            @PathVariable("idol-id") Long idolId,
-            @RequestParam(name = "page", required = false, defaultValue = "1")int page,
-            @RequestParam(name = "size", required = false, defaultValue = "10")int size,
-            @RequestParam(name = "sort", required = false, defaultValue = "idolID")String sort
+            Model model,
+            @PathVariable("idol-id") Long idolId
+//            @RequestParam(name = "page", required = false, defaultValue = "1")int page,
+//            @RequestParam(name = "size", required = false, defaultValue = "10")int size,
+//            @RequestParam(name = "sort", required = false, defaultValue = "idolId")String sort
     )
     {
-        log.info("/board/{} Get request!",idolId);
+             log.info("/board/{} Get request!",idolId);
 
-        try {
-            BoardListResponseDTO responseDTO = boardService.retrieve(idolId,page,size,sort); //memId
-            return ResponseEntity.ok().body(responseDTO);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError()
-                    .body(BoardListResponseDTO.builder().error(e.getMessage()));
 
-        }
+            BoardListResponseDTO responseDTO = boardService.retrieve(idolId); //memId,page,size,sort
+            model.addAttribute("BoardList",responseDTO);
+            return "list";
+
     }
+
 
     //게시글 등록 요청   파일 업로드 추가 필요
     //@PostMapping("/{idol-id}")
     @PostMapping("/{idol-id}")
     public ResponseEntity<?> createBoard(
             //@AuthenticationPrincipal Long memId,
-             @PathVariable("idol-id") Long idolId,
+            @PathVariable("idol-id") Long idolId,
             @Validated @RequestBody BoardCreateRequestDTO requestDTO,
             BindingResult result
 
@@ -78,8 +103,6 @@ public class BoardController {
                     .body(BoardListResponseDTO.builder().error(e.getMessage()));
         }
 
-        //return "testBoardList";
-        //return null;
     }
 
 
@@ -138,6 +161,9 @@ public class BoardController {
         }
 
     }
+
+    //게시글 조회수
+
 }
 
 
