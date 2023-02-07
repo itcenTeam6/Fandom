@@ -4,8 +4,10 @@ import com.example.NewJeans.dto.request.CreateIdolImgRequestDTO;
 import com.example.NewJeans.dto.request.ModifyIdolImgRequestDTO;
 import com.example.NewJeans.dto.response.DetailIdolImgResponseDTO;
 import com.example.NewJeans.dto.response.ListIdolImgResponseDTO;
+import com.example.NewJeans.entity.Idol;
 import com.example.NewJeans.entity.IdolImg;
 import com.example.NewJeans.repository.IdolImgRepository;
+import com.example.NewJeans.repository.IdolRepository;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +27,14 @@ import java.util.stream.Collectors;
 public class IdolImgService {
 
     private final IdolImgRepository idolImgRepository;
+    private final IdolRepository idolRepository;
 
     public DetailIdolImgResponseDTO create(CreateIdolImgRequestDTO createIdolImgRequestDTO){
         // RequestDTO -> 엔티티
         IdolImg idolImg = createIdolImgRequestDTO.toEntity();
+        Optional<Idol> foundIdol = idolRepository.findByIdolName(idolImg.getIdolName());
+        Idol idol = foundIdol.orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
+        idolImg.setIdol(idol);
         idolImgRepository.save(idolImg);
         log.info("아이돌 이미지 업로드 완료 : {}",idolImg.getImgId());
 
