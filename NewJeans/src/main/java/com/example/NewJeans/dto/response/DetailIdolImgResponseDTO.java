@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @Builder
 public class DetailIdolImgResponseDTO {
     private Long imgId;
-    private Idol idolId;
     private String imgPath;
     private String msType;
     private String idolName;
@@ -25,7 +24,6 @@ public class DetailIdolImgResponseDTO {
 
     public DetailIdolImgResponseDTO(IdolImg entity){
         this.imgId = entity.getImgId();
-        this.idolId = entity.getIdol();
         this.imgPath = entity.getImgPath();
         this.msType = entity.getMsType();
         this.idolName = entity.getIdolName();

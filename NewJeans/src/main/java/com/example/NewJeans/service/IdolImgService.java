@@ -50,7 +50,7 @@ public class IdolImgService {
         List<IdolImg> listImgs = pageImgs.getContent();
         List<DetailIdolImgResponseDTO> listImgResponseDTOs = listImgs
                 .stream().
-                map(idolImg -> new DetailIdolImgResponseDTO(idolImg))
+                map(DetailIdolImgResponseDTO::new)
                 .collect(Collectors.toList());
 
         return ListIdolImgResponseDTO.builder().idolImages(listImgResponseDTOs).build();

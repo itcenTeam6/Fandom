@@ -32,7 +32,7 @@ public class IdolImgController {
     public ResponseEntity<?> createImage(Model model, Authentication authentication,
                                       @Validated @RequestBody CreateIdolImgRequestDTO createIdolImgRequestDTO,
                                       BindingResult result){
-        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
+//        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
 
         //CreateDTO가 잘못 입력된 경우 에러
         if(result.hasErrors()){
@@ -40,11 +40,16 @@ public class IdolImgController {
             return ResponseEntity.badRequest().build();
         }
 
-        DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.create(createIdolImgRequestDTO);
+        try {
+            DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.create(createIdolImgRequestDTO);
 
-        return new ResponseEntity<>(
-                detailIdolImgResponseDTO, HttpStatus.CREATED
-        );
+            return new ResponseEntity<>(
+                    detailIdolImgResponseDTO, HttpStatus.CREATED
+            );
+        } catch (RuntimeException e) {
+            log.warn("idolImage POST 에러 : {}",e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     //멤버쉽 이미지 보기
@@ -53,10 +58,14 @@ public class IdolImgController {
                                        @RequestParam(name = "page", required = false, defaultValue = "1")int page,
                                        @RequestParam(name = "size", required = false, defaultValue = "10")int size,
                                        @RequestParam(name = "sort", required = false, defaultValue = "imgId")String sort){
-        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
-        ListIdolImgResponseDTO listIdolImgResponseDTO = idolImgService.findIdolImgs(page,size,sort);
-
-        return ResponseEntity.ok().body(listIdolImgResponseDTO);
+//        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
+        try {
+            ListIdolImgResponseDTO listIdolImgResponseDTO = idolImgService.findIdolImgs(page,size,sort);
+            return ResponseEntity.ok().body(listIdolImgResponseDTO);
+        } catch (RuntimeException e) {
+            log.warn("idolImage GET(리스트) 에러 : {}", e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     // 멤버쉽 이미지 상세 보기
@@ -64,12 +73,17 @@ public class IdolImgController {
     public ResponseEntity<?> getImage(Model model,
                            @Positive @PathVariable("image-id") Long imageId,
                            Authentication authentication){
-        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
+//        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
         log.info("이미지 상세 보기 실행");
-        DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.findIdolImg(imageId);
 
 
-        return ResponseEntity.ok().body(detailIdolImgResponseDTO);
+        try {
+            DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.findIdolImg(imageId);
+            return ResponseEntity.ok().body(detailIdolImgResponseDTO);
+        } catch (RuntimeException e) {
+            log.warn("idolImage GET(상세) 에러 : {}", e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     // 관리자가 이미지 수정
@@ -79,7 +93,7 @@ public class IdolImgController {
                               @Validated @RequestBody ModifyIdolImgRequestDTO modifyIdolImgRequestDTO,
                               Authentication authentication,
                               BindingResult result){
-        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
+//        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
 
         //ModifyDTO가 잘못 입력된 경우 에러
         if(result.hasErrors()){
@@ -87,10 +101,12 @@ public class IdolImgController {
             return ResponseEntity.badRequest().build();
         }
 
-        DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.update(imageId, modifyIdolImgRequestDTO);
-
-
-        return ResponseEntity.ok().body(detailIdolImgResponseDTO);
+        try {
+            DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.update(imageId, modifyIdolImgRequestDTO);
+            return ResponseEntity.ok().body(detailIdolImgResponseDTO);
+        } catch (RuntimeException e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     // 관리자가 이미지 삭제
@@ -98,10 +114,14 @@ public class IdolImgController {
     public ResponseEntity<?> removeImage(Model model,
                               @Positive @PathVariable("image-id")Long imageId,
                               Authentication authentication){
-        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
+//        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
 
-        idolImgService.remove(imageId);
-
-        return ResponseEntity.ok().build();
+        try {
+            idolImgService.remove(imageId);
+            log.info("{}번 이미지 삭제 완료", imageId);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }
