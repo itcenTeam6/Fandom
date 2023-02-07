@@ -23,6 +23,8 @@ public class WebSecurityConfig {
                 .csrf()
                 .disable()
                 .httpBasic().disable();
+//                .authorizeRequests()
+//                .antMatchers("/membership").access("hasRole('member') or hasRole('admin')");
 
         return http.build();
     }

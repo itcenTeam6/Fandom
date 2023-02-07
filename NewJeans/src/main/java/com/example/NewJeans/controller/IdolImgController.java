@@ -29,7 +29,7 @@ public class IdolImgController {
 
     //멤버쉽 이미지 등록
     @PostMapping
-    public ResponseEntity<?> createImage(Model model, Authentication authentication,
+    public ResponseEntity<?> postImage(Model model, Authentication authentication,
                                       @Validated @RequestBody CreateIdolImgRequestDTO createIdolImgRequestDTO,
                                       BindingResult result){
 //        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
@@ -48,12 +48,12 @@ public class IdolImgController {
             );
         } catch (RuntimeException e) {
             log.warn("idolImage POST 에러 : {}",e.getMessage());
-            return ResponseEntity.internalServerError().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     //멤버쉽 이미지 보기
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<?> getImages(Model model, Authentication authentication,
                                        @RequestParam(name = "page", required = false, defaultValue = "1")int page,
                                        @RequestParam(name = "size", required = false, defaultValue = "10")int size,
@@ -64,7 +64,7 @@ public class IdolImgController {
             return ResponseEntity.ok().body(listIdolImgResponseDTO);
         } catch (RuntimeException e) {
             log.warn("idolImage GET(리스트) 에러 : {}", e.getMessage());
-            return ResponseEntity.internalServerError().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
@@ -82,13 +82,13 @@ public class IdolImgController {
             return ResponseEntity.ok().body(detailIdolImgResponseDTO);
         } catch (RuntimeException e) {
             log.warn("idolImage GET(상세) 에러 : {}", e.getMessage());
-            return ResponseEntity.internalServerError().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     // 관리자가 이미지 수정
     @RequestMapping(value="/{image-id}",method = {RequestMethod.PUT,RequestMethod.PATCH})
-    public ResponseEntity<?> updateImage(Model model,
+    public ResponseEntity<?> patchImage(Model model,
                               @Positive @PathVariable("image-id") Long imageId,
                               @Validated @RequestBody ModifyIdolImgRequestDTO modifyIdolImgRequestDTO,
                               Authentication authentication,
@@ -105,23 +105,24 @@ public class IdolImgController {
             DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.update(imageId, modifyIdolImgRequestDTO);
             return ResponseEntity.ok().body(detailIdolImgResponseDTO);
         } catch (RuntimeException e) {
-            return ResponseEntity.internalServerError().build();
+            log.warn("idolImage 수정 에러 : {}", e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     // 관리자가 이미지 삭제
     @DeleteMapping("/{image-id}")
-    public ResponseEntity<?> removeImage(Model model,
+    public ResponseEntity<?> deleteImage(Model model,
                               @Positive @PathVariable("image-id")Long imageId,
                               Authentication authentication){
 //        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
 
         try {
-            idolImgService.remove(imageId);
-            log.info("{}번 이미지 삭제 완료", imageId);
-            return ResponseEntity.ok().build();
+            DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.remove(imageId);
+            return ResponseEntity.ok().body(detailIdolImgResponseDTO);
         } catch (RuntimeException e) {
-            return ResponseEntity.internalServerError().build();
+            log.warn("idolImage 삭제 에러 : {}", e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 public class Idol {
+
     @Id
     @Column(name="idolID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

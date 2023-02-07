@@ -70,9 +70,11 @@ public class IdolImgService {
         return new DetailIdolImgResponseDTO(savedIdolImg);
     }
 
-    public void remove(Long imageId){
+    public DetailIdolImgResponseDTO remove(Long imageId){
         IdolImg idolImg = findVerifiedIdolImg(imageId);
         idolImgRepository.delete(idolImg);
+        log.info("{}번 이미지 삭제 완료", imageId);
+        return new DetailIdolImgResponseDTO(idolImg);
     }
 
     public IdolImg findVerifiedIdolImg(Long imageId){

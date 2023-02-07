@@ -1,28 +1,25 @@
 package com.example.NewJeans.dto.request;
 
-import com.example.NewJeans.entity.IdolImg;
+import com.example.NewJeans.entity.Idol;
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 
-//Beans
 @Getter @Setter @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class CreateIdolImgRequestDTO {
-    @NotBlank
-    private String imgPath;
-    private String msType;
+public class CreateIdolRequestDTO {
     @NotBlank
     private String idolName;
+    private String idolMainImg;
 
-    public IdolImg toEntity(){
-        return IdolImg.builder()
+    public Idol toEntity(){
+        return Idol.builder()
                 .idolName(this.idolName)
-                .imgPath(this.imgPath)
-                .msType(this.msType)
+                .idolMainImg(this.idolMainImg)
                 .build();
     }
 }
