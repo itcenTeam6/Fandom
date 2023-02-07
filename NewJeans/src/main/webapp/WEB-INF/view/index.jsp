@@ -51,8 +51,37 @@
 <body>
 
 <div class="wrap">
-    <!--header-->
-    <jsp:include page="./header/header.jsp" />
+    <!-- header -->
+    <header>
+        <div class="inner-header">
+            <h1 class="logo">
+                <a href="#">
+                    <img src="/img/logo.png" alt="logo">
+                    <img src="/img/logo2.png" alt="logo">
+                </a>
+            </h1>
+            <h2 class="intro-text">Welcome</h2>
+            <h2 class="intro-text">Login</h2>
+            <a href="#" class="menu-open"><span class="menu-txt">MENU</span> <span class="lnr lnr-menu menu-img"></span></a>
+        </div>
+        <!-- gnb -->
+        <nav class="gnb">
+            <a href="#" class="close">
+                <span class="lnr lnr-cross"></span>
+            </a>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Work</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Favorite</a></li>
+            </ul>
+        </nav>
+
+    </header>
+    <!-- //header -->
+
     <!-- section visual -->
     <section class="visual">
         <ul class="slide">
