@@ -1,6 +1,7 @@
 package com.example.NewJeans.service;
 
 import com.example.NewJeans.dto.request.BoardCreateRequestDTO;
+import com.example.NewJeans.dto.request.BoardModifyRequestDTO;
 import com.example.NewJeans.dto.response.BoardDetailResponseDTO;
 import com.example.NewJeans.dto.response.BoardListResponseDTO;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,12 +14,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-class BoardServiceTest {
-
-    @Autowired
-    BoardService boardService;
-
+//@SpringBootTest
+//class BoardServiceTest {
+//
+//    @Autowired
+//    BoardService boardService;
+//
 //    @BeforeEach
 //    void beforeInsert(){
 //
@@ -26,12 +27,14 @@ class BoardServiceTest {
 //                .boardContent("안녕하세요")
 //                .boardFile("이미지")
 //                .build();
-//                //.idol("")
-//                //.member()
+//
 //        BoardCreateRequestDTO dto2=BoardCreateRequestDTO.builder()
 //                .boardContent("안녕하세요2")
 //                .boardFile("이미지2")
 //                .build();
+//
+//        boardService.create(dto1);
+//        boardService.create(dto2);
 //
 //    }
 //
@@ -45,7 +48,7 @@ class BoardServiceTest {
 //                .build();
 //        //when
 //
-//        BoardListResponseDTO responseDTO=boardService.create(newBoard, 1L,1L);
+//        BoardListResponseDTO responseDTO=boardService.create(newBoard);
 //
 //
 //        //then
@@ -55,6 +58,33 @@ class BoardServiceTest {
 //        System.out.println("===============");
 //        boards.forEach(System.out::println);
 //    }
-
-
-}
+//
+//    @Test
+//    @DisplayName("2번째 게시물의 content를 바보로 수정 ")
+//    void updateTest() {
+//        // given
+//        String newTitle = "바보";
+//
+//        BoardModifyRequestDTO modifyRequestDTO
+//                = BoardModifyRequestDTO.builder()
+//                .boardContent(newTitle)
+//                .build();
+//
+//        // when
+//        BoardDetailResponseDTO targetTodo
+//                = boardService.retrieve().getBoards().get(1);
+//
+//        BoardListResponseDTO responseDTO
+//                = boardService.update(targetTodo.getBoardId(), modifyRequestDTO);
+//
+//        // then
+//        assertEquals("바보", responseDTO.getBoards().get(1).getBoardContent());
+//
+//        System.out.println("===========================================");
+//        responseDTO.getBoards().forEach(System.out::println);
+//    }
+//
+//
+//
+//
+//}

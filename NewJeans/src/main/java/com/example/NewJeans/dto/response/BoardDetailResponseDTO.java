@@ -18,7 +18,8 @@ import java.time.LocalDateTime;
 public class BoardDetailResponseDTO {
 
 
-    private Member memEmail;
+    private Long boardId;
+    private String memNickName;
 
     private String boardContent;
 
@@ -34,14 +35,13 @@ public class BoardDetailResponseDTO {
 
     public BoardDetailResponseDTO(Board entity){
 
-        this.memEmail=entity.getMember();
+        this.boardId=entity.getBoardID();
+        this.memNickName=entity.getMemNickName();
         this.boardContent=entity.getBoardContent();
         this.boardFile=entity.getBoardFile();
         this.boardDate=entity.getBoardDate();
         this.boardCnt=entity.getBoardCnt();
         this.boardLike=entity.getBoardLike();
-
-
 
 
     }

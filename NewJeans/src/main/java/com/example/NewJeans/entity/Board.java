@@ -16,6 +16,9 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardID;
 
+    //@Column(nullable = false)   //게시판에 작성자 닉네임
+    private String memNickName;
+
     @Column(nullable = false)
     private String boardContent;
 
