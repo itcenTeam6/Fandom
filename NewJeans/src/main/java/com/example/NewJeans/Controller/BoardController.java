@@ -67,7 +67,7 @@ public class BoardController {
 
             BoardListResponseDTO responseDTO = boardService.retrieve(idolId); //memId,page,size,sort
             model.addAttribute("BoardList",responseDTO);
-            return "list";
+            return "list";  //다시보기
 
     }
 
