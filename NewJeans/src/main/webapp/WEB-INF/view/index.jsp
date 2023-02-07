@@ -86,7 +86,7 @@
     <section class="visual">
         <ul class="slide">
             <li>
-                <img src="/img/visual1.jpg" alt="슬라이드 이미지1">
+                <img src="https://pbs.twimg.com/media/FFgr7uBVIAAoYYx.jpg:large" alt="슬라이드 이미지1">
                 <div class="txt">
                     <p>Creative design with Hong Studio</p>
                     <h3>Website & APP, <br>Responsive Web and <br>Brand Identity </h3>
@@ -95,7 +95,7 @@
                 <span class="scroll">Scroll down</span>
             </li>
             <li>
-                <img src="/img/visual2.jpg" alt="슬라이드 이미지2">
+                <img src="https://images.chosun.com/resizer/gst8Y76TWvb559SjLSh43AmEUrU=/2000x1333/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/GO7X3DGRXZDGAPFJJRGNZBR4VI.jpg" alt="슬라이드 이미지2">
                 <div class="txt">
                     <p>Creative design with Hong Studio</p>
                     <h3>Website & APP, <br>Responsive Web and <br>Brand Identity </h3>
@@ -104,7 +104,7 @@
                 <span class="scroll">Scroll down</span>
             </li>
             <li>
-                <img src="/img/visual3.jpg" alt="슬라이드 이미지3">
+                <img src="https://4kwallpapers.com/images/wallpapers/blackpink-pubg-mobile-pink-background-2560x1440-3105.jpg" alt="슬라이드 이미지3">
                 <div class="txt">
                     <p>Creative design with Hong Studio</p>
                     <h3>Website & APP, <br>Responsive Web and <br>Brand Identity </h3>
@@ -113,25 +113,7 @@
                 <span class="scroll">Scroll down</span>
             </li>
             <li>
-                <img src="/img/visual4.jpg" alt="슬라이드 이미지4">
-                <div class="txt">
-                    <p>Creative design with Hong Studio</p>
-                    <h3>Website & APP, <br>Responsive Web and <br>Brand Identity </h3>
-                    <a href="#">See the work <span class="lnr lnr-chevron-right"></span></a>
-                </div>
-                <span class="scroll">Scroll down</span>
-            </li>
-            <li>
-                <img src="/img/visual5.jpg" alt="슬라이드 이미지5">
-                <div class="txt">
-                    <p>Creative design with Hong Studio</p>
-                    <h3>Website & APP, <br>Responsive Web and <br>Brand Identity </h3>
-                    <a href="#">See the work <span class="lnr lnr-chevron-right"></span></a>
-                </div>
-                <span class="scroll">Scroll down</span>
-            </li>
-            <li>
-                <img src="/img/visual6.jpg" alt="슬라이드 이미지6">
+                <img src="https://dbkpop.com/wp-content/uploads/2022/09/le_sserafim_antifragile_teaser_frozen_aquamarine_all_group_2.jpg" alt="슬라이드 이미지4">
                 <div class="txt">
                     <p>Creative design with Hong Studio</p>
                     <h3>Website & APP, <br>Responsive Web and <br>Brand Identity </h3>
@@ -145,18 +127,18 @@
 
     <!-- section contents -->
     <section class="contents">
-        <div class="main-text animate" data-animate="fadeInUp" data-duration="1s" data-delay="0s">
+        <!-- <div class="main-text animate" data-animate="fadeInUp" data-duration="1s" data-delay="0s">
             <h3>Great experience <br> build great brands.</h3>
             <p>다양한 온라인 서비스들을 구축하고 운영해온 풍부한 경험으로<br class="mo">
                 UI/UX 기획과 디자인 그리고 구축에서 운영까지, 우리 스튜디오는<br class="mo">
                 고객의 비즈니스를 위해 수준 높은 결과물을 제작하는 크리에이티브<br class="mo">
                 파트너(Creative Partner) 입니다.
                 <span>Soongu Hong, HONG STUDIO</span></p>
-        </div>
+        </div> -->
 
         <div class="project">
             <div class="top">
-                <h3 class="animate" data-animate="fadeInLeft" data-duration="1s" data-delay="1s">Meet <br>Out Projects</h3>
+                <h3 class="animate" data-animate="fadeInLeft" data-duration="1s" data-delay="0s">Meet <br>Out Projects</h3>
                 <a href="#">More Projects
                     <span class="lnr lnr-chevron-right"></span>
                 </a>
@@ -164,7 +146,7 @@
             <ul class="animate" data-animate="fadeInUp" data-duration="1s" data-delay="0s">
                 <li>
                     <a href="#">
-                        <img src="/img/project1.jpg" alt="">
+                        <img src="https://pbs.twimg.com/media/FFgr7uBVIAAoYYx.jpg:large" alt="">
                         <div class="name">
                             <span>Website</span>
                             <h3>Linkin Aviation</h3>
@@ -173,7 +155,7 @@
                 </li>
                 <li>
                     <a href="#">
-                        <img src="/img/project2.jpg" alt="">
+                        <img src="https://4kwallpapers.com/images/wallpapers/blackpink-pubg-mobile-pink-background-2560x1440-3105.jpg" alt="">
                         <div class="name">
                             <span>Website</span>
                             <h3>HEESUNG LMS</h3>
@@ -182,7 +164,7 @@
                 </li>
                 <li>
                     <a href="#">
-                        <img src="/img/project3.png" alt="">
+                        <img src="https://images.chosun.com/resizer/gst8Y76TWvb559SjLSh43AmEUrU=/2000x1333/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/GO7X3DGRXZDGAPFJJRGNZBR4VI.jpg" alt="">
                         <div class="name">
                             <span>Website</span>
                             <h3>ORPHAN</h3>
@@ -191,7 +173,7 @@
                 </li>
                 <li>
                     <a href="#">
-                        <img src="/img/project4.jpg" alt="">
+                        <img src="https://dbkpop.com/wp-content/uploads/2022/09/le_sserafim_antifragile_teaser_frozen_aquamarine_all_group_2.jpg" alt="">
                         <div class="name">
                             <span>Website</span>
                             <h3>APMA WEB/APP</h3>
@@ -201,7 +183,7 @@
             </ul>
         </div>
 
-        <div class="partner">
+        <!-- <div class="partner">
             <h3>우리의 소중한 고객입니다.</h3>
             <ul class="animate" data-animate="fadeInRight" data-duration="1s" data-delay="0s">
                 <li><img src="/img/partner1.png" alt=""></li>
@@ -213,35 +195,21 @@
                 <li><img src="/img/partner7.png" alt=""></li>
                 <li><img src="/img/partner8.png" alt=""></li>
             </ul>
-        </div>
+        </div> -->
 
-        <div class="contact animate" data-animate="fadeIn" data-duration="2s" data-delay="0.3s">
+        <!-- <div class="contact animate" data-animate="fadeIn" data-duration="2s" data-delay="0.3s">
             <div class="inner">
                 <h3>당신의 프로젝트를 이야기해 주세요.</h3>
                 <p class="tel">010.7270.9984</p>
                 <p>모바일 앱/웹 디자인 및 웹 표준화 작업 <br> UI/UX설계 및 제안서 작성<br> 스프링 기반 웹사이트 구축 등을 제공합니다.</p>
             </div>
-        </div>
+        </div> -->
 
     </section>
     <!-- //section contents -->
 
-    <!-- footer-->
-    <footer>
-        <ul>
-            <li>Hong Studio<br>사업자등록번호:123-12-12345 <br>대표자:홍순구</li>
-            <li>
-                <span>A :</span>대전 서구 계룡로 637<br>
-                <span>T :</span>010.7270.9984<br>
-                <span>E :</span>hsg9984@kitt.co.kr<br>
-            </li>
-            <li> &#xa9 Hong Studio 2020 <br>All Rights Reseved</li>
-        </ul>
-        <a href="#top" class="go-top"><span class="lnr lnr-arrow-up"></span></a>
-    </footer>
-    <!-- //footer-->
-
-
+    <!-- footer -->
+    <jsp:include page="./header/footer.jsp" />
 </div>
 
 <!-- script-->

@@ -7,14 +7,15 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter@Setter@ToString
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "cmtID")
 @Builder
 
 @Entity
-//@Table(name = "Comment")
 public class Comment {
 
     @Id
