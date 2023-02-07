@@ -6,6 +6,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * 권한 : user : 일반회원, member : 멤버쉽회원, admin : 관리자 -> MemberShip테이블의 msType
+ * 인증 : 토큰 방식
+ * */
 @EnableWebSecurity
 public class WebSecurityConfig {
     @Bean
@@ -19,6 +23,8 @@ public class WebSecurityConfig {
                 .csrf()
                 .disable()
                 .httpBasic().disable();
+//                .authorizeRequests()
+//                .antMatchers("/membership").access("hasRole('member') or hasRole('admin')");
 
         return http.build();
     }
