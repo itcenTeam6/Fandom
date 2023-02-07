@@ -27,9 +27,10 @@ public class Comment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memID")
-    private Member memID;
+    private Member memId;
 
-    private String cmtContent;
+    @Column(columnDefinition = "TEXT",nullable = false)
+    private String cmtContent; //댓글 내용
 
     @CreationTimestamp
     private LocalDateTime cmtDate;

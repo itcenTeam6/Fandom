@@ -10,6 +10,9 @@ import com.example.NewJeans.entity.Idol;
 import com.example.NewJeans.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,10 +30,15 @@ public class BoardService {
 
     //게시판 목록 조회  페이징 처리 필요
     @Transactional
-    public BoardListResponseDTO retrieve(Idol idolId){ //Long memId,
-        Optional<Board> entityList = boardRepository.findByIdolId(idolId);//아이돌 번호에 맞는 게시판 목록 불러옴
+    public BoardListResponseDTO retrieve(Long idolId,int page, int size, String sort){ //Long memId,
 
-        List<BoardDetailResponseDTO> dtoList = entityList.stream()
+        // Optional<Board> entityList = boardRepository.findByIdolId(idolId);//아이돌 번호에 맞는 게시판 목록 불러옴
+        //페이징처리
+        Page<Board> pageBoards = boardRepository.findAll(PageRequest.of(page - 1, size, Sort.by(sort).descending()));
+
+        List<Board> listBoards= pageBoards.getContent();
+
+        List<BoardDetailResponseDTO> dtoList = listBoards.stream()
                 .map(BoardDetailResponseDTO::new)
                 .collect(Collectors.toList());
 
@@ -58,11 +66,11 @@ public class BoardService {
 
     //게시물 등록
 
-    public BoardListResponseDTO create(final BoardCreateRequestDTO createRequestDTO)//final Long memId,final Idol idolId
+    public BoardListResponseDTO create(final BoardCreateRequestDTO createRequestDTO,final Long idolId)//final Long memId,final Idol idolId
         throws RuntimeException
     {
         Board board=createRequestDTO.toEntity();
-       // board.setIdol(idolId);
+        //board.setIdol(idolId);
         
         boardRepository.save(board);
         log.info("게시물이 등록되었습니다. 내용:{} 파일:{}",createRequestDTO.getBoardContent(),createRequestDTO.getBoardFile());

@@ -29,13 +29,16 @@ public class BoardController {
     @GetMapping("/{idol-id}")
     public ResponseEntity<?> retrieveBoardList(
             //@AuthenticationPrincipal Long memId,
-            @PathVariable("idol-id") Idol idolId
+            @PathVariable("idol-id") Long idolId,
+            @RequestParam(name = "page", required = false, defaultValue = "1")int page,
+            @RequestParam(name = "size", required = false, defaultValue = "10")int size,
+            @RequestParam(name = "sort", required = false, defaultValue = "idolID")String sort
     )
     {
         log.info("/board/{} Get request!",idolId);
 
         try {
-            BoardListResponseDTO responseDTO = boardService.retrieve(idolId); //memId
+            BoardListResponseDTO responseDTO = boardService.retrieve(idolId,page,size,sort); //memId
             return ResponseEntity.ok().body(responseDTO);
         } catch (Exception e) {
             return ResponseEntity.internalServerError()
@@ -46,10 +49,10 @@ public class BoardController {
 
     //게시글 등록 요청   파일 업로드 추가 필요
     //@PostMapping("/{idol-id}")
-    @PostMapping
+    @PostMapping("/{idol-id}")
     public ResponseEntity<?> createBoard(
             //@AuthenticationPrincipal Long memId,
-            // @PathVariable("idol-id") Idol idolId,
+             @PathVariable("idol-id") Long idolId,
             @Validated @RequestBody BoardCreateRequestDTO requestDTO,
             BindingResult result
 
@@ -64,7 +67,7 @@ public class BoardController {
         }
 
         try {
-            BoardListResponseDTO boardListResponseDTO = boardService.create(requestDTO); //memId,idolId
+            BoardListResponseDTO boardListResponseDTO = boardService.create(requestDTO,idolId); //memId,idolId
             return ResponseEntity
                     .ok()
                     .body(boardListResponseDTO);
@@ -80,11 +83,12 @@ public class BoardController {
     }
 
 
-    //게시글 삭제 요청  작성자 OR 관리자
+    //게시글 삭제 요청  작성자 OR 관리자일 경우만 삭제
     @DeleteMapping("/{board-id}")  //헷갈린다
     public ResponseEntity<?> deleteBoard(
             //@AuthenticationPrincipal Long memId,
-            @PathVariable("board-id") Long boardId) {
+            @PathVariable("board-id") Long boardId)
+    {
         log.info("/board/{} DELETE request!", boardId);
 
         if (boardId == null) {

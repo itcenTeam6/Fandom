@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface BoardRepository extends JpaRepository<Board,Long> {
 
 
-    Optional<Board> findByIdolId(@Param("idolId") Idol idolId);
+    //Optional<Board> findByIdolId(@Param("idolId") Idol idolId);
 
 }

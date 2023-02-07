@@ -33,8 +33,8 @@ import static org.junit.jupiter.api.Assertions.*;
 //                .boardFile("이미지2")
 //                .build();
 //
-//        boardService.create(dto1);
-//        boardService.create(dto2);
+//        boardService.create(dto1, 1L);
+//        boardService.create(dto2, 2L);
 //
 //    }
 //
@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.*;
 //                .build();
 //        //when
 //
-//        BoardListResponseDTO responseDTO=boardService.create(newBoard);
+//        BoardListResponseDTO responseDTO=boardService.create(newBoard, 3L);
 //
 //
 //        //then
@@ -58,7 +58,7 @@ import static org.junit.jupiter.api.Assertions.*;
 //        System.out.println("===============");
 //        boards.forEach(System.out::println);
 //    }
-//
+
 //    @Test
 //    @DisplayName("2번째 게시물의 content를 바보로 수정 ")
 //    void updateTest() {
@@ -83,8 +83,8 @@ import static org.junit.jupiter.api.Assertions.*;
 //        System.out.println("===========================================");
 //        responseDTO.getBoards().forEach(System.out::println);
 //    }
-//
-//
-//
-//
+
+
+
+
 //}
