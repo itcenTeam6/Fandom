@@ -69,10 +69,11 @@ $memEmail.onkeyup=function() {
 
         if (!$memEmail.value) {
             $memEmailRight.innerHTML ='아이디는 필수로 입력해야 합니다.';
-              $memEmailRight.style.color='white';
+              $memEmailRight.style.color='red';
         }else if (!emailRegex.test($memEmail.value)) {
               $memEmailRight.innerHTML ='이메일 형식에 맞춰서 입력해 주세요.';
-              $memEmailRight.style.color='white';
+              $memEmailRight.style.color='red';
+
         }else{
             $memEmailRight.innerHTML ='';
             fetch(`/member/check?memEmail=`+$memEmail.value)
@@ -80,9 +81,11 @@ $memEmail.onkeyup=function() {
             .then(flag=>{
                   if(flag){
                      $memEmailRight.innerHTML ='중복된 이메일 입니다.';
+                      $memEmailRight.style.color='red';
 
                 }else{
                       $memEmailRight.innerHTML ='가입 할 수 있는 이메일 입니다.';
+                       $memEmailRight.style.color='white';
                       flag1=true;
                 }
              } );
@@ -95,12 +98,13 @@ $memPassword.onkeyup=function() {
     const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
     if (!$memPassword.value) {
                 $memPasswordRight.innerHTML ='비밀번호는 필수값입니다!';
-                $memPasswordRight.style.color='white';
+                $memPasswordRight.style.color='red';
             } else if (!pwRegex.test($memPassword.value)) {
                 $memPasswordRight.innerHTML = '8글자 이상의 영문,숫자,특수문자를 포함해주세요!';
-                 $memPasswordRight.style.color='white';
+                 $memPasswordRight.style.color='red';
             } else {
                 $memPasswordRight.innerHTML = '사용 가능한 비밀번호입니다.';
+                $memPasswordRight.style.color='white';
                 flag2=true;
             }
 
@@ -111,10 +115,10 @@ $memPassword.onkeyup=function() {
 $memPasswordCheck.onkeyup=function() {
                if (!$memPasswordCheck.value) { //패스워드 안적은 상황
                     $memPasswordCheckRight.innerHTML ='비밀번호는 필수값입니다!';
-                     $memPasswordCheckRight.style.color='white';
+                     $memPasswordCheckRight.style.color='red';
                    } else if ($memPasswordCheck.value!==$memPassword.value) {
                        $memPasswordCheckRight.innerHTML = '1차 비밀번호와 일치하게 작성해주세요!';
-                            $memPasswordCheckRight.style.color='white';
+                            $memPasswordCheckRight.style.color='red';
                    } else {
                         $memPasswordCheckRight.style.color='white';
                         $memPasswordCheckRight.innerHTML = '비밀번호가 일치합니다.';
