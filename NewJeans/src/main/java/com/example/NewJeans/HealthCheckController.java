@@ -13,4 +13,16 @@ public class HealthCheckController {
         log.info("Server is running...");
         return "index";
     }
+
+    @GetMapping("/login")
+    public String check2(){
+        log.info("Server is running...");
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String check3(){
+        log.info("Server is running...");
+        return "register";
+    }
 }
