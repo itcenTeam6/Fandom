@@ -21,12 +21,15 @@ public class BoardCreateRequestDTO {
 
     private String boardFile;
 
+    private String memNickName;
+
 
 
     public Board toEntity(){
             return Board.builder()
                     .boardContent(this.boardContent)
                     .boardFile(this.boardFile)
+                    .memNickName(this.memNickName)
                     .build();
     }
 

@@ -32,11 +32,14 @@ public class BoardService {
 
     //게시판 목록 조회  페이징 처리 필요
     @Transactional
-    public BoardListResponseDTO retrieve(int page,int size, String sort){ //Long memId,,int page, int size, String sort
+    public BoardListResponseDTO retrieve(Long idolId,int page,int size, String sort){ //Long memId,,int page, int size, String sort
 
+
+        //List<Board> listBoards = boardRepository.findByIdolId(idolId);
 
         //페이징처리
         Page<Board> pageBoards = boardRepository.findAll(PageRequest.of(page - 1, size, Sort.by(sort).descending()));
+
         List<Board> listBoards= pageBoards.getContent();
 
         //Optional<Board> listBoards = boardRepository.findById(idolId);
@@ -77,19 +80,18 @@ public class BoardService {
 //    }
 
     //게시물 등록
-
-    public BoardListResponseDTO create(final BoardCreateRequestDTO createRequestDTO,final Long idolId )//final Long memId,final Idol idolId
+    public BoardDetailResponseDTO create(final BoardCreateRequestDTO createRequestDTO,final Long idolId )//final Long memId,final Idol idolId
         throws RuntimeException
     {
 
         Board board=createRequestDTO.toEntity();
         board.setIdol(idolId);
-        
-        boardRepository.save(board);
+
+        Board saveBoard = boardRepository.save(board);
         log.info("게시물이 등록되었습니다. 내용:{} 파일:{}",createRequestDTO.getBoardContent(),createRequestDTO.getBoardFile());
 
         //return retrieve(idolId);
-        return null;
+        return new BoardDetailResponseDTO(saveBoard);
 
     }
 
