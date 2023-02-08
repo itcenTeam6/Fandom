@@ -32,7 +32,8 @@ public class IdolController {
                                         BindingResult result){
         if(result.hasErrors()){
             log.warn("createIdol 핸들러 메서드 에러 발생 : {}", result.getFieldError());
-            return "Idol";
+            model.addAttribute("errorMessage","postIdol에러");
+            return "error";
         }
 
         try {
@@ -41,8 +42,8 @@ public class IdolController {
             return "IdolDetail";
         } catch (RuntimeException e) {
             log.warn("idol 저장 에러 : {}", e.getMessage());
-            model.addAttribute("detailIdolResponseDTO","error");
-            return "Idol";
+            model.addAttribute("errorMessage","postIdol에러");
+            return "error";
         }
     }
 
@@ -58,8 +59,8 @@ public class IdolController {
             return "Idol";
         } catch (RuntimeException e) {
             log.warn("idol 목록 조회 에러 : {}", e.getMessage());
-            model.addAttribute("listIdolResponseDTO","error");
-            return "Idol";
+            model.addAttribute("errorMessage","getIdols 에러");
+            return "error";
         }
     }
 
@@ -74,8 +75,8 @@ public class IdolController {
             return "IdolDetail";
         } catch (RuntimeException e) {
             log.warn("아이돌 상세 조회 에러 : {}", e.getMessage());
-            model.addAttribute("detailIdolResponseDTO","error");
-            return "Idol";
+            model.addAttribute("errorMessage","getIdol 에러");
+            return "error";
         }
     }
 
@@ -92,8 +93,8 @@ public class IdolController {
             return "IdolDetail";
         } catch (RuntimeException e) {
             log.warn("아이돌 수정 에러 : {}", e.getMessage());
-            model.addAttribute("detailIdolResponseDTO","error");
-            return "Idol";
+            model.addAttribute("errorMessage","patchIdol 에러");
+            return "error";
         }
     }
 
@@ -107,7 +108,8 @@ public class IdolController {
             return "Idol";
         } catch (RuntimeException e) {
             log.warn("아이돌 삭제 에러 : {}", e.getMessage());
-            return "Idol";
+            model.addAttribute("errorMessage","deleteIdol 에러");
+            return "error";
         }
     }
 }

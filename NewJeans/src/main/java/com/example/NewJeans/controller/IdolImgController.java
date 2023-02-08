@@ -37,7 +37,8 @@ public class IdolImgController {
         //CreateDTO가 잘못 입력된 경우 에러
         if(result.hasErrors()){
             log.warn("createImage 핸들러 메서드 에러발생 : {}", result.getFieldError());
-            return "IdolImg";
+            model.addAttribute("errorMessage","postImage 에러");
+            return "error";
         }
 
         try {
@@ -46,8 +47,8 @@ public class IdolImgController {
             return "IdolImgDetail";
         } catch (RuntimeException e) {
             log.warn("idolImage POST 에러 : {}",e.getMessage());
-            model.addAttribute("detailIdolImgResponseDTO","error");
-            return "IdolImg";
+            model.addAttribute("errorMessage","postImage 에러");
+            return "error";
         }
     }
 
@@ -64,8 +65,8 @@ public class IdolImgController {
             return "IdolImg";
         } catch (RuntimeException e) {
             log.warn("idolImage GET(리스트) 에러 : {}", e.getMessage());
-            model.addAttribute("listIdolImgResponseDTO","error");
-            return "IdolImg";
+            model.addAttribute("errorMessage","getImages 에러");
+            return "error";
         }
     }
 
@@ -84,8 +85,8 @@ public class IdolImgController {
             return "IdolImgDetail";
         } catch (RuntimeException e) {
             log.warn("idolImage GET(상세) 에러 : {}", e.getMessage());
-            model.addAttribute("detailIdolImgResponseDTO", "error");
-            return "IdolImg";
+            model.addAttribute("errorMessage", "getImage 에러");
+            return "error";
         }
     }
 
@@ -98,20 +99,14 @@ public class IdolImgController {
                               BindingResult result){
 //        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
 
-        //ModifyDTO가 잘못 입력된 경우 에러
-        if(result.hasErrors()){
-            log.warn("updateImage 핸들러 메서드 에러 발생 : {}",result.getFieldError());
-            return "IdolImg";
-        }
-
         try {
             DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.update(imageId, modifyIdolImgRequestDTO);
             model.addAttribute("detailIdolImgResponseDTO", detailIdolImgResponseDTO);
             return "IdolImgDetail";
         } catch (RuntimeException e) {
             log.warn("idolImage 수정 에러 : {}", e.getMessage());
-            model.addAttribute("detailIdolImgResponseDTO", "error");
-            return "IdolImg";
+            model.addAttribute("errorMessage", "patchImage 에러");
+            return "error";
         }
     }
 
@@ -128,8 +123,8 @@ public class IdolImgController {
             return "IdolImg";
         } catch (RuntimeException e) {
             log.warn("idolImage 삭제 에러 : {}", e.getMessage());
-            model.addAttribute("detailIdolImgResponseDTO","error");
-            return "IdolImg";
+            model.addAttribute("errorMessage","deleteImage 에러");
+            return "error";
         }
     }
 }
