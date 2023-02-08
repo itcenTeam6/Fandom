@@ -40,7 +40,15 @@ public class IdolService {
                 listIdols.stream()
                         .map(DetailIdolResponseDTO::new)
                         .collect(Collectors.toList());
-        return ListIdolResponseDTO.builder().idols(responseDTOS).build();
+        return ListIdolResponseDTO.builder()
+                .idols(responseDTOS)
+                .size(foundIdols.getSize())
+                .page(page)
+                .totalElements(foundIdols.getTotalElements())
+                .totalPages(foundIdols.getTotalPages())
+                .hasNext(foundIdols.hasNext())
+                .hasPrevious(foundIdols.hasPrevious())
+                .build();
     }
 
     public DetailIdolResponseDTO findIdol(Long idolId){
