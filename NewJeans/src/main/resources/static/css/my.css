@@ -1405,6 +1405,23 @@ form.search-box .input-form .search-form i {
     background: #000;
     background: #F067FF
 }
+.login-form .form-input input[type="button"] {
+    background: #F067FF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-transform: capitalize;
+    line-height: 1;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 20px;
+    transition: .4s
+}
+
+.login-form .form-input input[type="button"]:hover {
+    background: #000;
+    background: #F067FF
+}
 
 .login-form .forget {
     display: block;
