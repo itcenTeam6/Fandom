@@ -60,7 +60,7 @@ public class BoardController {
             Model model,
             //인증된 회원
             //@AuthenticationPrincipal Long memId,
-            //@PathVariable("idol-id") Long idolId,
+            @PathVariable("idol-id") Long idolId,
             @RequestParam(name = "page", required = false, defaultValue = "1")int page,
             @RequestParam(name = "size", required = false, defaultValue = "10")int size,
             @RequestParam(name = "sort", required = false, defaultValue = "idol")String sort
@@ -69,7 +69,7 @@ public class BoardController {
     {
             // log.info("/board/{} Get request!",idolId);
 
-            BoardListResponseDTO BoardListResponseDTO = boardService.retrieve(page,size,sort);
+            BoardListResponseDTO BoardListResponseDTO = boardService.retrieve(idolId,page,size,sort);
             //BoardListResponseDTO BoardListResponseDTO = boardService.retrieve(idolId); //memId,page,size,sort
             model.addAttribute("BoardListResponseDTO",BoardListResponseDTO);
             return "list";
@@ -80,7 +80,8 @@ public class BoardController {
     //게시글 등록 요청   파일 업로드 추가 필요
     //@PostMapping("/{idol-id}")
     @PostMapping("/{idol-id}")
-    public ResponseEntity<?> createBoard(
+    public String createBoard(
+            Model model,
             //@AuthenticationPrincipal Long memId,
             //아이돌 번호도 넘어와야함
             @PathVariable("idol-id") Long idolId,
@@ -92,21 +93,28 @@ public class BoardController {
 
         if (result.hasErrors()) {
             log.warn("DTO 검증 에러 발생: {}", result.getFieldError());
-            return ResponseEntity
-                    .badRequest()
-                    .body(result.getFieldError());
+            model.addAttribute("error","createBoard 에러");
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body(result.getFieldError());
+            return null; //페이지 만들어서 보내
         }
 
         try {
-            BoardListResponseDTO boardListResponseDTO = boardService.create(requestDTO,idolId); //memId,idolId
-            return ResponseEntity
-                    .ok()
-                    .body(boardListResponseDTO);
+            BoardDetailResponseDTO boardDetailResponseDTO = boardService.create(requestDTO,idolId); //memId,idolId
+            model.addAttribute("boardDetailResponseDTO",boardDetailResponseDTO);
+            return "list";
+
+//            return ResponseEntity
+//                    .ok()
+//                    .body(boardDetailResponseDTO);
         } catch (RuntimeException e) {
             log.error(e.getMessage());
-            return ResponseEntity
-                    .internalServerError()
-                    .body(BoardListResponseDTO.builder().error(e.getMessage()));
+            model.addAttribute("error","createBoard 에러");
+            return null; //페이지 만들어서 보내
+//            return ResponseEntity
+//                    .internalServerError()
+//                    .body(BoardListResponseDTO.builder().error(e.getMessage()));
         }
 
     }

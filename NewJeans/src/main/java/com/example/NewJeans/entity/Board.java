@@ -1,5 +1,6 @@
 package com.example.NewJeans.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -40,6 +41,7 @@ public class Board {
     @JoinColumn(name = "memberID")
     private  Member member;
 
+    @JsonIgnoreProperties({"Board"})
     @OneToMany(mappedBy = "boardId",fetch = FetchType.EAGER,cascade =CascadeType.REMOVE)
     private List<Comment> comments;
 
