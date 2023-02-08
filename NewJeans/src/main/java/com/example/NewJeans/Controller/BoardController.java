@@ -6,6 +6,7 @@ import com.example.NewJeans.dto.request.BoardModifyRequestDTO;
 import com.example.NewJeans.dto.response.BoardDetailResponseDTO;
 import com.example.NewJeans.dto.response.BoardListResponseDTO;
 import com.example.NewJeans.entity.Idol;
+import com.example.NewJeans.repository.IdolRepository;
 import com.example.NewJeans.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.nio.file.Path;
 
 @Controller
 @Slf4j
@@ -26,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 public class BoardController {
 
     private final BoardService boardService;
+
 
 
     //게시글 목록 요청  idolID로 idol별 게시물 페이지 요청
@@ -52,22 +55,24 @@ public class BoardController {
 //        }
 //
 //    }
-    @GetMapping("/{idol-id}")
+    @GetMapping
     public String retrieveBoardList(
-            //@AuthenticationPrincipal Long memId,
             Model model,
-            @PathVariable("idol-id") Long idolId
-//            @RequestParam(name = "page", required = false, defaultValue = "1")int page,
-//            @RequestParam(name = "size", required = false, defaultValue = "10")int size,
-//            @RequestParam(name = "sort", required = false, defaultValue = "idolId")String sort
+            //인증된 회원
+            //@AuthenticationPrincipal Long memId,
+            //@PathVariable("idol-id") Long idolId,
+            @RequestParam(name = "page", required = false, defaultValue = "1")int page,
+            @RequestParam(name = "size", required = false, defaultValue = "10")int size,
+            @RequestParam(name = "sort", required = false, defaultValue = "idol")String sort
+
     )
     {
-             log.info("/board/{} Get request!",idolId);
+            // log.info("/board/{} Get request!",idolId);
 
-
-            BoardListResponseDTO responseDTO = boardService.retrieve(idolId); //memId,page,size,sort
-            model.addAttribute("BoardList",responseDTO);
-            return "list";  //다시보기
+            BoardListResponseDTO BoardListResponseDTO = boardService.retrieve(page,size,sort);
+            //BoardListResponseDTO BoardListResponseDTO = boardService.retrieve(idolId); //memId,page,size,sort
+            model.addAttribute("BoardListResponseDTO",BoardListResponseDTO);
+            return "list";
 
     }
 
@@ -77,6 +82,7 @@ public class BoardController {
     @PostMapping("/{idol-id}")
     public ResponseEntity<?> createBoard(
             //@AuthenticationPrincipal Long memId,
+            //아이돌 번호도 넘어와야함
             @PathVariable("idol-id") Long idolId,
             @Validated @RequestBody BoardCreateRequestDTO requestDTO,
             BindingResult result
@@ -107,10 +113,12 @@ public class BoardController {
 
 
     //게시글 삭제 요청  작성자 OR 관리자일 경우만 삭제
-    @DeleteMapping("/{board-id}")  //헷갈린다
+    @DeleteMapping("/{idol-id}/{board-id}")  //헷갈린다
     public ResponseEntity<?> deleteBoard(
             //@AuthenticationPrincipal Long memId,
-            @PathVariable("board-id") Long boardId)
+            @PathVariable("board-id") Long boardId,
+            @PathVariable("idol-id") Long idolId
+     )
     {
         log.info("/board/{} DELETE request!", boardId);
 
@@ -121,7 +129,7 @@ public class BoardController {
         }
 
         try {
-            BoardListResponseDTO responseDTO = boardService.delete(boardId); //memId
+            BoardListResponseDTO responseDTO = boardService.delete(boardId,idolId); //memId
             return ResponseEntity.ok().body(responseDTO);
         } catch (Exception e) {
             return ResponseEntity.internalServerError()
@@ -135,11 +143,12 @@ public class BoardController {
 //
 //    //게시글 수정 요청
     @RequestMapping(
-            value = "/{board-id}"
+            value = "/{idol-id}/{board-id}"
             , method = {RequestMethod.PUT, RequestMethod.PATCH})
     public ResponseEntity<?> updateBoard(
             //@AuthenticationPrincipal Long memId,
             @PathVariable("board-id") Long boardId,
+            @PathVariable("idol-id") Long idolId,
             @Validated @RequestBody BoardModifyRequestDTO requestDTO, BindingResult result, HttpServletRequest request
     ) {
         if (result.hasErrors()) {
@@ -150,7 +159,7 @@ public class BoardController {
         log.info("modifying dto: {}", requestDTO);
 
         try {
-            BoardListResponseDTO responseDTO = boardService.update(boardId, requestDTO); //memId
+            BoardListResponseDTO responseDTO = boardService.update(boardId,idolId, requestDTO); //memId
             return ResponseEntity
                     .ok()
                     .body(responseDTO);

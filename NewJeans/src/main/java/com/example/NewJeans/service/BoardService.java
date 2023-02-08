@@ -8,6 +8,7 @@ import com.example.NewJeans.dto.response.BoardListResponseDTO;
 import com.example.NewJeans.entity.Board;
 import com.example.NewJeans.entity.Idol;
 import com.example.NewJeans.repository.BoardRepository;
+import com.example.NewJeans.repository.IdolRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -27,17 +28,19 @@ public class BoardService {
 
 
     private final BoardRepository boardRepository;
+    private final IdolRepository idolRepository;
 
     //게시판 목록 조회  페이징 처리 필요
     @Transactional
-    public BoardListResponseDTO retrieve(Long idolId){ //Long memId,,int page, int size, String sort
+    public BoardListResponseDTO retrieve(int page,int size, String sort){ //Long memId,,int page, int size, String sort
 
-        // Optional<Board> entityList = boardRepository.findByIdolId(idolId);//아이돌 번호에 맞는 게시판 목록 불러옴
+
         //페이징처리
-       // Page<Board> pageBoards = boardRepository.findAll(PageRequest.of(page - 1, size, Sort.by(sort).descending()));
-        // List<Board> listBoards= pageBoards.getContent();
+        Page<Board> pageBoards = boardRepository.findAll(PageRequest.of(page - 1, size, Sort.by(sort).descending()));
+        List<Board> listBoards= pageBoards.getContent();
 
-        Optional<Board> listBoards = boardRepository.findById(idolId);
+        //Optional<Board> listBoards = boardRepository.findById(idolId);
+        //List<Board> listBoards = boardRepository.findByIdolId(idolId);
 
 
         List<BoardDetailResponseDTO> dtoList = listBoards.stream()
@@ -51,39 +54,47 @@ public class BoardService {
     }
 
 
-    //테스트용
-//    public BoardListResponseDTO retrieve() {
-//        List<Board> entityList = boardRepository.findAll();
+//    @Transactional
+//    public BoardListResponseDTO retrieve(Long idolId){ //Long memId,,int page, int size, String sort
 //
-//        List<BoardDetailResponseDTO> dtoList = entityList.stream()
+//        // Optional<Board> entityList = boardRepository.findByIdolId(idolId);//아이돌 번호에 맞는 게시판 목록 불러옴
+//        //페이징처리
+//        // Page<Board> pageBoards = boardRepository.findAll(PageRequest.of(page - 1, size, Sort.by(sort).descending()));
+//        // List<Board> listBoards= pageBoards.getContent();
+//
+//        //Optional<Board> listBoards = boardRepository.findById(idolId);
+//        List<Board> listBoards = boardRepository.findByIdolId(idolId);
+//
+//
+//        List<BoardDetailResponseDTO> dtoList = listBoards.stream()
 //                .map(BoardDetailResponseDTO::new)
 //                .collect(Collectors.toList());
 //
 //        return BoardListResponseDTO.builder()
 //                .boards(dtoList)
 //                .build();
+//
 //    }
-
-
 
     //게시물 등록
 
-    public BoardListResponseDTO create(final BoardCreateRequestDTO createRequestDTO,final Long idolId)//final Long memId,final Idol idolId
+    public BoardListResponseDTO create(final BoardCreateRequestDTO createRequestDTO,final Long idolId )//final Long memId,final Idol idolId
         throws RuntimeException
     {
+
         Board board=createRequestDTO.toEntity();
-        //board.setIdol(idolId);
+        board.setIdol(idolId);
         
         boardRepository.save(board);
         log.info("게시물이 등록되었습니다. 내용:{} 파일:{}",createRequestDTO.getBoardContent(),createRequestDTO.getBoardFile());
 
+        //return retrieve(idolId);
+        return null;
 
-        //return retrieve(memId,idolId);
-       return null;
     }
 
     //게시물 삭제
-    public BoardListResponseDTO delete(final Long boardId){ //final Long memId,
+    public BoardListResponseDTO delete(final Long boardId,final Long idolId){ //final Long memId,
         try {
             boardRepository.deleteById(boardId);
         } catch (Exception e) {
@@ -92,14 +103,15 @@ public class BoardService {
             throw new RuntimeException("boardId가 존재하지 않아 삭제에 실패했습니다.");
         }
 
-        //return retrieve(); //어디로 가?
+        //return retrieve(idolId); //어디로 가?
         return null;
+
     }
 //
 //
     //게시물 수정
     public BoardListResponseDTO update(
-              final Long boardId, final BoardModifyRequestDTO requestDTO){ //final Long memId,
+              final Long boardId,final Long idolId, final BoardModifyRequestDTO requestDTO){ //final Long memId,
 
         Optional<Board> targetEntity=boardRepository.findById(boardId);
 
@@ -109,16 +121,16 @@ public class BoardService {
             boardRepository.save(entity);
         });
 
-       // return retrieve();
+        //return retrieve(idolId);
         return null;
+
     }
 
 
     //게시물 조회수
 
 
-
-    }
+}
 
 
 

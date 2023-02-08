@@ -1,33 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Spring Boot</title>
+<title>Simple Spring Boot Board</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<h1>LIST</h1>
-	<table border="1">
-		<thead>
-			<tr>
-				<th>id</th>
-				<th>email</th>
-				<th>password</th>
-				<th>-</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="data" items="${BoardList}">
+
+	<div class="container">
+		<h2>Simple Spring Boot Board</h2>
+		<p>TEST Simple Board</p>
+		<div>
+			<a href="/board/create"><button type="button"
+					class="btn btn-primary">Create</button></a>
+		</div>
+		<table class="table table-striped">
+			<thead>
 				<tr>
-					<td>${data.boardContent }</td>
-					<td>${data.boardFile }</td>
-					<td>삭제</td>
+					<th>Number</th>
+					<th>Title</th>
+					<th>Writer</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<a href="./add">입력</a>
+			</thead>
+			<tbody>
+				<c:forEach var="board" items="${BoardListResponseDTO.boards}">
+					<tr>
+						<td>${board.boardContent}</td>
+						<td>${board.boardFile }</td>
+						<td>${board.boardDate }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

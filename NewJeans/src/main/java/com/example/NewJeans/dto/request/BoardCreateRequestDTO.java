@@ -22,6 +22,7 @@ public class BoardCreateRequestDTO {
     private String boardFile;
 
 
+
     public Board toEntity(){
             return Board.builder()
                     .boardContent(this.boardContent)

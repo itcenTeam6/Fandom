@@ -34,7 +34,7 @@ public class Board {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idolID")
-    private Idol idol;
+    private Idol idolID;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberID")
@@ -42,5 +42,8 @@ public class Board {
 
     @OneToMany(mappedBy = "boardId",fetch = FetchType.EAGER,cascade =CascadeType.REMOVE)
     private List<Comment> comments;
+
+    //게시판 조회, 추가, 삭제를 위한 외래키
+    private Long idol;
 
 }
