@@ -29,7 +29,7 @@ public class IdolImgController {
 
     //멤버쉽 이미지 등록
     @PostMapping
-    public ResponseEntity<?> postImage(Model model, Authentication authentication,
+    public String postImage(Model model, Authentication authentication,
                                       @Validated @RequestBody CreateIdolImgRequestDTO createIdolImgRequestDTO,
                                       BindingResult result){
 //        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
@@ -37,40 +37,42 @@ public class IdolImgController {
         //CreateDTO가 잘못 입력된 경우 에러
         if(result.hasErrors()){
             log.warn("createImage 핸들러 메서드 에러발생 : {}", result.getFieldError());
-            return ResponseEntity.badRequest().build();
+            model.addAttribute("errorMessage","postImage 에러");
+            return "error";
         }
 
         try {
             DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.create(createIdolImgRequestDTO);
-
-            return new ResponseEntity<>(
-                    detailIdolImgResponseDTO, HttpStatus.CREATED
-            );
+            model.addAttribute("detailIdolImgResponseDTO",detailIdolImgResponseDTO);
+            return "IdolImgDetail";
         } catch (RuntimeException e) {
             log.warn("idolImage POST 에러 : {}",e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
+            model.addAttribute("errorMessage","postImage 에러");
+            return "error";
         }
     }
 
     //멤버쉽 이미지 보기
     @GetMapping
-    public ResponseEntity<?> getImages(Model model, Authentication authentication,
+    public String getImages(Model model, Authentication authentication,
                                        @RequestParam(name = "page", required = false, defaultValue = "1")int page,
                                        @RequestParam(name = "size", required = false, defaultValue = "10")int size,
                                        @RequestParam(name = "sort", required = false, defaultValue = "imgId")String sort){
 //        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
         try {
             ListIdolImgResponseDTO listIdolImgResponseDTO = idolImgService.findIdolImgs(page,size,sort);
-            return ResponseEntity.ok().body(listIdolImgResponseDTO);
+            model.addAttribute("listIdolImgResponseDTO",listIdolImgResponseDTO);
+            return "IdolImg";
         } catch (RuntimeException e) {
             log.warn("idolImage GET(리스트) 에러 : {}", e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
+            model.addAttribute("errorMessage","getImages 에러");
+            return "error";
         }
     }
 
     // 멤버쉽 이미지 상세 보기
     @GetMapping("/{image-id}")
-    public ResponseEntity<?> getImage(Model model,
+    public String getImage(Model model,
                            @Positive @PathVariable("image-id") Long imageId,
                            Authentication authentication){
 //        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
@@ -79,50 +81,50 @@ public class IdolImgController {
 
         try {
             DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.findIdolImg(imageId);
-            return ResponseEntity.ok().body(detailIdolImgResponseDTO);
+            model.addAttribute("detailIdolImgResponseDTO",detailIdolImgResponseDTO);
+            return "IdolImgDetail";
         } catch (RuntimeException e) {
             log.warn("idolImage GET(상세) 에러 : {}", e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
+            model.addAttribute("errorMessage", "getImage 에러");
+            return "error";
         }
     }
 
     // 관리자가 이미지 수정
     @RequestMapping(value="/{image-id}",method = {RequestMethod.PUT,RequestMethod.PATCH})
-    public ResponseEntity<?> patchImage(Model model,
+    public String patchImage(Model model,
                               @Positive @PathVariable("image-id") Long imageId,
                               @Validated @RequestBody ModifyIdolImgRequestDTO modifyIdolImgRequestDTO,
                               Authentication authentication,
                               BindingResult result){
 //        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
 
-        //ModifyDTO가 잘못 입력된 경우 에러
-        if(result.hasErrors()){
-            log.warn("updateImage 핸들러 메서드 에러 발생 : {}",result.getFieldError());
-            return ResponseEntity.badRequest().build();
-        }
-
         try {
             DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.update(imageId, modifyIdolImgRequestDTO);
-            return ResponseEntity.ok().body(detailIdolImgResponseDTO);
+            model.addAttribute("detailIdolImgResponseDTO", detailIdolImgResponseDTO);
+            return "IdolImgDetail";
         } catch (RuntimeException e) {
             log.warn("idolImage 수정 에러 : {}", e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
+            model.addAttribute("errorMessage", "patchImage 에러");
+            return "error";
         }
     }
 
     // 관리자가 이미지 삭제
     @DeleteMapping("/{image-id}")
-    public ResponseEntity<?> deleteImage(Model model,
+    public String deleteImage(Model model,
                               @Positive @PathVariable("image-id")Long imageId,
                               Authentication authentication){
 //        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
 
         try {
             DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.remove(imageId);
-            return ResponseEntity.ok().body(detailIdolImgResponseDTO);
+            model.addAttribute("detailIdolImgResponseDTO",detailIdolImgResponseDTO);
+            return "IdolImg";
         } catch (RuntimeException e) {
             log.warn("idolImage 삭제 에러 : {}", e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
+            model.addAttribute("errorMessage","deleteImage 에러");
+            return "error";
         }
     }
 }
