@@ -9,6 +9,13 @@
 </head>
     <body>
 
+        size = ${listIdolResponseDTO.size} <br>
+        page = ${listIdolResponseDTO.page} <br>
+        totalElements = ${listIdolResponseDTO.totalElements} <br>
+        totalPages = ${listIdolResponseDTO.totalPages} <br>
+        hasNext = ${listIdolResponseDTO.hasNext} <br>
+        hasPrevious = ${listIdolResponseDTO.hasPrevious} <br>
+
        <c:forEach var = "idol" items = "${listIdolResponseDTO.idols}">
        ${idol.idolName} <br>
        </c:forEach>
