@@ -39,7 +39,7 @@
             <!-- <a href="#" class="forget">Forget Password</a> -->
             <div class="text-center">
             <p class="mem">Not a member?</p>
-            <a href="#" class="registration">Registration</a>
+            <a href="/member/signup" class="registration">Registration</a>
             </div>
         </div>
     </main>
@@ -63,11 +63,11 @@ $memEmail.onkeyup=function() {
         const emailRegex = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
 
         if (!$memEmail.value) {
-            $memEmailRight.style.color='white';
+            $memEmailRight.style.color='red';
             $memEmailRight.innerHTML ='아이디는 필수로 입력해야 합니다.';
 
         }else if (!emailRegex.test($memEmail.value)) {
-         $memEmailRight.style.color='white';
+         $memEmailRight.style.color='red';
               $memEmailRight.innerHTML ='이메일 형식에 맞춰서 입력해 주세요.';
         }else{
             $memEmailRight.innerHTML ='';
@@ -81,10 +81,10 @@ $memPassword.onkeyup=function() {
     const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
     if (!$memPassword.value) {
                 $memPasswordRight.innerHTML ='비밀번호는 필수값입니다!';
-                 $memPasswordRight.style.color='white';
+                 $memPasswordRight.style.color='red';
             } else if (!pwRegex.test($memPassword.value)) {
                 $memPasswordRight.innerHTML = '8글자 이상의 영문,숫자,특수문자를 포함해주세요!';
-                  $memPasswordRight.style.color='white';
+                  $memPasswordRight.style.color='red';
             } else {
                 $memPasswordRight.innerHTML = '';
                 flag2=true;
