@@ -35,7 +35,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         try {
-            String token=parseBearerToken(request);
+            System.out.println(request.getHeader("Authorization"));
+            String token = parseBearerToken(request);
             log.info("Jwt Token Filter is running.... - token : {}",token);
 
             if (token !=null){
@@ -56,14 +57,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
                 securityContext.setAuthentication(authentication);
-
                 SecurityContextHolder.setContext(securityContext);
             }
         } catch (Exception e) {
             log.error("인증되지 않은 사용자입니다.");
         }
         filterChain.doFilter(request,response);
-
     }
 
 

@@ -8,13 +8,21 @@ import com.example.NewJeans.dto.response.ListIdolImgResponseDTO;
 import com.example.NewJeans.service.IdolImgService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.Positive;
+import java.util.Collection;
 
 
 @Controller
@@ -55,13 +63,7 @@ public class IdolImgController {
                                        @RequestParam(name = "size", required = false, defaultValue = "10")int size,
                                        @RequestParam(name = "sort", required = false, defaultValue = "imgId")String sort){
 
-
-
-        //멤버쉽, 관리자는 컨텐츠를 보여줌, 나머지는 안 보여줌
-        boolean contents = false;
-        if(authentication != null && (authentication.getAuthorities().contains("MEMBER") || authentication.getAuthorities().contains("ADMIN")))
-            contents = true;
-        model.addAttribute("contents",contents);
+        System.out.println(authentication.getAuthorities());
 
         try {
             ListIdolImgResponseDTO listIdolImgResponseDTO = idolImgService.findIdolImgs(page,size,sort);

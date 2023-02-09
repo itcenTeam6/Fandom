@@ -1,5 +1,8 @@
 package com.example.NewJeans.config;
 
+import com.example.NewJeans.security.JwtAuthFilter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,31 +16,34 @@ import org.springframework.web.filter.CorsFilter;
  * 인증 : 토큰 방식
  * */
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class WebSecurityConfig {
     @Bean
     public BCryptPasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
     }
+
+    private final JwtAuthFilter jwtAuthFilter;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.cors()
                 .and()
                 .csrf()
                 .disable()
-                .httpBasic().disable();
+                .httpBasic().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 //                .and()
 //                .authorizeRequests().antMatchers("/","/img/**","/css/**","/js/**","/member/**").permitAll()
 //                .anyRequest().authenticated();
-
 //                .authorizeRequests()
 //                .antMatchers("/membership").access("hasRole('member') or hasRole('admin')");
 
-//        http.addFilterAfter(
-//                jwtAuthFilter
-//                , CorsFilter.class
-//        );
+        http.addFilterAfter(
+                jwtAuthFilter
+                , CorsFilter.class
+        );
         return http.build();
     }
 }
