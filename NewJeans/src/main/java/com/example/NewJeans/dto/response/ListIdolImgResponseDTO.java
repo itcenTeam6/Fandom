@@ -10,11 +10,7 @@ import java.util.List;
 @EqualsAndHashCode
 @Builder
 public class ListIdolImgResponseDTO {
-    private int size;
-    private int page;
-    private long totalElements;
-    private int totalPages;
-    private boolean hasNext;
-    private boolean hasPrevious;
+    private String error;
     private List<DetailIdolImgResponseDTO> idolImages;
+
 }

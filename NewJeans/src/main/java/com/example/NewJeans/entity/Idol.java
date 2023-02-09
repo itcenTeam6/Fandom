@@ -1,4 +1,4 @@
-package com.example.NewJeans.entity;
+package com.example.NewJeans.Entity;
 
 
 import lombok.*;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 public class Idol {
-
+    
     @Id
     @Column(name="idolID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
