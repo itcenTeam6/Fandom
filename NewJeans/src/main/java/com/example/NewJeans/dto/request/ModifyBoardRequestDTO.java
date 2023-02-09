@@ -16,6 +16,7 @@ public class ModifyBoardRequestDTO {
     @NotBlank
     private String boardContent;
     private String boardFile;
+    private String memNickName;
 
 
 }

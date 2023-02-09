@@ -239,10 +239,7 @@
         <a href="#top" class="go-top"><span class="lnr lnr-arrow-up"></span></a>
     </footer>
     <!-- //footer-->
-
-
 </div>
-
 <!-- script-->
 <script src="/js/jquery-3.3.1.min.js"></script>
 <!-- https://animate.style/ -->
@@ -251,5 +248,4 @@
 <script src="/js/slick.min.js"></script>
 <script src="/js/script.js"></script>
 </body>
-
 </html>

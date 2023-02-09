@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping
+@RequestMapping("/board")
 public class BoardController {
 
     private final BoardService boardService;
@@ -61,7 +61,7 @@ public class BoardController {
             // log.info("/board/{} Get request!",idolId);
             ListBoardResponseDTO listBoardResponseDTO = boardService.retrieve(idolId,page,size,sort);
             model.addAttribute("ListBoardResponseDTO", listBoardResponseDTO);
-            return "board";
+            return "board/boardList";
 
     }
 
@@ -81,29 +81,17 @@ public class BoardController {
             model.addAttribute("error","createBoard 에러");
             return null; //에러페이지
 
-//            return ResponseEntity
-//                    .badRequest()
-//                    .body(result.getFieldError());
-
         }
 
         try {
-            DetailBoardResponseDTO detailBoardResponseDTO = boardService.create(requestDTO,idolId); //memId,idolId
-            model.addAttribute("DetailBoardResponseDTO",detailBoardResponseDTO);
-            return "board"; //게시판 페이지
-
-//            return ResponseEntity
-//                    .ok()
-//                    .body(boardDetailResponseDTO);
+            boardService.create(requestDTO,idolId);
+            return "redirect:/"; //게시판 페이지
 
         } catch (RuntimeException e) {
             log.error(e.getMessage());
             model.addAttribute("error","createBoard 에러");
 
             return null; ////에러페이지
-//            return ResponseEntity
-//                    .internalServerError()
-//                    .body(BoardListResponseDTO.builder().error(e.getMessage()));
         }
 
     }
@@ -121,28 +109,22 @@ public class BoardController {
         log.info("/board/{} DELETE request!", boardId);
 
         if (boardId == null) {
-//            return ResponseEntity
-//                    .badRequest()
-//                    .body(BoardListResponseDTO.builder().error("boardID를 전달해주세요"));
             return null; //에러페이지
         }
 
         try {
             boardService.delete(boardId,idolId); //memId
-            return "board"; //게시판 페이지
-            //return ResponseEntity.ok().body(responseDTO);
+            return "redirect:/"; //게시판 페이지
+
         } catch (Exception e) {
             log.warn("게시글 삭제 에러 : {}", e.getMessage());
             model.addAttribute("error","deleteBoard 에러");
             return null; //에러페이지
 
-//            return ResponseEntity.internalServerError()
-//                    .body(BoardListResponseDTO.builder().error(e.getMessage()));
         }
 
 
     }
-
 
     //게시글 수정 요청   (작성자만 수정 가능)
     @RequestMapping(
@@ -156,34 +138,24 @@ public class BoardController {
             @Validated @RequestBody ModifyBoardRequestDTO requestDTO, BindingResult result, HttpServletRequest request
     ) {
         if (result.hasErrors()) {
-//            return ResponseEntity.badRequest()
-//                    .body(result.getFieldError());
             return null; //에러페이지
         }
         log.info("/board/{} {} request", boardId, request.getMethod());
         log.info("modifying dto: {}", requestDTO);
 
         try {
-            ListBoardResponseDTO listBoardResponseDTO = boardService.update(boardId,idolId, requestDTO); //memId
-            model.addAttribute("ListBoardResponseDTO", listBoardResponseDTO);
-            return "list"; //게시판 페이지
-//            return ResponseEntity
-//                    .ok()
-//                    .body(responseDTO);
+            boardService.update(boardId,idolId, requestDTO);
+            return "redirect:/"; //게시판 페이지
+
         } catch (Exception e) {
             log.warn("게시글 수정 에러 : {}", e.getMessage());
             model.addAttribute("error","updateBoard 에러");
             return null; //에러페이지
-//            return ResponseEntity
-//                    .internalServerError()
-//                    .body(BoardListResponseDTO.builder().error(e.getMessage()));
+
         }
 
     }
 
-
-
-    //게시글 조회수
 
 }
 
