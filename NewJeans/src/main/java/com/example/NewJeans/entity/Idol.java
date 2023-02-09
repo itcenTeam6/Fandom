@@ -1,4 +1,4 @@
-package com.example.NewJeans.Entity;
+package com.example.NewJeans.entity;
 
 
 import lombok.*;
