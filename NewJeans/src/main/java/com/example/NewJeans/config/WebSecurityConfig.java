@@ -9,7 +9,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.filter.CorsFilter;
 
 /**
- * 권한 : user : 일반회원, member : 멤버쉽회원, admin : 관리자 -> MemberShip테이블의 msType
+ * 권한 : USER = 일반회원, MEMBER = 멤버쉽회원, ADMIN = 관리자 -> MemberShip테이블의 msType
  * 인증 : 토큰 방식
  * */
 @EnableWebSecurity
