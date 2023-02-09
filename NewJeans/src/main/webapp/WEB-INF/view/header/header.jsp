@@ -11,37 +11,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <script type="text/javascript">
+        function LoadMain(){
+            location.href = "/"
+        }
+
+        function LoadSignIn(){
+            location.href = "/member/signin";
+        }
+
+        function LoadSignUp(){
+            location.href = "/member/signup"
+        }
+
+        function LoadBoardList(){
+            location.href = "/boardList.do"
+        }
+    </script>
 </head>
 
 <body>
-    <!-- header -->
+ <!-- header -->
     <header>
         <div class="inner-header">
             <h1 class="logo">
-                <a href="#">
-                    <img src="img/logo.png" alt="logo">
-                    <img src="img/logo2.png" alt="logo">
+                <a href="javascript:LoadMain()">
+                    <img src="/img/logo.png" alt="logo">
+                    <img src="/img/logo2.png" alt="logo">
                 </a>
             </h1>
-            <a href="#" class="menu-open"><span class="menu-txt">Login</span><span class="menu-img"></span></a>
-            <a href="#" class="menu-open"><span class="menu-txt">LogOut</span><span class="menu-img"></span></a>
-            <!-- <a href="#" class="menu-open"><span class="menu-txt">MENU</span> <span class="lnr lnr-menu menu-img"></span></a> -->
+            <a href="javascript:LoadSignIn()" class="menu-open"><span class="menu-txt">SignIn</span> <span class="menu-img"></span></a>
+            <a href="javascript:LoadSignUp()" class="menu-open"><span class="menu-txt">SignUp</span> <span class="menu-img"></span></a>
+            <a href="#" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
+            <a href="javascript:LoadBoardList()" class="menu-open"><span class="menu-txt">Board</span> <span class="menu-img"></span></a>
         </div>
-        <!-- gnb
-            <nav class="gnb">
-                <a href="#" class="close">
-                    <span class="lnr lnr-cross"></span>
-                </a>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Work</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">News</a></li>
-                    <li><a href="#">Favorite</a></li>
-                </ul>
-            </nav> -->
-
     </header>
     <!-- //header -->
 </body>
