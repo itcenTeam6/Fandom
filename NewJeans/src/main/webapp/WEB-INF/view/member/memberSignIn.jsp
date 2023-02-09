@@ -21,7 +21,7 @@
 <body>
     <main class="login-body slider-bg">
         <div class="login-form">
-            <form class="form-default" id="frm-login" action="#" method="POST">
+
                 <h2>Login</h2>
                 <div class="form-input">
                     <label for="name">Email</label> <input type="email" name="userEmail" id="memEmail" placeholder="Email">
@@ -34,7 +34,7 @@
                 <div class="form-input pt-30">
                     <input type="submit" name="submit" value="login" id="loginBtn">
                 </div>
-            </form>
+
             <!-- Forget Password -->
             <!-- <a href="#" class="forget">Forget Password</a> -->
             <div class="text-center">
@@ -98,7 +98,7 @@ $loginBtn.onclick=function(){
                     memEmail:$memEmail.value,
                     memPassword:$memPassword.value
             }
-              fetch('/member/signup',{
+              fetch('/member/signin',{
                             method:'POST',
                             headers:{
                                 'content-type':'application/json'
@@ -110,8 +110,8 @@ $loginBtn.onclick=function(){
                                            alert(result.message);
                                        }else{
 
-                                           sessionStorage.setItem('ACCESS_TOKEN',result.token);
-                                           sessionStorage.setItem('LOGIN_USERNAME',result.userName);
+                                           localStorage.setItem('ACCESS_TOKEN',result.token);
+                                           localStorage.setItem('LOGIN_USERNAME',result.userName);
                                            window.location.href='/';
                                        }
                                    })
