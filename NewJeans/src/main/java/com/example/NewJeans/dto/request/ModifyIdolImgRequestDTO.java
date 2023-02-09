@@ -3,6 +3,7 @@ package com.example.NewJeans.dto.request;
 
 import com.example.NewJeans.entity.IdolImg;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @EqualsAndHashCode
 @Builder
 public class ModifyIdolImgRequestDTO {
-    private String imgPath;
+    private MultipartFile multipartFile;
     private String msType;
     private String idolName;
 

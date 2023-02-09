@@ -8,7 +8,6 @@ import com.example.NewJeans.dto.response.ListIdolImgResponseDTO;
 import com.example.NewJeans.service.IdolImgService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

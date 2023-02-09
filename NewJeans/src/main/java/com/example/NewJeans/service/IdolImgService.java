@@ -8,6 +8,7 @@ import com.example.NewJeans.entity.Idol;
 import com.example.NewJeans.entity.IdolImg;
 import com.example.NewJeans.repository.IdolImgRepository;
 import com.example.NewJeans.repository.IdolRepository;
+import com.example.NewJeans.utils.FileUtils;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,12 +30,23 @@ public class IdolImgService {
     private final IdolImgRepository idolImgRepository;
     private final IdolRepository idolRepository;
 
+    private static final String IMAGE_PATH = "E:\\image";
+
     public DetailIdolImgResponseDTO create(CreateIdolImgRequestDTO createIdolImgRequestDTO){
+
+        // 이미지 파일 -> 파일 경로
+        String imgPath = FileUtils.uploadFile(createIdolImgRequestDTO.getImage(), IMAGE_PATH);
+        createIdolImgRequestDTO.setImgPath(imgPath);
+
         // RequestDTO -> 엔티티
         IdolImg idolImg = createIdolImgRequestDTO.toEntity();
+
+        //존재하는 아이돌인지 확인하고 아이돌 매핑
         Optional<Idol> foundIdol = idolRepository.findByIdolName(idolImg.getIdolName());
         Idol idol = foundIdol.orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
         idolImg.setIdol(idol);
+
+        //DB에 저장
         idolImgRepository.save(idolImg);
         log.info("아이돌 이미지 업로드 완료 : {}",idolImg.getImgId());
 
@@ -71,11 +83,14 @@ public class IdolImgService {
     }
 
     public DetailIdolImgResponseDTO update(Long imageId, ModifyIdolImgRequestDTO modifyIdolImgRequestDTO){
+
+
+
         IdolImg idolImg = findVerifiedIdolImg(imageId);
         Optional.ofNullable(modifyIdolImgRequestDTO.getIdolName())
                 .ifPresent(idolImg::setIdolName);
-        Optional.ofNullable(modifyIdolImgRequestDTO.getImgPath())
-                .ifPresent(idolImg::setImgPath);
+        Optional.ofNullable(modifyIdolImgRequestDTO.getMultipartFile())
+                .ifPresent(file -> idolImg.setImgPath(FileUtils.uploadFile(file, IMAGE_PATH)));
         Optional.ofNullable(modifyIdolImgRequestDTO.getMsType())
                 .ifPresent(idolImg::setMsType);
         idolImg.setImgDate(LocalDateTime.now());
