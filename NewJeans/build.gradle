@@ -48,6 +48,11 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
 	implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
 	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+
+	//파일 업로드
+	implementation group: 'commons-io', name: 'commons-io', version: '2.7'
+
+
 }
 
 tasks.named('test') {

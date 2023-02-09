@@ -22,9 +22,9 @@ public class IdolImg {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="idolID")
-    private Idol idolId;
+    private Idol idol;
 
-    @Column(nullable = false)
+    @Column(length = 2000, nullable = false)
     private String imgPath;
 
     @Column(nullable = false)
