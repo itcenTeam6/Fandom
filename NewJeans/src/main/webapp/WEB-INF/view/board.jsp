@@ -34,7 +34,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="board" items="${BoardListResponseDTO.boards}">
+				<c:forEach var="board" items="${ListBoardResponseDTO.boards}">
 					<tr>
 						<td>${board.boardContent}</td>
 						<td>${board.boardFile }</td>

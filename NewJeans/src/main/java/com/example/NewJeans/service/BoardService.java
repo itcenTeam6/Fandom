@@ -1,10 +1,10 @@
 package com.example.NewJeans.service;
 
 
-import com.example.NewJeans.dto.request.BoardCreateRequestDTO;
-import com.example.NewJeans.dto.request.BoardModifyRequestDTO;
-import com.example.NewJeans.dto.response.BoardDetailResponseDTO;
-import com.example.NewJeans.dto.response.BoardListResponseDTO;
+import com.example.NewJeans.dto.request.CreateBoardRequestDTO;
+import com.example.NewJeans.dto.request.ModifyBoardRequestDTO;
+import com.example.NewJeans.dto.response.DetailBoardResponseDTO;
+import com.example.NewJeans.dto.response.ListBoardResponseDTO;
 import com.example.NewJeans.entity.Board;
 import com.example.NewJeans.entity.Idol;
 import com.example.NewJeans.repository.BoardRepository;
@@ -32,25 +32,19 @@ public class BoardService {
 
     //게시판 목록 조회  페이징 처리 필요
     @Transactional
-    public BoardListResponseDTO retrieve(Long idolId,int page,int size, String sort){ //Long memId,,int page, int size, String sort
-
+    public ListBoardResponseDTO retrieve(Long idolId, int page, int size, String sort){ //Long memId,,int page, int size, String sort
 
         //List<Board> listBoards = boardRepository.findByIdolId(idolId);
 
         //페이징처리
         Page<Board> pageBoards = boardRepository.findAll(PageRequest.of(page - 1, size, Sort.by(sort).descending()));
-
         List<Board> listBoards= pageBoards.getContent();
 
-        //Optional<Board> listBoards = boardRepository.findById(idolId);
-        //List<Board> listBoards = boardRepository.findByIdolId(idolId);
-
-
-        List<BoardDetailResponseDTO> dtoList = listBoards.stream()
-                .map(BoardDetailResponseDTO::new)
+        List<DetailBoardResponseDTO> dtoList = listBoards.stream()
+                .map(DetailBoardResponseDTO::new)
                 .collect(Collectors.toList());
 
-        return BoardListResponseDTO.builder()
+        return ListBoardResponseDTO.builder()
                 .boards(dtoList)
                 .build();
 
@@ -80,23 +74,22 @@ public class BoardService {
 //    }
 
     //게시물 등록
-    public BoardDetailResponseDTO create(final BoardCreateRequestDTO createRequestDTO,final Long idolId )//final Long memId,final Idol idolId
+    public DetailBoardResponseDTO create(final CreateBoardRequestDTO createRequestDTO, final Long idolId )
         throws RuntimeException
     {
-
         Board board=createRequestDTO.toEntity();
-        board.setIdol(idolId);
-
+        board.setIdol(idolId);  // 아이돌번호
+        board.setMemNickName(board.getMemNickName()); //작성자 닉네임
         Board saveBoard = boardRepository.save(board);
         log.info("게시물이 등록되었습니다. 내용:{} 파일:{}",createRequestDTO.getBoardContent(),createRequestDTO.getBoardFile());
 
         //return retrieve(idolId);
-        return new BoardDetailResponseDTO(saveBoard);
+        return new DetailBoardResponseDTO(saveBoard);
 
     }
 
     //게시물 삭제
-    public BoardListResponseDTO delete(final Long boardId,final Long idolId){ //final Long memId,
+    public void delete(final Long boardId, final Long idolId){ //final Long memId,
         try {
             boardRepository.deleteById(boardId);
         } catch (Exception e) {
@@ -106,14 +99,15 @@ public class BoardService {
         }
 
         //return retrieve(idolId); //어디로 가?
-        return null;
+        //return new BoardListResponseDTO();
 
     }
 //
 //
     //게시물 수정
-    public BoardListResponseDTO update(
-              final Long boardId,final Long idolId, final BoardModifyRequestDTO requestDTO){ //final Long memId,
+    public ListBoardResponseDTO update(
+              final Long boardId,final Long idolId, final ModifyBoardRequestDTO requestDTO){ //final Long memId,
+
 
         Optional<Board> targetEntity=boardRepository.findById(boardId);
 
@@ -122,6 +116,9 @@ public class BoardService {
             entity.setBoardFile(requestDTO.getBoardFile());
             boardRepository.save(entity);
         });
+
+
+       // boardRepository.save()
 
         //return retrieve(idolId);
         return null;

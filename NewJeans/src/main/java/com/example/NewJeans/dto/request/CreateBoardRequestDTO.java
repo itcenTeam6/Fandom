@@ -2,18 +2,16 @@ package com.example.NewJeans.dto.request;
 
 import com.example.NewJeans.entity.Board;
 import com.example.NewJeans.entity.Idol;
-import com.example.NewJeans.entity.Member;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Getter@Setter@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class BoardCreateRequestDTO {
+public class CreateBoardRequestDTO {
 
 
     @NotBlank
@@ -21,7 +19,8 @@ public class BoardCreateRequestDTO {
 
     private String boardFile;
 
-    private String memNickName;
+    private String memNickName;  //필요없음
+
 
 
 

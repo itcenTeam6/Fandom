@@ -2,6 +2,7 @@ package com.example.NewJeans.service;
 
 
 import com.example.NewJeans.dto.request.CommentRequestDTO;
+import com.example.NewJeans.dto.response.CommentResponseDTO;
 import com.example.NewJeans.entity.Board;
 import com.example.NewJeans.entity.Comment;
 import com.example.NewJeans.entity.Member;
@@ -11,6 +12,9 @@ import com.example.NewJeans.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -23,25 +27,51 @@ public class CommentService {
 
     //댓글 조회
 
+    public List<CommentResponseDTO> retrieve(Long boardId) {
+
+        Board board = boardRepository.findById(boardId).orElseThrow(() ->
+                new IllegalArgumentException("해당 게시글이 존재하지 않습니다. " + boardId));
+
+        List<Comment> comments = board.getComments();
+        return comments.stream().map(CommentResponseDTO::new).collect(Collectors.toList());
+
+    }
+
 
     //댓글 작성
-    public Long create(Long id, CommentRequestDTO requestDTO){
+    public Long create(Long boardId, CommentRequestDTO requestDTO) {
 
-       Board board= boardRepository.findById(id).orElseThrow(()->
-                new IllegalArgumentException("댓글 쓰기 실패: 해당 게시글이 존재하지 않습니다. " + id));
+        Board board = boardRepository.findById(boardId).orElseThrow(() ->
+                new IllegalArgumentException("댓글 쓰기 실패: 해당 게시글이 존재하지 않습니다. " + boardId));
 
         requestDTO.setBoardId(board);
 
-        Comment comment =requestDTO.toEntity();
-        commentRepository.save(comment);
-
-        return comment.getCmtID();
+        Comment comment = requestDTO.toEntity();
+        Comment saveComment = commentRepository.save(comment);
+        return null;
+        // return comment.getCmtID();
+        //return new CommentResponseDTO(saveComment);
     }
 
 
     //댓글 삭제
+    public void delete(Long cmtId) {
+
+        Comment comment = commentRepository.findById(cmtId).orElseThrow(() ->
+                new IllegalArgumentException("해당 댓글이 존재하지 않습니다. id=" + cmtId));
+
+        commentRepository.delete(comment);
+    }
+
 
     //댓글 수정
+
+    public void update(Long cmtId, CommentRequestDTO requestDTO) {
+        Comment comment = commentRepository.findById(cmtId).orElseThrow(() ->
+                new IllegalArgumentException("해당 댓글이 존재하지 않습니다. " + cmtId));
+
+        comment.update(requestDTO.getCmtContent());
+    }
 
 
 

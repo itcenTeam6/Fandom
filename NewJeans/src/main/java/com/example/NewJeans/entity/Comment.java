@@ -35,5 +35,10 @@ public class Comment {
     @CreationTimestamp
     private LocalDateTime cmtDate;
 
+    //댓글 수정
+    public void update(String comment){
+        this.cmtContent=comment;
+    }
+
 
 }

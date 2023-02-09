@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class BoardModifyRequestDTO {
+public class ModifyBoardRequestDTO {
 
     @NotBlank
     private String boardContent;

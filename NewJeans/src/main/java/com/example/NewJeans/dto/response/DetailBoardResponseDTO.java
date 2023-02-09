@@ -1,8 +1,6 @@
 package com.example.NewJeans.dto.response;
 
 import com.example.NewJeans.entity.Board;
-import com.example.NewJeans.entity.IdolImg;
-import com.example.NewJeans.entity.Member;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
@@ -17,7 +15,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class BoardDetailResponseDTO {
+public class DetailBoardResponseDTO {
 
 
     private Long boardId;
@@ -37,7 +35,7 @@ public class BoardDetailResponseDTO {
     private List<CommentResponseDTO> comments;
 
 
-    public BoardDetailResponseDTO(Board entity){
+    public DetailBoardResponseDTO(Board entity){
 
         this.boardId=entity.getBoardID();
         this.memNickName=entity.getMemNickName();

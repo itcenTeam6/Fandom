@@ -1,19 +1,5 @@
 package com.example.NewJeans.service;
 
-import com.example.NewJeans.dto.request.BoardCreateRequestDTO;
-import com.example.NewJeans.dto.request.BoardModifyRequestDTO;
-import com.example.NewJeans.dto.response.BoardDetailResponseDTO;
-import com.example.NewJeans.dto.response.BoardListResponseDTO;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 //@SpringBootTest
 //class BoardServiceTest {
 //
