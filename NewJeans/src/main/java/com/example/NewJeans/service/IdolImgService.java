@@ -59,15 +59,7 @@ public class IdolImgService {
                 map(DetailIdolImgResponseDTO::new)
                 .collect(Collectors.toList());
 
-        return ListIdolImgResponseDTO.builder()
-                .idolImages(listImgResponseDTOs)
-                .size(pageImgs.getSize())
-                .page(page)
-                .totalElements(pageImgs.getTotalElements())
-                .totalPages(pageImgs.getTotalPages())
-                .hasNext(pageImgs.hasNext())
-                .hasPrevious(pageImgs.hasPrevious())
-                .build();
+        return ListIdolImgResponseDTO.builder().idolImages(listImgResponseDTOs).build();
     }
 
     public DetailIdolImgResponseDTO update(Long imageId, ModifyIdolImgRequestDTO modifyIdolImgRequestDTO){

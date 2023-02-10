@@ -262,7 +262,7 @@ section.visual {
 section.visual .slide li {
     width: 100%;
     height: 100vh;
-    background: white;
+    background: #222;
     position: relative;
 }
 
@@ -316,7 +316,7 @@ section.visual .slide li .scroll {
     width: 60px;
     height: 60px;
     line-height: 60px;
-    background: none;
+    background: #fff;
     z-index: 5;
     text-indent: -9999px;
     border: none;
@@ -327,7 +327,7 @@ section.visual .slide li .scroll {
     position: absolute;
     width: 100%;
     height: 100%;
-    color: white;
+    color: #888888;
     font-size: 20px;
     left: 0;
     top: 0;
@@ -345,7 +345,7 @@ section.visual .slide li .scroll {
 
 .slick-arrow:hover {
     cursor: pointer;
-    background: none;
+    background: #cccccc;
     transform: all .5s;
 }
 
@@ -401,8 +401,8 @@ section.visual .slick-active img {
 
 /* section contents */
 section.contents {
-    background: whitesmoke;
-    padding: 10px 0 100px;
+    background: #1b1b1b;
+    padding: 120px 0;
     overflow: hidden;
 }
 
@@ -462,16 +462,14 @@ section.contents .main-text p span {
 
 /* section contents project */
 section.contents .project {
-    color: #fff;
-    margin-left: 150px;
-    margin-right: 150px;    
+    color: #fff;    
 }
 
 section.contents .project .top {
-    width: 1500px;
-    margin: 60px auto 60px;
+    width: 1170px;
+    margin: 130px auto 60px;
     height: 90px;
-    color: magenta;
+    /* background: red; */
     display: flex;
     justify-content: space-between;
 }
@@ -499,7 +497,7 @@ section.contents .project ul {
 section.contents .project ul li {
     width: 25%;
     margin-right: 1%;
-    height: 300px;
+    height: 400px;
 }
 
 section.contents .project ul li:first-child {
@@ -516,7 +514,6 @@ section.contents .project ul li a {
 section.contents .project ul li a img {
     width: 100%;
     height: 100%;
-    border-radius: 30px;
 }
 
 section.contents .project ul li a .name {
@@ -590,7 +587,7 @@ section.contents .project ul li a .name h3 {
 section.contents .partner {
     width: 1170px;
     margin: 170px auto 100px;
-    background-color: blueviolet;
+    color: #fff;
 }
 
 section.contents .partner h3 {
@@ -652,43 +649,54 @@ section.contents .contact .inner .tel {
 
 /* footer */
 footer {
-    background: #1b1b1b;
+    background:whitesmoke;
     color: #999;
-    padding: 0 80px 80px;
+    padding: 0 0px 0px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-top: #999 1px solid;
+}
+
+.footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    vertical-align: middle;
     position: relative;
 }
 
-footer ul {    
+footer .socials{
+    list-style: none;
     display: flex;
-    justify-content: space-around;
-    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0 20px 0;
 }
-
-footer ul li:nth-child(2) {
-    color: #eee;
-    font-size: 16px;
-    line-height: 2;
+footer .socials li{
+    margin: 0 10px;
 }
-
-footer ul li:nth-child(2) span {
-    font-weight: bold;
-    margin-right: 10px;
-    color: #999;
+footer .socials a{
+    text-decoration: none;
+    color: gray;
 }
+footer .socials a i{
+    font-size: 1.1rem;
+    transition: color .4s ease;
 
-footer ul li:nth-child(3) {
-    font-weight: bold;
+}
+footer .socials a:hover i{
+    color: hotpink;
 }
 
 footer .go-top {
     display: block;
     font-size: 50px;
-    color: #fff;
+    color: orange;
     position: fixed;
     right: 50px;
     bottom: 60px;
-}
-
-ul.animate{
-    margin-bottom: 50px;
 }

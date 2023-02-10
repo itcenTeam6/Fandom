@@ -214,3 +214,13 @@ header.on::before {
 header.on .inner-header .logo a img:nth-child(2) {
     opacity: 1;
 }
+
+/* footer */
+footer .go-top {
+    display: block;
+    font-size: 50px;
+    color: orange;
+    position: fixed;
+    right: 50px;
+    bottom: 60px;
+}

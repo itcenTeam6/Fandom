@@ -1,6 +1,7 @@
 package com.example.NewJeans.entity;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
