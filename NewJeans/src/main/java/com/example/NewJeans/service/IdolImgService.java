@@ -6,8 +6,10 @@ import com.example.NewJeans.dto.response.DetailIdolImgResponseDTO;
 import com.example.NewJeans.dto.response.ListIdolImgResponseDTO;
 import com.example.NewJeans.entity.Idol;
 import com.example.NewJeans.entity.IdolImg;
+import com.example.NewJeans.entity.MemberShip;
 import com.example.NewJeans.repository.IdolImgRepository;
 import com.example.NewJeans.repository.IdolRepository;
+import com.example.NewJeans.repository.MemberShipRepository;
 import com.example.NewJeans.utils.FileUtils;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,7 @@ public class IdolImgService {
 
     private final IdolImgRepository idolImgRepository;
     private final IdolRepository idolRepository;
+    private final MemberShipRepository memberShipRepository;
 
     private static final String IMAGE_PATH = "E:\\image";
 
@@ -54,21 +57,29 @@ public class IdolImgService {
     }
 
     // 상세 아이돌 이미지
-    public DetailIdolImgResponseDTO findIdolImg(Long imageId){
+    public DetailIdolImgResponseDTO findIdolImg(String idolName, Long imageId){
+        //해당 아이돌이 있는 지 조사
+        idolRepository.findByIdolName(idolName).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
+
         IdolImg idolImg = findVerifiedIdolImg(imageId);
         return new DetailIdolImgResponseDTO(idolImg);
     }
 
     // 리스트 아이돌 이미지
-    public ListIdolImgResponseDTO findIdolImgs(int page, int size, String sort){
+    public ListIdolImgResponseDTO findIdolImgs(String idolName, int page, int size, String sort){
+
+        //해당 아이돌이 있는 지 조사
+        idolRepository.findByIdolName(idolName).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
+
         // 페이징처리 + 목록 불러오기
         Page<IdolImg> pageImgs = idolImgRepository.findAll(PageRequest.of(page - 1, size, Sort.by(sort).descending()));
 
         // responseDTO 리스트로 변환
         List<IdolImg> listImgs = pageImgs.getContent();
         List<DetailIdolImgResponseDTO> listImgResponseDTOs = listImgs
-                .stream().
-                map(DetailIdolImgResponseDTO::new)
+                .stream()
+                .filter(idolImg -> idolImg.getIdolName().equals(idolName))
+                .map(DetailIdolImgResponseDTO::new)
                 .collect(Collectors.toList());
 
         return ListIdolImgResponseDTO.builder()
@@ -109,5 +120,12 @@ public class IdolImgService {
     public IdolImg findVerifiedIdolImg(Long imageId){
         Optional<IdolImg> optionalIdolImg = idolImgRepository.findById(imageId);
         return optionalIdolImg.orElseThrow(() -> new RuntimeException("이미지가 존재하지 않습니다."));
+    }
+
+    public boolean isMemberShip(Long userId) {
+        if(userId == null) return false; // -1은 인증객체가 없다 == 로그인 안했다
+        MemberShip memberShip = memberShipRepository.findByMem_MemID(userId); //멤버의 아이디로 멤버쉽의 유형을 가져옴
+        // 멤버쉽 회원이거나 관리자면 컨텐츠를 볼 수 있음
+        return memberShip != null && (memberShip.getMsType().equals("MEMBER") || memberShip.getMsType().equals("ADMIN"));
     }
 }

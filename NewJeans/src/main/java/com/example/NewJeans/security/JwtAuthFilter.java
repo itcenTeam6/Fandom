@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,6 +35,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        System.out.println("토큰 : " + request.getHeader("Authorization"));
+
         try {
             System.out.println(request.getHeader("Authorization"));
             String token = parseBearerToken(request);
@@ -48,10 +51,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
                 AbstractAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userId,
-                        userDetails.getPassword(),
-                        userDetails.getAuthorities()
-//                        null,
-//                        AuthorityUtils.NO_AUTHORITIES
+//                        userDetails.getPassword(),
+//                        userDetails.getAuthorities()
+                        null,
+                        AuthorityUtils.NO_AUTHORITIES
                 );
 
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
@@ -74,7 +77,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }else{
             return null;
         }
-
 
     }
 }

@@ -21,6 +21,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import java.util.Collection;
 
@@ -57,16 +59,22 @@ public class IdolImgController {
     }
 
     //멤버쉽 이미지 보기
-    @GetMapping
+    @GetMapping("/{idol-name}")
     public String getImages(Model model, Authentication authentication,
-                                       @RequestParam(name = "page", required = false, defaultValue = "1")int page,
-                                       @RequestParam(name = "size", required = false, defaultValue = "10")int size,
-                                       @RequestParam(name = "sort", required = false, defaultValue = "imgId")String sort){
+                            @Positive @PathVariable("idol-name") String idolName,
+                            @RequestParam(name = "page", required = false, defaultValue = "1")int page,
+                            @RequestParam(name = "size", required = false, defaultValue = "10")int size,
+                            @RequestParam(name = "sort", required = false, defaultValue = "imgId")String sort){
 
-        System.out.println(authentication.getAuthorities());
+        Long userId = null;
+        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
+        log.info("현재 {}로 시작합니다.", userId);
+        boolean contents = idolImgService.isMemberShip(userId);
+        model.addAttribute("contents",contents);
+
 
         try {
-            ListIdolImgResponseDTO listIdolImgResponseDTO = idolImgService.findIdolImgs(page,size,sort);
+            ListIdolImgResponseDTO listIdolImgResponseDTO = idolImgService.findIdolImgs(idolName,page,size,sort);
             model.addAttribute("listIdolImgResponseDTO",listIdolImgResponseDTO);
             return "Idol/IdolImg";
         } catch (RuntimeException e) {
@@ -77,13 +85,14 @@ public class IdolImgController {
     }
 
     // 멤버쉽 이미지 상세 보기
-    @GetMapping("/{image-id}")
+    @GetMapping("/{idol-name}/{image-id}")
     public String getImage(Model model,
+                           @Positive @PathVariable("idol-name") String idolName,
                            @Positive @PathVariable("image-id") Long imageId){
         log.info("이미지 상세 보기 실행");
 
         try {
-            DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.findIdolImg(imageId);
+            DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.findIdolImg(idolName, imageId);
             model.addAttribute("detailIdolImgResponseDTO",detailIdolImgResponseDTO);
             return "Idol/IdolImgDetail";
         } catch (RuntimeException e) {
