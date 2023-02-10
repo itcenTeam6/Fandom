@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+<<<<<<< HEAD
 @Configuration
 @RequiredArgsConstructor
 public class configure implements WebMvcConfigurer {
@@ -19,3 +20,19 @@ public class configure implements WebMvcConfigurer {
 
     }
 }
+=======
+//@Configuration
+//@RequiredArgsConstructor
+//public class configure implements WebMvcConfigurer {
+//    private final Interceptor interceptor;
+//
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(interceptor);
+//        //.addPathPatterns() 인터셉터 적용될 url
+//        //.addPathPatterns()
+//        //.excludePathPatterns(); 인터셉터 동작하지 않을 때 url
+//
+//    }
+//}
+>>>>>>> 68f21a8ecf21ec3987202594a93b67982af8a96f
