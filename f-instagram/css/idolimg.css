@@ -1,35 +1,41 @@
 body {
-    background-image: linear-gradient(to top, #ecedee 0%, #eceeef 75%, #e7e8e9 100%);
+    background-color: #35373a;
     min-height: 100vh;
     font: normal 16px sans-serif;
     padding: 60px 0;
 }
 
+#img_container{
+    background-color: #35373a;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .container.gallery-container {
-    background-color: #fff;
+    background-color: #35373a;
     color: #35373a;
     width: 95%;
     /* min-height: 100vh; */
     border-radius: 20px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
+    /* box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06); */
     margin-bottom: 30px;
     margin-top: 160px;
 }
 
 .tz-gallery {
-    padding: 40px;
+    padding: 40px 100px 0px 100px;
 }
 
 .tz-gallery .lightbox img {
     width: 100%;
     height: 200px;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     transition: 0.2s ease-in-out;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     object-fit: none;
 }
-
 
 .tz-gallery .lightbox img:hover {
     transform: scale(1.05);
@@ -39,6 +45,37 @@ body {
 .tz-gallery img {
     border-radius: 8px;
 }
+
+.tz-gallery img.myBlur{
+    border-radius: 8px;
+    filter: blur(20px);
+    -webkit-filter: blur(10px);
+    /* -moz-filter: blur(5px); 
+    -o-filter: blur(5px); 
+    -ms-filter: blur(5px);  */
+}
+
+.memberShip{
+    position: relative;
+}
+
+.memberShipImg{
+    vertical-align: middle;
+}
+
+.memberShipTxt{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    white-space: nowrap;
+    color: #0DE5C0;
+    font-family: 'Noto Sans KR';
+    font-size: 20px;
+    font-weight: 900;
+}
+
 
 .baguetteBox-button {
     background-color: transparent !important;
@@ -66,7 +103,7 @@ body {
     position: relative;
     min-height: 1px;
     padding-right: 15px;
-    padding-right: 15px;
+    padding-bottom: 15px;
 }
 
 .pagingDiv {
@@ -74,3 +111,31 @@ body {
     display: flex;
 }
 
+.pagination .myPage{
+    font-family: 'Noto Sans KR';
+    font-weight: bold;
+    font-size: large;
+    color: white;
+    background-color: #35373a;
+    border: none;
+}
+
+.pagination .active .myPage,
+.pagination .active .myPage:focus,
+.pagination .active .myPage:hover{
+    color: #0DE5C0;
+    background-color: #35373a;
+    /* cursor: pointer; */
+}
+
+.pagination .myPage:focus,
+.pagination .myPage:hover{
+    color: #0DE5C0;
+    background-color: #35373a;
+}
+
+.pagination .disabled .myPage,
+.pagination .disabled .myPage:hover,
+.pagination .disabled .myPage:focus{
+    background-color: #35373a;
+}

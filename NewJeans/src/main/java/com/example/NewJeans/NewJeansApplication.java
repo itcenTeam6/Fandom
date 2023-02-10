@@ -10,5 +10,6 @@ public class NewJeansApplication {
 		SpringApplication.run(NewJeansApplication.class, args);
 	}
 
-	//브랜치에 커밋
+
+	//branch test1
 }
