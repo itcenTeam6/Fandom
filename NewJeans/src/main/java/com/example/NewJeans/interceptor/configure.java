@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-<<<<<<< HEAD
 @Configuration
 @RequiredArgsConstructor
 public class configure implements WebMvcConfigurer {
@@ -20,7 +19,7 @@ public class configure implements WebMvcConfigurer {
 
     }
 }
-=======
+
 //@Configuration
 //@RequiredArgsConstructor
 //public class configure implements WebMvcConfigurer {
@@ -35,4 +34,4 @@ public class configure implements WebMvcConfigurer {
 //
 //    }
 //}
->>>>>>> 68f21a8ecf21ec3987202594a93b67982af8a96f
+

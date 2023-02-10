@@ -30,7 +30,8 @@ public class CommentService {
     public List<Comment> retrieve(Long boardId) {
 
         Board board = boardRepository.findById(boardId).orElseThrow(() ->
-                new IllegalArgumentException("해당 게시글이 존재하지 않습니다. " + boardId));
+                new IllegalArgumentException("해당 게시글이 존해하지 않습니다." + boardId));
+
 
         List<Comment> comments = board.getComments();
         return comments;
