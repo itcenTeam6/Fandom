@@ -108,7 +108,7 @@ body {
 /*-------------------------------------//icons*/
 
 #container {
-    background: #fafafa;
+    background: white;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -239,6 +239,7 @@ body {
     display: flex;
     justify-content: center;
     order: 1;
+    background-color: white;
 }
 
 

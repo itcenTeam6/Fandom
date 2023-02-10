@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/boardList.css">
     <link rel="stylesheet" href="/css/innerPage.css">
+    <link rel="stylesheet" href="/css/animate.min.css">
+
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -236,6 +238,9 @@
                 </div>
         </section>
     </section>
+    <footer>
+        <a href="#top" class="go-top"><span class="lnr lnr-arrow-up"></span></a>
+    </footer>
 
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/boardList.js"></script>

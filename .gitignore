@@ -34,6 +34,9 @@ out/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
+=======
 
 # json 제외
 *.json
+>>>>>>> 817cf653f09a3ba88c80fd67d7e7d57db7751603
