@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Hong Studio</title>
-    
+
     <meta name="author" content="Soon9">
     <meta name="description" content="Soon9's web studio">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -24,16 +25,17 @@
     <header>
         <div class="inner-header">
             <h1 class="logo">
-                <a href="#">
-                    <img src="img/logo.png" alt="logo">
-                    <img src="img/logo2.png" alt="logo">
+                <a href="index.html">
+                    <img src="/img/WeverseLogo_main.png" alt="logo">
                 </a>
             </h1>
             <a href="#" class="menu-open"><span class="menu-txt">SignIn</span> <span class="menu-img"></span></a>
             <a href="#" class="menu-open"><span class="menu-txt">SignUp</span> <span class="menu-img"></span></a>
             <a href="#" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
-            <a href="boardList.html" class="menu-open"><span class="menu-txt">Board</span> <span class="menu-img"></span></a>
-            <a href="idolImg.html" class="menu-open"><span class="menu-txt">Idol</span> <span class="menu-img"></span></a>
+            <a href="boardList.html" class="menu-open"><span class="menu-txt">Board</span> <span
+                    class="menu-img"></span></a>
+            <a href="idolImg.html" class="menu-open"><span class="menu-txt">Idol</span> <span
+                    class="menu-img"></span></a>
         </div>
         <div class="outer-header">
             <a href="boardList.html">BoardList</a>
@@ -42,11 +44,12 @@
         </div>
     </header>
     <!-- //header -->
-    <section id="container">
+    <section id="img_container">
         <div id="profile_container">
             <div class="container gallery-container">
                 <div class="tz-gallery">
-                    <div class="row">
+                    <div class="row myRow">
+                        <!-- MemberShip 회원용 -->
                         <div class="mycol-md-2">
                             <a class="lightbox"
                                 href="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA5MTJfNzkg%2FMDAxNjYyOTU2MTA5NTMy.Tk7IpleKqqzX-7HyhX8toMU881oUjV6QWmsW4gAEihIg.X5NJvQ-T9W7eVtHYSPaQO3xq--BS71APLB4PSNuiyMYg.JPEG.youth629%2F20220912%25A3%25DF023603.jpg&type=a340">
@@ -55,12 +58,19 @@
                                     alt="Park">
                             </a>
                         </div>
+                        <!-- Non MemberShip 회원용 -->
                         <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA4MjZfMTA1%2FMDAxNjYxNDkwNzIwNzY0.62lEXCofM3sv9j8jM8RDyN-b8Q-3NbPBZh14lE5iZGgg.mHNooYdEivkYQKqON_-kW1gArBDAvHvQU6Lt_Lziabkg.JPEG.niceguy00%2FSeul_%25B4%25BA%25C1%25F8%25BD%25BA_%25BE%25EE%25C5%25D9%25BC%25C7_%25C7%25FD%25C0%25CE69.jpg&type=ofullfill340_600_png">
-                                <img class="img-fluid"
-                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA4MjZfMTA1%2FMDAxNjYxNDkwNzIwNzY0.62lEXCofM3sv9j8jM8RDyN-b8Q-3NbPBZh14lE5iZGgg.mHNooYdEivkYQKqON_-kW1gArBDAvHvQU6Lt_Lziabkg.JPEG.niceguy00%2FSeul_%25B4%25BA%25C1%25F8%25BD%25BA_%25BE%25EE%25C5%25D9%25BC%25C7_%25C7%25FD%25C0%25CE69.jpg&type=ofullfill340_600_png"
-                                    alt="Bridge">
+                            <a class="lightbox">
+                                <div class="memberShip">
+                                    <div class="memberShipImg">
+                                        <img class="img-fluid myBlur"
+                                            src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA4MjZfMTA1%2FMDAxNjYxNDkwNzIwNzY0.62lEXCofM3sv9j8jM8RDyN-b8Q-3NbPBZh14lE5iZGgg.mHNooYdEivkYQKqON_-kW1gArBDAvHvQU6Lt_Lziabkg.JPEG.niceguy00%2FSeul_%25B4%25BA%25C1%25F8%25BD%25BA_%25BE%25EE%25C5%25D9%25BC%25C7_%25C7%25FD%25C0%25CE69.jpg&type=ofullfill340_600_png"
+                                            alt="Bridge">
+                                    </div>
+                                    <div class="memberShipTxt">
+                                        <h5>MemberShip Only</h5>
+                                    </div>
+                                </div>
                             </a>
                         </div>
                         <div class="mycol-md-2">
@@ -103,16 +113,122 @@
                                     alt="Coast">
                             </a>
                         </div>
+                        <div class="mycol-md-2">
+                            <a class="lightbox"
+                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832">
+                                <img class="img-fluid"
+                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832"
+                                    alt="Coast">
+                            </a>
+                        </div>
+                        <div class="mycol-md-2">
+                            <a class="lightbox"
+                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832">
+                                <img class="img-fluid"
+                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832"
+                                    alt="Coast">
+                            </a>
+                        </div>
+                        <div class="mycol-md-2">
+                            <a class="lightbox"
+                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832">
+                                <img class="img-fluid"
+                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832"
+                                    alt="Coast">
+                            </a>
+                        </div>
+                        <div class="mycol-md-2">
+                            <a class="lightbox"
+                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832">
+                                <img class="img-fluid"
+                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832"
+                                    alt="Coast">
+                            </a>
+                        </div>
+                        <div class="mycol-md-2">
+                            <a class="lightbox"
+                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832">
+                                <img class="img-fluid"
+                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832"
+                                    alt="Coast">
+                            </a>
+                        </div>
+                        <div class="mycol-md-2">
+                            <a class="lightbox"
+                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832">
+                                <img class="img-fluid"
+                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832"
+                                    alt="Coast">
+                            </a>
+                        </div>
+                        <div class="mycol-md-2">
+                            <a class="lightbox"
+                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
+                                <img class="img-fluid"
+                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
+                                    alt="Coast">
+                            </a>
+                        </div>
+                        <div class="mycol-md-2">
+                            <a class="lightbox"
+                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
+                                <img class="img-fluid"
+                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
+                                    alt="Coast">
+                            </a>
+                        </div>
+                        <div class="mycol-md-2">
+                            <a class="lightbox"
+                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
+                                <img class="img-fluid"
+                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
+                                    alt="Coast">
+                            </a>
+                        </div>
+                        <div class="mycol-md-2">
+                            <a class="lightbox"
+                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
+                                <img class="img-fluid"
+                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
+                                    alt="Coast">
+                            </a>
+                        </div>
+                        <div class="mycol-md-2">
+                            <a class="lightbox"
+                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
+                                <img class="img-fluid"
+                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
+                                    alt="Coast">
+                            </a>
+                        </div>
+                        <div class="mycol-md-2">
+                            <a class="lightbox"
+                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
+                                <img class="img-fluid"
+                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
+                                    alt="Coast">
+                            </a>
+                        </div>
+                        <div class="mycol-md-2">
+                            <a class="lightbox"
+                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
+                                <img class="img-fluid"
+                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
+                                    alt="Coast">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="pagingDiv">
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#"><</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">></a></li>
+                    <li class="disabled"><a class="myPage">&laquo;</a></li>
+                    <li class="active"><a class="myPage">1</a></li>
+                    <li><a class="myPage" href="idolImg.html">2</a></li>
+                    <li><a class="myPage" href="#">3</a></li>
+                    <li><a class="myPage" href="#">4</a></li>
+                    <li><a class="myPage" href="#">5</a></li>
+                    <li><a class="myPage" href="#">&raquo;</a></li>
                 </ul>
             </div>
         </div>

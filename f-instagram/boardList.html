@@ -11,10 +11,11 @@
         content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/boardList.css">
-    <link rel="stylesheet" href="css/innerPage.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/boardList.css">
+    <link rel="stylesheet" href="/css/innerPage.css">
+    <link rel="stylesheet" href="/css/animate.min.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -31,9 +32,8 @@
     <header>
         <div class="inner-header">
             <h1 class="logo">
-                <a href="#">
-                    <img src="img/logo.png" alt="logo">
-                    <img src="img/logo2.png" alt="logo">
+                <a href="index.html">
+                    <img src="/img/WeverseLogo_main.png" alt="logo">
                 </a>
             </h1>
             <a href="#" class="menu-open"><span class="menu-txt">SignIn</span> <span class="menu-img"></span></a>
@@ -196,10 +196,10 @@
                         <div class="bottom_icons">
                             <div class="left_icons">
                                 <div class="heart_btn">
-                                    <span class="lnr lnr-pencil"></span>
+                                    <a href="#"><span class="lnr lnr-pencil"></span></a>
                                 </div>
                                 <div class="heart_btn">
-                                    <span class="lnr lnr-trash"></span>
+                                    <a href="#"><span class="lnr lnr-trash"></span></a>
                                 </div>
                             </div>
                         </div>
@@ -253,14 +253,19 @@
                 </div>
         </section>
     </section>
+    <footer>
+        <a href="#top" class="go-top"><span class="lnr lnr-arrow-up"></span></a>
+    </footer>
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/scrolla.jquery.min.js"></script>
     <script src="js/slick.min.js"></script>
     <script src="js/script.js"></script>
     <script>
-        <!-- 대충 어케어케 게시글 pk 받아서 querySelector로 선택할 수 있도록 -->
-        <!-- 대충 어케어케 현재 유저 닉네임이든 아이디든 받아서 넣을 수 있도록 -->
+        /*
+        대충 어케어케 현재 유저 닉네임이든 아이디든 받아서 넣을 수 있도록
+        대충 어케어케 게시글 pk 받아서 querySelector로 선택할 수 있도록
+        */
         let replyInput = document.querySelector(".replyInput");
         let replyBtn = document.querySelector(".replyBtn");
         let commentBox = document.querySelector(".commentBox");

@@ -649,38 +649,53 @@ section.contents .contact .inner .tel {
 
 /* footer */
 footer {
-    background: #1b1b1b;
+    background:whitesmoke;
     color: #999;
-    padding: 0 80px 80px;
+    padding: 0 0px 0px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-top: #999 1px solid;
+}
+
+.footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    vertical-align: middle;
     position: relative;
 }
 
-footer ul {    
+footer .socials{
+    list-style: none;
     display: flex;
-    justify-content: space-around;
-    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0 20px 0;
 }
-
-footer ul li:nth-child(2) {
-    color: #eee;
-    font-size: 16px;
-    line-height: 2;
+footer .socials li{
+    margin: 0 10px;
 }
-
-footer ul li:nth-child(2) span {
-    font-weight: bold;
-    margin-right: 10px;
-    color: #999;
+footer .socials a{
+    text-decoration: none;
+    color: gray;
 }
+footer .socials a i{
+    font-size: 1.1rem;
+    transition: color .4s ease;
 
-footer ul li:nth-child(3) {
-    font-weight: bold;
+}
+footer .socials a:hover i{
+    color: hotpink;
 }
 
 footer .go-top {
     display: block;
     font-size: 50px;
-    color: #fff;
+    color: orange;
     position: fixed;
     right: 50px;
     bottom: 60px;
