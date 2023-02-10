@@ -15,12 +15,15 @@
 	    function LoadMain(){
 	        location.href = "/"
 	    }
+
 		function LoadBoardList(){
             location.href = "/boardList.do"
         }
+
         function LoadBoardWrite(){
             location.href = "/boardWrite.do"
         }
+
         function LoadIdolImg(){
             location.href = "/idolImg.do"
         }

@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,16 +34,17 @@ public class BoardService {
 
     //게시판 목록 조회  페이징 처리 필요
     @Transactional
-    public ListBoardResponseDTO retrieve(Long idolId, int page, int size, String sort){ //Long memId,,int page, int size, String sort
+    public ListBoardResponseDTO retrieve(Long idolId, Pageable pageable){ //Long memId,,int page, int size, String sort
 
-        //List<Board> listBoards = boardRepository.findByIdolId(idolId);
+        Page<Board> listBoards = boardRepository.findByIdolId(idolId,pageable);
 
-        Optional<Board> idol=boardRepository.findById(idolId);
+       // List<Board> boardList = boardRepository.findByIdolContaining(idolId, pageable);
 
         //페이징처리
 
-        Page<Board> pageBoards = boardRepository.findAll(PageRequest.of(page - 1, size,Sort.by(sort).descending()));
-        List<Board> listBoards= pageBoards.getContent();
+        //Page<Board> pageBoards = boardRepository.findAll(PageRequest.of(page - 1, size,Sort.by(sort).descending()));
+
+        //List<Board> listBoards= pageBoards.getContent();
 
         List<DetailBoardResponseDTO> dtoList = listBoards.stream()
                 .map(DetailBoardResponseDTO::new)
@@ -55,16 +57,16 @@ public class BoardService {
     }
 
     //게시물 등록
-    public void create(final CreateBoardRequestDTO createRequestDTO, final Long idolId )
+    public Long create(final CreateBoardRequestDTO createRequestDTO, final Long idolId )
         throws RuntimeException
     {
-
         Board board=createRequestDTO.toEntity();
         board.setIdol(idolId);  // 아이돌번호
         board.setMemNickName(board.getMemNickName()); //작성자 닉네임
         boardRepository.save(board);
         log.info("게시물이 등록되었습니다. 내용:{} 파일:{}",createRequestDTO.getBoardContent(),createRequestDTO.getBoardFile());
 
+        return idolId;
 
     }
 

@@ -160,7 +160,7 @@ header .inner-header .logo a img:nth-child(2) {
 }
 
 
-header .inner-header .menu-open {
+header .inner-header .menu-open {    
     display: block;
     color: blue;
     font-size: 16px;

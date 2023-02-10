@@ -59,6 +59,7 @@
 
     <script>
         var fileInput = document.querySelector("#userInputImg");
+
         function handleImage(e) {
             var reader = new FileReader();
             reader.onload = function (event) {
@@ -72,10 +73,13 @@
             };
             reader.readAsDataURL(e.target.files[0]);
         }
+
         // Show image
         fileInput.addEventListener('change', handleImage, false);
         var canvas = document.getElementById('imageCanvas');
         var ctx = canvas.getContext('2d');
+
+
         function inputTagClick() {
             document.fileForm.userInputImg.click()
         }

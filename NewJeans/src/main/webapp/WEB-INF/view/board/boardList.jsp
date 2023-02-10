@@ -46,8 +46,8 @@
                                     <img src="/img/userProfile.png">
                                 </div>
                                 <div class="user_name">
-                                    <div class="nick_name m_text"></div>
-                                    <div class="country s_text"></div>
+                                    <div class="nick_name m_text">post 등록 작성자</div>
+                                    <div class="country s_text">post 등록 일자</div>
                                 </div>
                             </div>
                         </div>
@@ -247,32 +247,40 @@
         대충 어케어케 현재 유저 닉네임이든 아이디든 받아서 넣을 수 있도록
         대충 어케어케 게시글 pk 받아서 querySelector로 선택할 수 있도록
         */
+
         let replyInput = document.querySelector(".replyInput");
         let replyBtn = document.querySelector(".replyBtn");
         let commentBox = document.querySelector(".commentBox");
         let commentContainer = document.querySelector(".showComment");
+
         replyInput.addEventListener("keydown", submitEnter);
         replyBtn.addEventListener("click", makeComment);
+
         function submitEnter(event) {
             if (event.keycode === 13) {
                 makeComment();
             }
         }
+
         function makeComment(e) {
             e.preventDefault();
+
             let commentText = replyInput.value;
             let newCommentBox = document.createElement("div");
             let newCommentSet = document.createElement("div");
             let newCommentUser = document.createElement("div")
             let newCommentId = document.createElement("span");
             let newCommentContents = document.createElement("div");
+
             newCommentBox.setAttribute("class", "commentBox");
             newCommentSet.setAttribute("class", "commentSet");
             newCommentUser.setAttribute("class", "commentUser")
             newCommentId.setAttribute("class", "commentId");
             newCommentContents.setAttribute("class", "commentContents");
+
             newCommentId.innerText = "testUser";
             newCommentContents.innerText = commentText;
+
             commentContainer.appendChild(newCommentBox);
             newCommentBox.appendChild(newCommentSet);
             newCommentSet.appendChild(newCommentUser);
@@ -280,9 +288,13 @@
             newCommentSet.appendChild(newCommentContents);
             initInput();
         }
+
         function initInput() {
             replyInput.value = "";
         }
+
+
+
     </script>
 </body>
 

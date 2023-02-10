@@ -137,6 +137,7 @@
 
 /* .col-4{
     margin-right: 5px;
+
 } */
 #f_themeName {
 	font-size: 40px;
@@ -287,7 +288,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .all-rounded{
-	border-radius: 1.25rem !important;
+	border-radius: 1.25rem !important;	
 }
 
 .padding-20 {
@@ -752,7 +753,7 @@ form.search-box .input-form .search-form i {
      color: #282C34;
     background-color: rgb(255, 255, 255);
     border: 0px solid black;
-    border-radius: 1rem;
+    border-radius: 1rem; 
 } */
 #back-top {
 	background: #a077ff;
@@ -1201,7 +1202,7 @@ form.search-box .input-form .search-form i {
 	margin: 0;
 	border-radius: 20px !important;
 	display: inline-block !important;
-
+	
 }
 
 .btn-color-s::after {
@@ -1346,7 +1347,7 @@ form.search-box .input-form .search-form i {
 
 .logo img{
 	width: 160px;
-	height: 45px;
+	height: 45px; 
 }
 
 .login-form h2 {
@@ -1519,3 +1520,7 @@ form.search-box .input-form .search-form i {
 .cmt-img{
 	width: 50px;
 }
+
+
+
+

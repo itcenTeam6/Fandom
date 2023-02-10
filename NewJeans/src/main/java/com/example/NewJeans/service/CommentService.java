@@ -27,19 +27,23 @@ public class CommentService {
 
     //댓글 조회
 
-    public List<CommentResponseDTO> retrieve(Long boardId) {
+    public List<Comment> retrieve(Long boardId) {
 
         Board board = boardRepository.findById(boardId).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글이 존재하지 않습니다. " + boardId));
 
         List<Comment> comments = board.getComments();
-        return comments.stream().map(CommentResponseDTO::new).collect(Collectors.toList());
+        return comments;
+        //return comments.stream().map(CommentResponseDTO::new).collect(Collectors.toList());
 
     }
 
 
     //댓글 작성
-    public Long create(Long boardId, CommentRequestDTO requestDTO) {
+    public void create(CommentRequestDTO requestDTO) {
+
+        Board boardID = requestDTO.getBoardId();
+        Long boardId = boardID.getBoardID();
 
         Board board = boardRepository.findById(boardId).orElseThrow(() ->
                 new IllegalArgumentException("댓글 쓰기 실패: 해당 게시글이 존재하지 않습니다. " + boardId));
@@ -47,10 +51,8 @@ public class CommentService {
         requestDTO.setBoardId(board);
 
         Comment comment = requestDTO.toEntity();
-        Comment saveComment = commentRepository.save(comment);
-        return null;
-        // return comment.getCmtID();
-        //return new CommentResponseDTO(saveComment);
+        commentRepository.save(comment);
+
     }
 
 
