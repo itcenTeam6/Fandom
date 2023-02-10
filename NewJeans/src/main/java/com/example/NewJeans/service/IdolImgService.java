@@ -37,10 +37,6 @@ public class IdolImgService {
 
     public DetailIdolImgResponseDTO create(CreateIdolImgRequestDTO createIdolImgRequestDTO){
 
-        // 이미지 파일 -> 파일 경로
-        String imgPath = FileUtils.uploadFile(createIdolImgRequestDTO.getImage(), IMAGE_PATH);
-        createIdolImgRequestDTO.setImgPath(imgPath);
-
         // RequestDTO -> 엔티티
         IdolImg idolImg = createIdolImgRequestDTO.toEntity();
 
@@ -72,15 +68,16 @@ public class IdolImgService {
         idolRepository.findByIdolName(idolName).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
 
         // 페이징처리 + 목록 불러오기
-        Page<IdolImg> pageImgs = idolImgRepository.findAll(PageRequest.of(page - 1, size, Sort.by(sort).descending()));
+        Page<IdolImg> pageImgs = idolImgRepository.findAllByIdolName(idolName, PageRequest.of(page - 1, size, Sort.by(sort).descending()));
 
         // responseDTO 리스트로 변환
         List<IdolImg> listImgs = pageImgs.getContent();
         List<DetailIdolImgResponseDTO> listImgResponseDTOs = listImgs
                 .stream()
-                .filter(idolImg -> idolImg.getIdolName().equals(idolName))
                 .map(DetailIdolImgResponseDTO::new)
                 .collect(Collectors.toList());
+
+
 
         return ListIdolImgResponseDTO.builder()
                 .idolImages(listImgResponseDTOs)
@@ -123,9 +120,15 @@ public class IdolImgService {
     }
 
     public boolean isMemberShip(Long userId) {
-        if(userId == null) return false; // -1은 인증객체가 없다 == 로그인 안했다
+        if(userId == null) return false; // 인증객체가 없다 == 로그인 안했다
         MemberShip memberShip = memberShipRepository.findByMem_MemID(userId); //멤버의 아이디로 멤버쉽의 유형을 가져옴
         // 멤버쉽 회원이거나 관리자면 컨텐츠를 볼 수 있음
         return memberShip != null && (memberShip.getMsType().equals("MEMBER") || memberShip.getMsType().equals("ADMIN"));
+    }
+
+    public boolean isAdmin(Long userId) {
+        if(userId == null) return false; // 인증객체가 없다 == 로그인 안했다
+        MemberShip memberShip = memberShipRepository.findByMem_MemID(userId);
+        return memberShip != null && memberShip.getMsType().equals("ADMIN");
     }
 }

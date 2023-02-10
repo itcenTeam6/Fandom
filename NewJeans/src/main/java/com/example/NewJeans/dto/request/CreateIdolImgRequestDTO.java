@@ -13,8 +13,6 @@ import javax.validation.constraints.NotBlank;
 @EqualsAndHashCode
 @Builder
 public class CreateIdolImgRequestDTO {
-    @NotBlank
-    private MultipartFile image;
     private String imgPath;
     private String msType;
     @NotBlank

@@ -15,7 +15,6 @@ import javax.validation.constraints.NotBlank;
 public class CreateIdolRequestDTO {
     @NotBlank
     private String idolName;
-    @NotBlank
     private MultipartFile image;
     private String idolMainImg;
 

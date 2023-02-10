@@ -6,25 +6,22 @@ import com.example.NewJeans.dto.request.ModifyIdolImgRequestDTO;
 import com.example.NewJeans.dto.response.DetailIdolImgResponseDTO;
 import com.example.NewJeans.dto.response.ListIdolImgResponseDTO;
 import com.example.NewJeans.service.IdolImgService;
+import com.example.NewJeans.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import java.util.Collection;
+import java.util.List;
 
 
 @Controller
@@ -33,38 +30,59 @@ import java.util.Collection;
 @RequestMapping("/membership")
 public class IdolImgController {
     private final IdolImgService idolImgService;
+    private static final String UPLOAD_PATH = "E:\\img";
 
-    //멤버쉽 이미지 등록
-//    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping
-    public String postImage(Model model,
-                            @Validated @RequestBody CreateIdolImgRequestDTO createIdolImgRequestDTO,
-                            BindingResult result){
-        //CreateDTO가 잘못 입력된 경우 에러
-        if(result.hasErrors()){
-            log.warn("createImage 핸들러 메서드 에러발생 : {}", result.getFieldError());
-            model.addAttribute("errorMessage","postImage 에러");
-            return "Idol/error";
+    @PostMapping("/upload-form")
+    public String uploadForm(Model model, Authentication authentication,
+                             @Validated @RequestBody CreateIdolImgRequestDTO createIdolImgRequestDTO){
+
+        // 관리자가 아니라면 업로드 불가능
+        Long userId = null;
+        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
+        if(!idolImgService.isAdmin(userId)){
+            log.warn("어드민이 아닌 회원은 업로드 할 수 없습니다.");
+            return "Idol/IdolImg";
         }
 
+
+        // 이미지 데이터 데이터 베이스에 저장
         try {
             DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.create(createIdolImgRequestDTO);
-            model.addAttribute("detailIdolImgResponseDTO",detailIdolImgResponseDTO);
-            return "Idol/IdolImgDetail";
+            model.addAttribute("imgId", detailIdolImgResponseDTO.getImgId());
+            return "Idol/IdolImage-upload";
         } catch (RuntimeException e) {
             log.warn("idolImage POST 에러 : {}",e.getMessage());
-            model.addAttribute("errorMessage","postImage 에러");
             return "Idol/error";
         }
+    }
+
+    @PostMapping("/upload")
+    public String postImage(@RequestParam("file") List<MultipartFile> fileList,
+                            HttpServletRequest request){
+        log.info("/upload POST! - {}", fileList);
+
+        for (MultipartFile file: fileList) {
+            log.info("file-name: {}", file.getName());
+            log.info("file-origin-name: {}", file.getOriginalFilename());
+            log.info("file-size: {}KB", (double) file.getSize() / 1024);
+            log.info("file-type: {}", file.getContentType());
+            System.out.println("==================================================================");
+
+            Long imgId = Long.parseLong((String)request.getAttribute("imgId"));
+            String imgPath = FileUtils.uploadFile(file, UPLOAD_PATH);
+
+        }
+
+        return "redirect:/member/upload/upload-form";
     }
 
     //멤버쉽 이미지 보기
     @GetMapping("/{idol-name}")
     public String getImages(Model model, Authentication authentication,
                             @Positive @PathVariable("idol-name") String idolName,
-                            @RequestParam(name = "page", required = false, defaultValue = "1")int page,
-                            @RequestParam(name = "size", required = false, defaultValue = "10")int size,
-                            @RequestParam(name = "sort", required = false, defaultValue = "imgId")String sort){
+                            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+                            @RequestParam(name = "size", required = false, defaultValue = "10") int size,
+                            @RequestParam(name = "sort", required = false, defaultValue = "imgId") String sort){
 
         Long userId = null;
         if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
@@ -82,6 +100,8 @@ public class IdolImgController {
             model.addAttribute("errorMessage","getImages 에러");
             return "Idol/error";
         }
+
+
     }
 
     // 멤버쉽 이미지 상세 보기
