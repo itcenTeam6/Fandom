@@ -1,3 +1,12 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700&display=swap');
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    background:#fafafa;
+}
+
 .m_text{
     font-size: 14px;
     font-weight: bold;
@@ -13,126 +22,6 @@
 .s_text{
     font-size: 10px;
     color: #999;
-}
-
-
-body{
-    background:#fafafa;
-}
-
-
-#header{
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 999;
-    background:white;
-    border-bottom:1px solid rgba(0,0,0,0.1);
-}
-
-#header.on{
-    position: fixed;
-}
-
-
-#header .inner{
-    width: 975px;
-    height: 77px;
-    margin: 0 auto;
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    transition:all 1s;
-}
-
-#header.on .inner{
-    height:52px;
-}
-
-#header .inner .logo > a{
-    color:transparent;
-}
-
-#header .inner .logo .sprite_insta_icon{
-    position: relative;
-    margin-right: 30px;
-}
-
-#header .inner .logo .sprite_insta_icon:after{
-    content: '';
-    width: 1px;
-    height: 28px;
-    background: #000;
-    position: absolute;
-    right: -15px;
-    top: -4px;
-    transition:all .5s;
-}
-#header .inner .logo div{
-    vertical-align: middle;
-}
-
-#header .inner .logo div:nth-child(2){
-    transform:translateY(2px);
-    transition:all .5s;
-}
-
-#header.on .inner .logo .sprite_insta_icon:after{
-    opacity: 0;
-}
-#header.on .inner .logo div:nth-child(2){
-    opacity: 0;
-}
-
-#header .search_box{
-
-    position:relative;
-}
-
-#search-field{
-    width: 185px;
-    height: 28px;
-    background:#fafafa;
-    border: 1px solid #dbdbdb;
-    border-radius: 3px;
-    padding:3px 30px;
-    color:#999;
-    font-weight: 400;
-    text-align: left;
-    font-size: 14px;
-    outline:none;
-}
-
-#search-field::placeholder{
-    font-size: 0;
-}
-
-#search-field:focus::placeholder{
-    font-size: 14px;
-}
-
-#header .search_box .fake_field{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform:translate(-50%,-50%);
-    pointer-events: none;
-}
-
-#search-field:focus ~ .fake_field > span:nth-child(1){
-    transform:translateX(-105px);
-}
-
-
-#search-field:focus ~ .fake_field > span:nth-child(2){
-    display: none;
-}
-
-#header .right_icons{
-    width: 132px;
-    display: flex;
-    justify-content: space-between;
 }
 
 #main_container{
@@ -166,6 +55,7 @@ body{
     margin-bottom: 10px;
     background: white;
     border-bottom: 1px solid #99999928;
+    font-family: 'Noto Sans KR';
 }
 
 .contents .top{
@@ -173,6 +63,7 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 10px 10px;
+    font-family: 'Noto Sans KR';
 }
 
 .contents .top .profile_img{
@@ -191,36 +82,6 @@ body{
     display: flex;
 }
 
-/* .user_container .user_name . */
-
-.contents .sprite_more_icon{
-    position: relative;
-}
-
-.contents .toggle_box{
-    text-align: center;
-    position: absolute;
-    right: 0;
-    top: 20px;
-    border: 1px solid rgba(0,0,0,0.09);
-    border-radius: 3px;
-    display: none;
-}
-
-.contents .sprite_more_icon.on .toggle_box{
-    display: block;
-}
-
-.contents .toggle_box > li{
-    padding: 5px 10px;
-    background: white;
-}
-
-.contents .toggle_box > li input{
-    border: none;
-    font-size: inherit;
-}
-
 .contents .img_section{
     overflow:hidden;
 }
@@ -229,7 +90,6 @@ body{
     width: 100%;
     border-radius: 20px;
 }
-
 
 .contents .bottom_icons{
     display: flex;
@@ -258,48 +118,72 @@ body{
     font-size: x-large;
 }
 
-.contents .likes{
-    padding: 5px 20px;
-    color:#262626;
-}
-
-
-.contents .comment_container{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 20px;
-}
-.contents .comment_container .comment{
-    display:flex;
-    flex-direction: column;
+/* comment */
+.showComment{
+    width: 558px;
+    max-height: 100px;
+    padding-left: 16px;
+    padding-right: 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
     font-size: 14px;
 }
 
-.contents .comment_container .comment-detail{
+.showComment::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+.showComment::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #0de5c186; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.showComment::-webkit-scrollbar-track {
+    background: none;  /*스크롤바 뒷 배경 색상*/
+}
+
+.commentBox{
+    width: 568px;
+    align-content: center;
+    align-items: center;
     display: flex;
 }
 
-.contents .comment_container .comment .nick_name{
-    margin-right: 10px;
+.commentSet{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 5px 0;
+    justify-content: space-between;
+    align-content: space-between;
+    font-family: 'Noto Sans KR';
 }
 
-
-.contents .timer{
-    font-size: 10px;
-    letter-spacing: 0.2px;
-    color:#999;
-    border-bottom: 1px solid rgba(0,0,0,0.09);
-    padding: 10px 20px;
+.commentUser{
+    white-space: nowrap;
+    padding-right: 5px;
 }
 
+.commentId {
+    font-weight: 600;
+    font-size: 15px;
+    color: rgba(var(--i1d,38,38,38),1)
+}
+
+.commentContents{
+    padding-left: 5px;
+    width: 480px;
+    color: #999;
+    line-height: 18px;
+}
 
 .contents .comment_field{
     min-height:56px;
     padding: 0 20px;
     position: relative;
+    font-family: 'Noto Sans KR';
 }
-
 
 .contents .comment_field input{
     width: 100%;
@@ -307,6 +191,7 @@ body{
     border: none;
     outline:none;
     background: transparent;
+    font-family: 'Noto Sans KR';
 }
 
 .contents .comment_field input:focus ~ .upload_btn{
@@ -323,8 +208,10 @@ body{
     cursor: pointer;
     /*pointer-events: none;*/
     opacity: 0.6;
+    font-family: 'Noto Sans KR';
 }
 
+/* ============================ */
 
 .side_box{
     width: 293px;
@@ -332,11 +219,7 @@ body{
     position:absolute;
     right: 0;
     top: 0;
-}
 
-.side_box.on{
-    position: fixed;
-    top: 80px;
 }
 
 .side_box .profile_thumb{
@@ -398,10 +281,10 @@ body{
     background-color: transparent;
     /* background-color: rgb(13, 229, 192, 0.5); */
     background-color: #99999915;
-
     border-radius: 20px;
     height: 100px;
 }
+
 .side_box .detail .id{
     margin-bottom: 5px;
 }
@@ -468,56 +351,6 @@ body{
 
 }
 
-.hidden_menu{
-    display:none;
-    width: 600px;
-    /*background: red;*/
-    position: absolute;
-    left: 50%;
-    transform:translateX(-50%);
-    top: 100px;
-    overflow:hidden;
-    border: 1px solid rgba(0,0,0,0.09);
-    border-radius: 3px;
-}
-
-.hidden_menu .scroll_inner{
-    height: 100px;
-    width: auto;
-    overflow-x: auto;
-    overflow-y: hidden;
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-
-}
-
-.hidden_menu .scroll_inner .user{
-    width: 80px;
-    height: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 15px;
-    justify-content: space-between;
-}
-
-.hidden_menu .scroll_inner .user .id{
-    font-size: 12px;
-    color:#262626;
-}
-.hidden_menu .thumb_img{
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.hidden_menu .thumb_img img{
-    width: 100%;
-    height: 100%;
-}
-
 @media screen and (max-width:1000px){
 
     #header .inner{
@@ -561,66 +394,6 @@ body{
 
 
 }
-
-/* comment */
-.showComment{
-    width: 558px;
-    max-height: 100px;
-    padding-left: 16px;
-    padding-right: 30px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    font-size: 14px;
-}
-
-.showComment::-webkit-scrollbar {
-    width: 8px;  /* 스크롤바의 너비 */
-}
-
-.showComment::-webkit-scrollbar-thumb {
-    height: 30%; /* 스크롤바의 길이 */
-    background: #0de5c186; /* 스크롤바의 색상 */
-    border-radius: 10px;
-}
-
-.showComment::-webkit-scrollbar-track {
-    background: none;  /*스크롤바 뒷 배경 색상*/
-}
-
-.commentBox{
-    width: 568px;
-    align-content: center;
-    align-items: center;
-    display: flex;
-}
-
-.commentSet{
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    padding: 5px 0;
-    justify-content: space-between;
-    align-content: space-between;
-}
-
-.commentUser{
-    white-space: nowrap;
-    padding-right: 5px;
-}
-
-.commentId {
-    font-weight: 600;
-    font-size: 15px;
-    color: rgba(var(--i1d,38,38,38),1)
-}
-
-.commentContents{
-    padding-left: 5px;
-    width: 480px;
-    color: #999;
-    line-height: 18px;
-}
-/* =========== */
 
 .replyInput{
     width: 530px;
