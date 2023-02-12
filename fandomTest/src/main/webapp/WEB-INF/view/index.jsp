@@ -15,7 +15,7 @@
     <meta name="description" content="Soon9's web studio">
     <meta name="viewport"
         content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 
     <link rel="icon" href="nakocon.ico">
     <link rel="apple-touch-icon" href="nakocon.ico">
