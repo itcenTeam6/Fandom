@@ -9,13 +9,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Hong Studio</title>
+    <title>FEED</title>
 
     <meta name="author" content="Soon9">
     <meta name="description" content="Soon9's web studio">
     <meta name="viewport"
         content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/common.css">
@@ -32,9 +32,8 @@
     </script>
 
 </head>
-
 <body>
-    <jsp:include page="./header/innerHeader.jsp" />
+    <jsp:include page="../header/innerHeader.jsp" />
     <section id="container">
         <section id="main_container">
             <div class="inner">
@@ -44,7 +43,7 @@
                         <div class="top">
                             <div class="user_container">
                                 <div class="profile_img">
-                                    <img src="img/userProfile.png">
+                                    <img src="/img/userProfile.png">
                                 </div>
                                 <div class="user_name">
                                     <div class="nick_name m_text">post 등록 작성자</div>
@@ -103,7 +102,7 @@
                         <div class="top">
                             <div class="user_container">
                                 <div class="profile_img">
-                                    <img src="img/userProfile.png">
+                                    <img src="/img/userProfile.png">
                                 </div>
                                 <div class="user_name">
                                     <div class="nick_name m_text">post 등록 작성자</div>
@@ -162,7 +161,7 @@
                         <div class="top">
                             <div class="user_container">
                                 <div class="profile_img">
-                                    <img src="img/userProfile.png">
+                                    <img src="/img/userProfile.png">
                                 </div>
                                 <div class="user_name">
                                     <div class="nick_name m_text">post 등록 작성자</div>
@@ -221,7 +220,7 @@
                     <div class="side_box">
                         <div class="user_profile">
                             <div class="profile_thumb">
-                                <img src="img/userProfile.png" alt="프로필사진">
+                                <img src="/img/userProfile.png" alt="프로필사진">
                             </div>
                             <div class="detail">
                                 <div class="id m_text_profile">현재 접속한 유저의 무언가</div>
@@ -244,10 +243,10 @@
         <a href="#top" class="go-top"><span class="lnr lnr-arrow-up"></span></a>
     </footer>
 
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/scrolla.jquery.min.js"></script>
-    <script src="js/slick.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/scrolla.jquery.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+    <script src="/js/script.js"></script>
     <script>
         /*
         대충 어케어케 현재 유저 닉네임이든 아이디든 받아서 넣을 수 있도록

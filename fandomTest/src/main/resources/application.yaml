@@ -36,9 +36,16 @@ spring:
       database: mysql
       generate-ddl: true
       ddl-auto: create
-
-  # JSP
+      naming:
+        physical-strategy=org:
+          hibernate:
+            boot:
+              model:
+                naming:
+                  PhysicalNamingStrategyStandardImpl:# JSP
   mvc:
     view:
       prefix: /WEB-INF/view/
       suffix: .jsp
+
+
