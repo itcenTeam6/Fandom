@@ -23,10 +23,47 @@
     <link rel="stylesheet" href="/css/innerPage.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 
+    <script text="text/javascript">
+        function LoadMain(){
+            location.href = '/';
+        }
+
+        function LoadBoardList(idolID){
+            location.href = '${cpath}/board/boardList.do?idolID=' + String(idolID);
+        }
+
+        function LoadBoardWrite(idolID){
+            location.href = '${cpath}/board/boardWrite.do?idolID=' + String(idolID);
+        }
+
+        function LoadIdolImg(idolID){
+            location.href = '${cpath}/idolImg/idolImg.do?idolID=' + String(idolID);
+        }
+
+        function commentUpload() {
+            document.getElementById("inputButton").click()
+        }
+    </script>
 </head>
 
 <body>
-    <jsp:include page="../header/innerHeader.jsp" />
+    <!-- header -->
+    <header>
+        <div class="inner-header">
+            <h1 class="logo">
+                <a href="javascript:LoadMain()">
+                    <img src="/img/WeverseLogo_main.png" alt="logo">
+                </a>
+            </h1>
+            <a href="#" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
+        </div>
+        <div class="outer-header">
+            <a href="javascript:LoadBoardList(${ idol.idolID })">Feed</a>
+            <a href="javascript:LoadBoardWrite(${ idol.idolID })">Post</a>
+            <a href="javascript:LoadIdolImg(${ idol.idolID })">Media</a>
+        </div>
+    </header>
+    <!-- //header -->
     <section id="container">
         <div id="main_container">
             <div class="post_form_container">

@@ -99,7 +99,7 @@
                     memEmail: $memEmail.value,
                     memPassword: $memPassword.value
                 }
-                fetch('/member/signin', {
+                fetch('/member/logIn.do', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

@@ -24,10 +24,48 @@
     <link rel="stylesheet" href="/css/innerPage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+    <script text="text/javascript">
+        function LoadMain(){
+            location.href = '/';
+        }
+
+        function LoadBoardList(idolID){
+            location.href = '${cpath}/board/boardList.do?idolID=' + String(idolID);
+        }
+
+        function LoadBoardWrite(idolID){
+            location.href = '${cpath}/board/boardWrite.do?idolID=' + String(idolID);
+        }
+
+        function LoadIdolImg(idolID){
+            location.href = '${cpath}/idolImg/idolImg.do?idolID=' + String(idolID);
+        }
+
+        function commentUpload() {
+            document.getElementById("inputButton").click()
+        }
+    </script>
 </head>
 
 <body>
-    <jsp:include page="../header/innerHeader.jsp" />
+    <!-- header -->
+    <header>
+        <div class="inner-header">
+            <h1 class="logo">
+                <a href="javascript:LoadMain()">
+                    <img src="/img/WeverseLogo_main.png" alt="logo">
+                </a>
+            </h1>
+            <a href="#" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
+        </div>
+        <div class="outer-header">
+            <a href="javascript:LoadBoardList(${ idol.idolID })">Feed</a>
+            <a href="javascript:LoadBoardWrite(${ idol.idolID })">Post</a>
+            <a href="javascript:LoadIdolImg(${ idol.idolID })">Media</a>
+        </div>
+    </header>
+    <!-- //header -->
     <section id="img_container">
         <div id="profile_container">
             <div class="container gallery-container">
@@ -55,150 +93,6 @@
                                         <h5>MemberShip Only</h5>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F609%2F2022%2F08%2F19%2F202208191400475510_1_20220819140204685.jpg&type=a340">
-                                <img class="img-fluid"
-                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F609%2F2022%2F08%2F19%2F202208191400475510_1_20220819140204685.jpg&type=a340"
-                                    alt="Tunnel">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F009%2F2022%2F05%2F17%2F0004965255_001_20220517193001130.jpg&type=a340">
-                                <img class="img-fluid"
-                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F009%2F2022%2F05%2F17%2F0004965255_001_20220517193001130.jpg&type=a340"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA4MDFfMjIg%2FMDAxNjU5MzMyMjczODA4.U2dm0GL4PbDloCF3phq__XU0wjDLGnhaWZpxE4lI-Vwg.LZrKjR1b0K5TLdbwx66nJftgG1rnkRLKB3X1RNWPYyQg.JPEG.jjwsuho%2F20220622%25A3%25DF221341.jpg&type=a340">
-                                <img class="img-fluid"
-                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA4MDFfMjIg%2FMDAxNjU5MzMyMjczODA4.U2dm0GL4PbDloCF3phq__XU0wjDLGnhaWZpxE4lI-Vwg.LZrKjR1b0K5TLdbwx66nJftgG1rnkRLKB3X1RNWPYyQg.JPEG.jjwsuho%2F20220622%25A3%25DF221341.jpg&type=a340"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://cafe24img.poxo.com/guka1/web/upload/NNEditor/20190124/mobile/8c7377cbeeee0da9d7f781d87cd85ff3_1548294728.png">
-                                <img class="img-fluid"
-                                    src="https://cafe24img.poxo.com/guka1/web/upload/NNEditor/20190124/mobile/8c7377cbeeee0da9d7f781d87cd85ff3_1548294728.png"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832">
-                                <img class="img-fluid"
-                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832">
-                                <img class="img-fluid"
-                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832">
-                                <img class="img-fluid"
-                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832">
-                                <img class="img-fluid"
-                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832">
-                                <img class="img-fluid"
-                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832">
-                                <img class="img-fluid"
-                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832">
-                                <img class="img-fluid"
-                                    src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5317%2F2018%2F10%2F16%2F0000020296_001_20181016172541739.jpg&type=sc960_832"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
-                                <img class="img-fluid"
-                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
-                                <img class="img-fluid"
-                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
-                                <img class="img-fluid"
-                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
-                                <img class="img-fluid"
-                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
-                                <img class="img-fluid"
-                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
-                                <img class="img-fluid"
-                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
-                                    alt="Coast">
-                            </a>
-                        </div>
-                        <div class="mycol-md-2">
-                            <a class="lightbox"
-                                href="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg">
-                                <img class="img-fluid"
-                                    src="https://images.chosun.com/resizer/R6_k4MEXsdHaKr4_xw1MO9tZCyM=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/ITCAMPJT3E5PYIVDU7AS6BVGGI.jpg"
-                                    alt="Coast">
                             </a>
                         </div>
                     </div>
