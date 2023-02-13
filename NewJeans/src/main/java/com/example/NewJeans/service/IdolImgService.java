@@ -52,22 +52,22 @@ public class IdolImgService {
     }
 
     // 상세 아이돌 이미지
-    public DetailIdolImgResponseDTO findIdolImg(String idolName, Long imageId){
+    public DetailIdolImgResponseDTO findIdolImg(Long idolId, Long imageId){
         //해당 아이돌이 있는 지 조사
-        idolRepository.findByIdolName(idolName).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
+        idolRepository.findById(idolId).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
 
         IdolImg idolImg = findVerifiedIdolImg(imageId);
         return new DetailIdolImgResponseDTO(idolImg);
     }
 
     // 리스트 아이돌 이미지
-    public ListIdolImgResponseDTO findIdolImgs(String idolName, int page, int size, String sort){
+    public ListIdolImgResponseDTO findIdolImgs(Long idolId, int page, int size, String sort){
 
         //해당 아이돌이 있는 지 조사
-        idolRepository.findByIdolName(idolName).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
+        idolRepository.findById(idolId).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
 
         // 페이징처리 + 목록 불러오기
-        Page<IdolImg> pageImgs = idolImgRepository.findAllByIdolName(idolName, PageRequest.of(page - 1, size, Sort.by(sort).descending()));
+        Page<IdolImg> pageImgs = idolImgRepository.findAllById(idolId, PageRequest.of(page - 1, size, Sort.by(sort).descending()));
 
         // responseDTO 리스트로 변환
         List<IdolImg> listImgs = pageImgs.getContent();
@@ -76,15 +76,19 @@ public class IdolImgService {
                 .map(DetailIdolImgResponseDTO::new)
                 .collect(Collectors.toList());
 
+        int startPage = ((pageImgs.getNumber() - 1) / size) * size + 1; //시작 페이지
+        int endPage = Math.min(startPage + size - 1, pageImgs.getTotalPages()); //종료 페이지
 
         return ListIdolImgResponseDTO.builder()
                 .idolImages(listImgResponseDTOs)
                 .size(pageImgs.getSize())
-                .page(page)
+                .page(pageImgs.getNumber())
                 .totalElements(pageImgs.getTotalElements())
                 .totalPages(pageImgs.getTotalPages())
                 .hasNext(pageImgs.hasNext())
                 .hasPrevious(pageImgs.hasPrevious())
+                .startPage(startPage)
+                .endPage(endPage)
                 .build();
     }
 
@@ -121,12 +125,19 @@ public class IdolImgService {
         if(userId == null) return false; // 인증객체가 없다 == 로그인 안했다
         MemberShip memberShip = memberShipRepository.findByMem_MemID(userId); //멤버의 아이디로 멤버쉽의 유형을 가져옴
         // 멤버쉽 회원이거나 관리자면 컨텐츠를 볼 수 있음
-        return memberShip != null && (memberShip.getMsType().equals("MEMBER") || memberShip.getMsType().equals("ADMIN"));
+        return memberShip != null && (memberShip.getMsType().equals("yes"));
     }
 
     public boolean isAdmin(Long userId) {
         if(userId == null) return false; // 인증객체가 없다 == 로그인 안했다
         MemberShip memberShip = memberShipRepository.findByMem_MemID(userId);
         return memberShip != null && memberShip.getMsType().equals("ADMIN");
+    }
+
+    public void changePath(Long imgId, String imgPath) {
+        IdolImg verifiedIdolImg = findVerifiedIdolImg(imgId);
+        if(imgPath == null) throw new RuntimeException("이미지경로가 존재하지 않습니다.");
+        else verifiedIdolImg.setImgPath(imgPath);
+        idolImgRepository.save(verifiedIdolImg);
     }
 }
