@@ -6,5 +6,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IdolImgRepository extends JpaRepository<IdolImg,Long > {
-    Page<IdolImg> findAllByIdolName(String idolName, Pageable pageable);
+    Page<IdolImg> findAllById(Long idolId, Pageable pageable);
 }

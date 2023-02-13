@@ -23,16 +23,17 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.cors()
                 .and()
                 .csrf()
                 .disable()
-                .httpBasic().disable();
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//               .and()
-//                .authorizeRequests().antMatchers("/","/img/**","/css/**","/js/**","/member/**").permitAll()
-//                .anyRequest().authenticated();
+                .httpBasic().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests().antMatchers("/","/img/**","/css/**","/js/**","/member/**").permitAll()
+                .anyRequest().authenticated();
 
 //                .authorizeRequests()
 //                .antMatchers("/membership").access("hasRole('member') or hasRole('admin')");

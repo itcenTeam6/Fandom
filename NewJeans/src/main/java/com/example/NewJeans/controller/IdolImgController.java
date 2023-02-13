@@ -9,14 +9,14 @@ import com.example.NewJeans.service.IdolImgService;
 import com.example.NewJeans.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.constraints.Positive;
 import java.util.List;
 
@@ -34,12 +34,13 @@ public class IdolImgController {
                              @Validated @RequestBody CreateIdolImgRequestDTO createIdolImgRequestDTO){
 
         // 관리자가 아니라면 업로드 불가능
-//        Long userId = null;
-//        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
-//        if(!idolImgService.isAdmin(userId)){
-//            log.warn("어드민이 아닌 회원은 업로드 할 수 없습니다.");
-//            return "Idol/IdolImg";
-//        }
+        Long userId = null;
+        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
+        if(!idolImgService.isAdmin(userId)){
+            log.warn("어드민이 아닌 회원은 업로드 할 수 없습니다.");
+            model.addAttribute("errorMessage","관리자 권한이 필요합니다.");
+            return "Idol/error";
+        }
 
 
         // 이미지 데이터 데이터 베이스에 저장
@@ -55,8 +56,10 @@ public class IdolImgController {
 
     @PostMapping("/upload")
     public String postImage(@RequestParam("file") List<MultipartFile> fileList,
-                            HttpServletRequest request){
+                            @RequestParam String imgId){
         log.info("/upload POST! - {}", fileList);
+
+        String imgPath = null;
 
         for (MultipartFile file: fileList) {
             log.info("file-name: {}", file.getName());
@@ -65,36 +68,42 @@ public class IdolImgController {
             log.info("file-type: {}", file.getContentType());
             System.out.println("==================================================================");
 
-            Long imgId = Long.parseLong((String)request.getAttribute("imgId"));
-            String imgPath = FileUtils.uploadFile(file, UPLOAD_PATH);
-
+            imgPath = FileUtils.uploadFile(file, UPLOAD_PATH);
         }
 
-        return "redirect:/member/upload/upload-form";
+        Long imageId = Long.parseLong(imgId);
+
+        try {
+            idolImgService.changePath(imageId,imgPath);
+        } catch (RuntimeException e) {
+            return "Idol/error";
+        }
+
+        return "redirect:/membership/upload-form";
     }
 
     //멤버쉽 이미지 보기
-    @GetMapping("/{idol-name}")
+    @GetMapping("/{idol-id}")
     public String getImages(Model model, Authentication authentication,
-                            @Positive @PathVariable("idol-name") String idolName,
+                            @Positive @PathVariable("idol-id") Long idolId,
                             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
-                            @RequestParam(name = "size", required = false, defaultValue = "10") int size,
+                            @RequestParam(name = "size", required = false, defaultValue = "5") int size,
                             @RequestParam(name = "sort", required = false, defaultValue = "imgId") String sort){
 
         Long userId = null;
-//        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
+        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
         log.info("현재 {}로 시작합니다.", userId);
-        boolean contents = idolImgService.isMemberShip(userId);
-        model.addAttribute("contents",contents);
+        boolean membership = idolImgService.isMemberShip(userId);
+        model.addAttribute("memberShip",membership);
 
 
         try {
-            ListIdolImgResponseDTO listIdolImgResponseDTO = idolImgService.findIdolImgs(idolName,page,size,sort);
+            ListIdolImgResponseDTO listIdolImgResponseDTO = idolImgService.findIdolImgs(idolId,page,size,sort);
             model.addAttribute("listIdolImgResponseDTO",listIdolImgResponseDTO);
-            return "Idol/IdolImg";
+            return "Idol/IdolImage";
         } catch (RuntimeException e) {
             log.warn("idolImage GET(리스트) 에러 : {}", e.getMessage());
-            model.addAttribute("errorMessage","getImages 에러");
+            model.addAttribute("errorMessage","존재하지 않는 아이돌입니다.");
             return "Idol/error";
         }
 
@@ -102,14 +111,14 @@ public class IdolImgController {
     }
 
     // 멤버쉽 이미지 상세 보기
-    @GetMapping("/{idol-name}/{image-id}")
+    @GetMapping("/{idol-id}/{image-id}")
     public String getImage(Model model,
-                           @Positive @PathVariable("idol-name") String idolName,
+                           @Positive @PathVariable("idol-name") Long idolId,
                            @Positive @PathVariable("image-id") Long imageId){
         log.info("이미지 상세 보기 실행");
 
         try {
-            DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.findIdolImg(idolName, imageId);
+            DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.findIdolImg(idolId, imageId);
             model.addAttribute("detailIdolImgResponseDTO",detailIdolImgResponseDTO);
             return "Idol/IdolImgDetail";
         } catch (RuntimeException e) {
@@ -121,12 +130,17 @@ public class IdolImgController {
 
     // 관리자가 이미지 수정
     @RequestMapping(value="/{image-id}",method = {RequestMethod.PUT,RequestMethod.PATCH})
-    public String patchImage(Model model,
+    public String patchImage(Model model, Authentication authentication,
                               @Positive @PathVariable("image-id") Long imageId,
                               @Validated @RequestBody ModifyIdolImgRequestDTO modifyIdolImgRequestDTO){
 
-
-
+        Long userId = null;
+        if(authentication != null) userId = Long.parseLong((String)authentication.getPrincipal());
+        if(!idolImgService.isAdmin(userId)){
+            log.warn("어드민이 아닌 회원은 수정 할 수 없습니다.");
+            model.addAttribute("errorMessage","관리자 권한이 필요합니다.");
+            return "Idol/error";
+        }
 
         try {
             DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.update(imageId, modifyIdolImgRequestDTO);
@@ -141,14 +155,21 @@ public class IdolImgController {
 
     // 관리자가 이미지 삭제
     @DeleteMapping("/{image-id}")
-    public String deleteImage(Model model,
+    public String deleteImage(Model model, Authentication authentication,
                               @Positive @PathVariable("image-id")Long imageId){
-//        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
+
+        Long userId = null;
+        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
+        if(!idolImgService.isAdmin(userId)){
+            log.warn("어드민이 아닌 회원은 삭제 할 수 없습니다.");
+            model.addAttribute("errorMessage","관리자 권한이 필요합니다.");
+            return "Idol/error";
+        }
 
         try {
             DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.remove(imageId);
             model.addAttribute("detailIdolImgResponseDTO",detailIdolImgResponseDTO);
-            return "Idol/IdolImg";
+            return "Idol/IdolImage";
         } catch (RuntimeException e) {
             log.warn("idolImage 삭제 에러 : {}", e.getMessage());
             model.addAttribute("errorMessage","deleteImage 에러");

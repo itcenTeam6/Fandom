@@ -16,6 +16,8 @@ public class ListIdolImgResponseDTO {
     private int totalPages;
     private boolean hasNext;
     private boolean hasPrevious;
+    private int startPage;
+    private int endPage;
     private List<DetailIdolImgResponseDTO> idolImages;
 
 }
