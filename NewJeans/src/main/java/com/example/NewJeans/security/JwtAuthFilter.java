@@ -1,7 +1,7 @@
 package com.example.NewJeans.security;
 
 
-import com.example.NewJeans.security.auth.LoginDetailsService;
+//import com.example.NewJeans.security.auth.LoginDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -30,7 +30,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     // 데이터 베이스에서  멤버쉽의 권한을 가져옵니다.
     // 로그인 유저의 권한 == MemberShip 테이블의 msType
-    private final LoginDetailsService loginDetailsService;
+    //private final LoginDetailsService loginDetailsService;
 
 
     @Override
@@ -48,7 +48,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 log.info("인증된 userId :{}",userId);
 
                 // MemberShip 테이블의 외래키로
-                UserDetails userDetails = loginDetailsService.loadUserByUsername(userId);
+               // UserDetails userDetails = loginDetailsService.loadUserByUsername(userId);
 
                 AbstractAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userId,

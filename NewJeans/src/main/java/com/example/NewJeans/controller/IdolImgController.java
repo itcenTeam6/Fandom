@@ -34,12 +34,12 @@ public class IdolImgController {
                              @Validated @RequestBody CreateIdolImgRequestDTO createIdolImgRequestDTO){
 
         // 관리자가 아니라면 업로드 불가능
-        Long userId = null;
-        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
-        if(!idolImgService.isAdmin(userId)){
-            log.warn("어드민이 아닌 회원은 업로드 할 수 없습니다.");
-            return "Idol/IdolImg";
-        }
+//        Long userId = null;
+//        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
+//        if(!idolImgService.isAdmin(userId)){
+//            log.warn("어드민이 아닌 회원은 업로드 할 수 없습니다.");
+//            return "Idol/IdolImg";
+//        }
 
 
         // 이미지 데이터 데이터 베이스에 저장
@@ -82,7 +82,7 @@ public class IdolImgController {
                             @RequestParam(name = "sort", required = false, defaultValue = "imgId") String sort){
 
         Long userId = null;
-        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
+//        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
         log.info("현재 {}로 시작합니다.", userId);
         boolean contents = idolImgService.isMemberShip(userId);
         model.addAttribute("contents",contents);
