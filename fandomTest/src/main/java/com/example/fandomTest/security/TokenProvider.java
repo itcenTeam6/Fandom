@@ -1,6 +1,6 @@
-package com.example.NewJeans.security;
+package com.example.fandomTest.security;
 
-import com.example.NewJeans.Entity.Member;
+import com.example.fandomTest.entity.Member;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -15,7 +15,6 @@ import java.util.Date;
 @Service
 @Slf4j
 public class TokenProvider {
-
     private static final String SECRET_KEY="Q4NSl604sgyHJj1qwEkRasdUeR4uUAt7WJraD7EN3O9DVccyYuHxMEbuuuXXyYJkal13eqgB0F7Bq4H";
 
     public String createToken(Member member){
@@ -36,7 +35,6 @@ public class TokenProvider {
                 .compact();
     }
 
-
     public String validateANdGetUserId(String token){
 
         Claims claims = Jwts.parserBuilder()
@@ -50,15 +48,4 @@ public class TokenProvider {
     public String getSubject(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
     }
-    public  boolean validatedToken(String token){
-        Claims claims = Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(SECRET_KEY.getBytes())).build().parseClaimsJws(token).getBody();
-        if(claims !=null){
-            return  true;
-        }else{
-            return  false;
-        }
-    }
-
-
-
 }

@@ -125,7 +125,7 @@ public class IdolImgService {
         if(userId == null) return false; // 인증객체가 없다 == 로그인 안했다
         MemberShip memberShip = memberShipRepository.findByMem_MemID(userId); //멤버의 아이디로 멤버쉽의 유형을 가져옴
         // 멤버쉽 회원이거나 관리자면 컨텐츠를 볼 수 있음
-        return memberShip != null && (memberShip.getMsType().equals("yes"));
+        return memberShip != null && (memberShip.getMsType().equals("yes") || memberShip.getMsType().equals("ADMIN"));
     }
 
     public boolean isAdmin(Long userId) {

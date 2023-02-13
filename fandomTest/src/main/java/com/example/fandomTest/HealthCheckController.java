@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @Slf4j
 public class HealthCheckController {
-    @GetMapping(value = "/")
+    @GetMapping(value = "/check")
     public String check(){
         log.info("Server is running...");
-        return "index";
+        return "check";
     }
 }

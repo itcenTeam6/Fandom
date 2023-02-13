@@ -27,11 +27,7 @@
     <link rel="stylesheet" href="/css/slick.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-      <script type="text/javascript">
-        function LoadIdolFeed(idolID){
-            location.href = "${cpath}/board/boardList.do?idolID=" + String(idolID);
-        }
-      </script>
+
 </head>
 
 <body>
@@ -40,16 +36,44 @@
         <!-- section visual -->
         <section class="visual">
             <ul class="slide">
-                <c:forEach var="idol" items="${idolList}">
-                    <li>
-                        <img src="${ idol.idolMainImg }" alt="슬라이드 이미지">
-                        <div class="txt">
-                            <h3 class="origin_p">Interact with<br>Our K-POP IDOL</h3>
-                            <h3 class="myIdolName">${ idol.idolName }</h3>
-                            <a href="javascript:LoadIdolFeed(${ idol.idolID })">More Contents<span class="lnr lnr-chevron-right"></span></a>
-                        </div>
-                    </li>
-                </c:forEach>
+                <li>
+                    <img src="https://cdn.clien.net/web/api/file/F01/13174997/2fdb6acdb5ecb3.jpg" alt="슬라이드 이미지2">
+                    <div class="txt">
+                        <!-- <p>Creative design with Hong Studio</p> -->
+                        <h3 class="origin_p">Interact with<br>Our K-POP IDOL</h3>
+                        <h3 class="myIdolName">NewJeans</h3>
+                        <a href="#">More Contents<span class="lnr lnr-chevron-right"></span></a>
+                    </div>
+                </li>
+                <li>
+                    <img src="https://4kwallpapers.com/images/wallpapers/blackpink-pubg-mobile-pink-background-2560x1440-3105.jpg"
+                        alt="슬라이드 이미지3">
+                    <div class="txt">
+                        <!-- <p>Creative design with Hong Studio</p> -->
+                        <h3 class="origin_p">Interact with<br>Our K-POP IDOL</h3>
+                        <h3 class="myIdolName">BlackPink</h3>
+                        <a href="#">More Contents<span class="lnr lnr-chevron-right"></span></a>
+                    </div>
+                </li>
+                <li>
+                    <img src="https://rare-gallery.com/uploads/posts/340441-Aespa-Kpop-K-pop-Girl-Group-Girls-Members-Karina-Ningning-Giselle-Winter.jpg"
+                        alt="슬라이드 이미지1">
+                    <div class="txt">
+                        <!-- <p>Creative design with Hong Studio</p> -->
+                        <h3 class="origin_p">Interact with<br>Our K-POP IDOL</h3>
+                        <h3 class="myIdolName">AESPA</h3>
+                        <a href="#">More Contents<span class="lnr lnr-chevron-right"></span></a>
+                    </div>
+                </li>
+                <li>
+                    <img src="https://pbs.twimg.com/media/FFgr7uBVIAAoYYx.jpg:large" alt="슬라이드 이미지4">
+                    <div class="txt">
+                        <!-- <p>Creative design with Hong Studio</p> -->
+                        <h3 class="origin_p">Interact with<br>Our K-POP IDOL</h3>
+                        <h3 class="myIdolName">IVE</h3>
+                        <a href="#">More Contents<span class="lnr lnr-chevron-right"></span></a>
+                    </div>
+                </li>
             </ul>
         </section>
         <!-- //section visual -->
@@ -63,21 +87,51 @@
                     </h3>
                 </div>
                 <ul class="animate" data-animate="fadeInUp" data-duration="1s" data-delay="0s">
-                    <c:forEach var="idol" items="${ idolList }">
-                        <li>
-                            <a href="javascript:LoadIdolFeed(${ idol.idolID })">
-                                <img class="mainIdolImgPo"
-                                    src="${ idol.idolMainImg }">
-                                <div class="name">
-                                    <span>K-POP IDOL</span>
-                                    <h3>${ idol.idolName }</h3>
-                                </div>
-                            </a>
-                        </li>
-                    </c:forEach>
-                </ul>
+                    <li>
+                        <a href="#">
+                            <img class="mainIdolImgPo"
+                                src="https://images.chosun.com/resizer/gst8Y76TWvb559SjLSh43AmEUrU=/2000x1333/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/GO7X3DGRXZDGAPFJJRGNZBR4VI.jpg"
+                                alt="">
+                            <div class="name">
+                                <span>K-POP IDOL</span>
+                                <h3>NewJeans</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="mainIdolImgPo"
+                                src="https://4kwallpapers.com/images/wallpapers/blackpink-pubg-mobile-pink-background-2560x1440-3105.jpg"
+                                alt="">
+                            <div class="name">
+                                <span>K-POP IDOL</span>
+                                <h3>BlackPink</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="mainIdolImgPo"
+                                src="https://rare-gallery.com/uploads/posts/340441-Aespa-Kpop-K-pop-Girl-Group-Girls-Members-Karina-Ningning-Giselle-Winter.jpg"
+                                alt="">
+                            <div class="name">
+                                <span>K-POP IDOL</span>
+                                <h3>AESPA</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="mainIdolImgPo" src="https://pbs.twimg.com/media/FFgr7uBVIAAoYYx.jpg:large"
+                                alt="">
+                            <div class="name">
+                                <span>K-POP IDOL</span>
+                                <h3>IVE</h3>
+                            </div>
+                        </a>
+                    </li>
 
-                <!-- 임시용 -->
+                </ul>
                 <ul class="animate" data-animate="fadeInUp" data-duration="1s" data-delay="0s">
                     <li>
                         <a href="#">

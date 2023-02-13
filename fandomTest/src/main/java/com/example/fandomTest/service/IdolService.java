@@ -1,13 +1,32 @@
 package com.example.fandomTest.service;
 
-import com.example.fandomTest.controller.IdolController;
+import com.example.fandomTest.entity.Idol;
+import com.example.fandomTest.repository.IdolRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class IdolService {
-    private IdolController idolController;
+    private final IdolRepository idolRepository;
+
+    public List<Idol> getIdolList() {
+        List<Idol> idolList = idolRepository.findAll();
+
+        if (idolList.isEmpty()) {
+            throw new RuntimeException("idolList is Empty");
+        }
+
+        return idolList;
+    }
+
+    public Idol getIdol(final Long idolID){
+        return idolRepository.findById(idolID).orElseThrow(NullPointerException::new);
+    }
 }

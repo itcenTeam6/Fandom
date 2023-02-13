@@ -15,8 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.constraints.Positive;
 import java.util.List;
 
@@ -82,12 +80,13 @@ public class IdolImgController {
         return "redirect:/membership/upload-form";
     }
 
+
     //멤버쉽 이미지 보기
     @GetMapping("/{idol-id}")
     public String getImages(Model model, Authentication authentication,
                             @Positive @PathVariable("idol-id") Long idolId,
                             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
-                            @RequestParam(name = "size", required = false, defaultValue = "5") int size,
+                            @RequestParam(name = "size", required = false, defaultValue = "20") int size,
                             @RequestParam(name = "sort", required = false, defaultValue = "imgId") String sort){
 
         Long userId = null;
@@ -95,7 +94,7 @@ public class IdolImgController {
         log.info("현재 {}로 시작합니다.", userId);
         boolean membership = idolImgService.isMemberShip(userId);
         model.addAttribute("memberShip",membership);
-
+        model.addAttribute("idolId", idolId);
 
         try {
             ListIdolImgResponseDTO listIdolImgResponseDTO = idolImgService.findIdolImgs(idolId,page,size,sort);
@@ -106,16 +105,15 @@ public class IdolImgController {
             model.addAttribute("errorMessage","존재하지 않는 아이돌입니다.");
             return "Idol/error";
         }
-
-
     }
 
     // 멤버쉽 이미지 상세 보기
     @GetMapping("/{idol-id}/{image-id}")
-    public String getImage(Model model,
+    public String getImage(Model model, Authentication authentication,
                            @Positive @PathVariable("idol-name") Long idolId,
                            @Positive @PathVariable("image-id") Long imageId){
         log.info("이미지 상세 보기 실행");
+
 
         try {
             DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.findIdolImg(idolId, imageId);
