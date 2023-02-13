@@ -183,6 +183,9 @@
                      location.href='/board/'+idolId+'/'+boardId
                       }
         }
+
+
+
     </script>
 </body>
 </html>
