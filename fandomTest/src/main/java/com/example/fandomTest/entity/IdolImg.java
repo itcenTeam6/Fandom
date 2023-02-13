@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "imgId")
 @Builder
 @Entity
 public class IdolImg {
@@ -24,7 +24,7 @@ public class IdolImg {
     @JoinColumn(name = "idolID")
     private Idol idolId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 2000)
     private String imgPath;
 
     @Column(nullable = false)

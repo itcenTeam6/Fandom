@@ -25,7 +25,23 @@
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <script>
+    <script text="text/javascript">
+        function LoadMain(){
+            location.href = '/';
+        }
+
+        function LoadBoardList(idolID){
+            location.href = '${cpath}/board/boardList.do?idolID=' + String(idolID);
+        }
+
+        function LoadBoardWrite(idolID){
+            location.href = '${cpath}/board/boardWrite.do?idolID=' + String(idolID);
+        }
+
+        function LoadIdolImg(idolID){
+            location.href = '${cpath}/idolImg/idolImg.do?idolID=' + String(idolID);
+        }
+
         function commentUpload() {
             document.getElementById("inputButton").click()
         }
@@ -33,7 +49,23 @@
 
 </head>
 <body>
-    <jsp:include page="../header/innerHeader.jsp" />
+    <!-- header -->
+    <header>
+        <div class="inner-header">
+            <h1 class="logo">
+                <a href="javascript:LoadMain()">
+                    <img src="/img/WeverseLogo_main.png" alt="logo">
+                </a>
+            </h1>
+            <a href="#" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
+        </div>
+        <div class="outer-header">
+            <a href="javascript:LoadBoardList(${ idol.idolID })">Feed</a>
+            <a href="javascript:LoadBoardWrite(${ idol.idolID })">Post</a>
+            <a href="javascript:LoadIdolImg(${ idol.idolID })">Media</a>
+        </div>
+    </header>
+    <!-- //header -->
     <section id="container">
         <section id="main_container">
             <div class="inner">
@@ -230,8 +262,8 @@
                         <article class="recommend">
                             <div class="myprofile_thumb">
                                 <img
-                                    src="https://weverse-phinf.pstatic.net/MjAyMjA5MTZfMTU3/MDAxNjYzMzAwNTMwNDg0.oWitHeFDQwy5XciQ0h2bxqq14H-a7GqzdKSwc5RqMU0g.Qo3Np6u6Y3chZy_xIrGlwANsJpphdm-FVGGar_5aoeQg.PNG/45377809542097982318a06ef-10d1-48da-888d-b1d1c97f89ca.png?type=f706_740">
-                                <h1 class="thumb_text">BlackPink</h1>
+                                    src="${ idol.idolMainImg }">
+                                <h1 class="thumb_text">${ idol.idolName }</h1>
                                 <div class="thumb_box"></div>
                             </div>
                         </article>
