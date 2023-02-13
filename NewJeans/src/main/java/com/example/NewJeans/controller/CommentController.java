@@ -2,8 +2,7 @@ package com.example.NewJeans.controller;
 
 import com.example.NewJeans.dto.request.CommentRequestDTO;
 import com.example.NewJeans.dto.response.ListBoardResponseDTO;
-import com.example.NewJeans.dto.response.CommentResponseDTO;
-import com.example.NewJeans.entity.Comment;
+import com.example.NewJeans.Entity.Comment;
 import com.example.NewJeans.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

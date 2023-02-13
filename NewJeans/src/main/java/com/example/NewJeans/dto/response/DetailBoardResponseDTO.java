@@ -1,13 +1,10 @@
 package com.example.NewJeans.dto.response;
 
-import com.example.NewJeans.entity.Board;
-import com.example.NewJeans.entity.Idol;
+import com.example.NewJeans.Entity.Board;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 

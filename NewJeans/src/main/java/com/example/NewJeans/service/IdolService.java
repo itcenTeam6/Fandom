@@ -4,7 +4,7 @@ import com.example.NewJeans.dto.request.CreateIdolRequestDTO;
 import com.example.NewJeans.dto.request.ModifyIdolRequestDTO;
 import com.example.NewJeans.dto.response.DetailIdolResponseDTO;
 import com.example.NewJeans.dto.response.ListIdolResponseDTO;
-import com.example.NewJeans.entity.Idol;
+import com.example.NewJeans.Entity.Idol;
 import com.example.NewJeans.repository.IdolRepository;
 import com.example.NewJeans.utils.FileUtils;
 import lombok.RequiredArgsConstructor;

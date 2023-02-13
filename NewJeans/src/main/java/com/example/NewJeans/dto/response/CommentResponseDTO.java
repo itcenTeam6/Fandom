@@ -1,8 +1,7 @@
 package com.example.NewJeans.dto.response;
 
 
-import com.example.NewJeans.entity.Board;
-import com.example.NewJeans.entity.Comment;
+import com.example.NewJeans.Entity.Comment;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 

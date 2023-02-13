@@ -1,6 +1,6 @@
 package com.example.NewJeans.dto.request;
 
-import com.example.NewJeans.entity.IdolImg;
+import com.example.NewJeans.Entity.IdolImg;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;

@@ -1,9 +1,9 @@
 package com.example.NewJeans.dto.request;
 
 
-import com.example.NewJeans.entity.Board;
-import com.example.NewJeans.entity.Comment;
-import com.example.NewJeans.entity.Member;
+import com.example.NewJeans.Entity.Board;
+import com.example.NewJeans.Entity.Comment;
+import com.example.NewJeans.Entity.Member;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 

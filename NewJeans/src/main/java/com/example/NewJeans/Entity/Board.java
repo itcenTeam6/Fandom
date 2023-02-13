@@ -1,4 +1,4 @@
-package com.example.NewJeans.entity;
+package com.example.NewJeans.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

@@ -2,10 +2,8 @@ package com.example.NewJeans.service;
 
 
 import com.example.NewJeans.dto.request.CommentRequestDTO;
-import com.example.NewJeans.dto.response.CommentResponseDTO;
-import com.example.NewJeans.entity.Board;
-import com.example.NewJeans.entity.Comment;
-import com.example.NewJeans.entity.Member;
+import com.example.NewJeans.Entity.Board;
+import com.example.NewJeans.Entity.Comment;
 import com.example.NewJeans.repository.BoardRepository;
 import com.example.NewJeans.repository.CommentRepository;
 import com.example.NewJeans.repository.MemberRepository;
@@ -14,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j

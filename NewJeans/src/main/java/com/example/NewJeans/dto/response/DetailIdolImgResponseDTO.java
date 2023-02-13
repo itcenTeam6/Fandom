@@ -1,6 +1,6 @@
 package com.example.NewJeans.dto.response;
 
-import com.example.NewJeans.entity.IdolImg;
+import com.example.NewJeans.Entity.IdolImg;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 

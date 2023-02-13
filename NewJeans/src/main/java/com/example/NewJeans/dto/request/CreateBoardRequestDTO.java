@@ -1,7 +1,6 @@
 package com.example.NewJeans.dto.request;
 
-import com.example.NewJeans.entity.Board;
-import com.example.NewJeans.entity.Idol;
+import com.example.NewJeans.Entity.Board;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 

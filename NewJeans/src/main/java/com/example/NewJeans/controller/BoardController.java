@@ -3,10 +3,7 @@ package com.example.NewJeans.controller;
 
 import com.example.NewJeans.dto.request.CreateBoardRequestDTO;
 import com.example.NewJeans.dto.request.ModifyBoardRequestDTO;
-import com.example.NewJeans.dto.response.DetailBoardResponseDTO;
 import com.example.NewJeans.dto.response.ListBoardResponseDTO;
-import com.example.NewJeans.entity.Idol;
-import com.example.NewJeans.repository.IdolRepository;
 import com.example.NewJeans.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,11 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 @Slf4j

@@ -1,4 +1,4 @@
-package com.example.NewJeans.entity;
+package com.example.NewJeans.Entity;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -22,9 +22,9 @@ public class IdolImg {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="idolID")
-    private Idol idol;
+    private Idol idolId;
 
-    @Column(length = 2000, nullable = false)
+    @Column(nullable = false)
     private String imgPath;
 
     @Column(nullable = false)

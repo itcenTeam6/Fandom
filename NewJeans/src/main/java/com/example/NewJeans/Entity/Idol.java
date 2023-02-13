@@ -1,4 +1,4 @@
-package com.example.NewJeans.entity;
+package com.example.NewJeans.Entity;
 
 
 import lombok.*;
@@ -23,5 +23,5 @@ public class Idol {
 
     @Column(nullable = false)
     private String idolMainImg;
-    
+
 }
