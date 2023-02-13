@@ -2,8 +2,8 @@ package com.example.NewJeans.dto.request;
 
 import com.example.NewJeans.entity.Idol;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 
 @Getter @Setter @ToString
@@ -14,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 public class CreateIdolRequestDTO {
     @NotBlank
     private String idolName;
+    private MultipartFile image;
     private String idolMainImg;
 
     public Idol toEntity(){

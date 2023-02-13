@@ -67,8 +67,5 @@ public class MemberServcie {
         String token = tokenProvider.createToken(member);
 
         return new LoginResponseDTO(member, token);
-
-
     }
-
 }

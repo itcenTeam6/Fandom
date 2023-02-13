@@ -28,6 +28,7 @@ public class CommentResponseDTO {
     @JsonFormat(pattern = "MM월 dd일 a hh시 mm분")
     private LocalDateTime cmtDate;
 
+
     public CommentResponseDTO(Comment comment){
         this.cmtID=comment.getCmtID();
         this.boardId=comment.getBoardId().getBoardID();

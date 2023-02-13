@@ -27,81 +27,87 @@ public class IdolController {
 
     // 아이돌 저장
     @PostMapping
-    public ResponseEntity<?> postIdol(Model model, Authentication authentication,
-                                        @Validated @RequestBody CreateIdolRequestDTO createIdolRequestDTO,
-                                        BindingResult result){
+    public String postIdol(Model model,
+                           @Validated @RequestBody CreateIdolRequestDTO createIdolRequestDTO,
+                           BindingResult result){
         if(result.hasErrors()){
             log.warn("createIdol 핸들러 메서드 에러 발생 : {}", result.getFieldError());
-            return ResponseEntity.badRequest().build();
+            model.addAttribute("errorMessage","postIdol에러");
+            return "Idol/error";
         }
 
         try {
             DetailIdolResponseDTO detailIdolResponseDTO = idolService.create(createIdolRequestDTO);
-            return new ResponseEntity<>(
-                    detailIdolResponseDTO, HttpStatus.CREATED
-            );
+            model.addAttribute("detailIdolResponseDTO", detailIdolResponseDTO);
+            return "Idol/IdolDetail";
         } catch (RuntimeException e) {
             log.warn("idol 저장 에러 : {}", e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
+            model.addAttribute("errorMessage","postIdol에러");
+            return "Idol/error";
         }
     }
 
     // 아이돌 목록 조회
     @GetMapping
-    public ResponseEntity<?> getIdols(Model model, Authentication authentication,
-                                       @RequestParam(name = "page", required = false, defaultValue = "1")int page,
-                                       @RequestParam(name = "size", required = false, defaultValue = "10")int size,
-                                       @RequestParam(name = "sort", required = false, defaultValue = "idolID")String sort){
+    public String getIdols(Model model,
+                           @RequestParam(name = "page", required = false, defaultValue = "1")int page,
+                           @RequestParam(name = "size", required = false, defaultValue = "5")int size,
+                           @RequestParam(name = "sort", required = false, defaultValue = "idolID")String sort){
         try {
             ListIdolResponseDTO listIdolResponseDTO = idolService.findIdols(page, size, sort);
-            return ResponseEntity.ok().body(listIdolResponseDTO);
+            model.addAttribute("listIdolResponseDTO",listIdolResponseDTO);
+            return "Idol/Idol";
         } catch (RuntimeException e) {
             log.warn("idol 목록 조회 에러 : {}", e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
+            model.addAttribute("errorMessage","getIdols 에러");
+            return "Idol/error";
         }
     }
 
     // 아이돌 상세 조회
     @GetMapping("/{idol-id}")
-    public ResponseEntity<?> getIdol(Model model, Authentication authentication,
-                                      @Positive @PathVariable(value = "idol-id") Long idolId){
+    public String getIdol(Model model, @Positive @PathVariable(value = "idol-id") Long idolId){
 
         try {
             DetailIdolResponseDTO detailIdolResponseDTO = idolService.findIdol(idolId);
-            return ResponseEntity.ok().body(idolId);
+            model.addAttribute("detailIdolResponseDTO",detailIdolResponseDTO);
+            return "Idol/IdolDetail";
         } catch (RuntimeException e) {
             log.warn("아이돌 상세 조회 에러 : {}", e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
+            model.addAttribute("errorMessage","getIdol 에러");
+            return "Idol/error";
         }
     }
 
     // 아이돌 수정
     @RequestMapping(value = "/{idol-id}", method = {RequestMethod.PUT, RequestMethod.PATCH})
-    public ResponseEntity<?> patchIdol(Model model, Authentication authentication,
-                                        @Validated @RequestBody ModifyIdolRequestDTO modifyIdolRequestDTO,
-                                        @Positive @PathVariable(value = "idol-id") Long idolId,
-                                        BindingResult result){
+    public String patchIdol(Model model,
+                            @Validated @RequestBody ModifyIdolRequestDTO modifyIdolRequestDTO,
+                            @Positive @PathVariable(value = "idol-id") Long idolId,
+                            BindingResult result){
 
         try {
             DetailIdolResponseDTO detailIdolResponseDTO = idolService.updateIdol(idolId, modifyIdolRequestDTO);
-            return ResponseEntity.ok().body(detailIdolResponseDTO);
+            model.addAttribute("detailIdolResponseDTO",detailIdolResponseDTO);
+            return "Idol/IdolDetail";
         } catch (RuntimeException e) {
             log.warn("아이돌 수정 에러 : {}", e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
+            model.addAttribute("errorMessage","patchIdol 에러");
+            return "Idol/error";
         }
     }
 
     // 아이돌 삭제
     @DeleteMapping("/{idol-id}")
-    public ResponseEntity<?> deleteIdol(Model model, Authentication authentication,
-                                        @Positive @PathVariable(value = "idol-id") Long idolId){
+    public String deleteIdol(Model model, @Positive @PathVariable(value = "idol-id") Long idolId){
 
         try {
             idolService.removeIdol(idolId);
-            return ResponseEntity.ok().build();
+            return "Idol/Idol";
         } catch (RuntimeException e) {
             log.warn("아이돌 삭제 에러 : {}", e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
+            model.addAttribute("errorMessage","deleteIdol 에러");
+            return "Idol/error";
         }
     }
 }

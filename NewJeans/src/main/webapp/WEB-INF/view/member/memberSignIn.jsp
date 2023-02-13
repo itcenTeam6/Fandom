@@ -104,15 +104,23 @@ $loginBtn.onclick=function(){
                                 'content-type':'application/json'
                             },
                             body:JSON.stringify(userValue)
-                        })
+                        }).then(t=>t.json())
                             .then(result => {
                                        if(result.message){
                                            alert(result.message);
                                        }else{
+                                       var date = new Date();
+                                       date.setTime(date.getTime() + 1*60*10000);
 
-                                           localStorage.setItem('ACCESS_TOKEN',result.token);
-                                           localStorage.setItem('LOGIN_USERNAME',result.userName);
-                                           window.location.href='/';
+                                        document.cookie = "ACCESS_TOKEN="+result.token+"; path=/; max-age=600"
+                                        document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; path=/; max-age=600";
+                                        //document.cookie = "ACCESS_TOKEN="+result.token+"; expires="+date+"; path=/; max-age=500"
+                                       //document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; expires="+date+"; path=/; max-age=500";
+
+                                          localStorage.clear()
+                                           //localStorage.setItem('ACCESS_TOKEN',result.token);
+                                           //localStorage.setItem('LOGIN_USEREMAIL',result.memEmail);
+                                            window.location.href='/';
                                        }
                                    })
    }

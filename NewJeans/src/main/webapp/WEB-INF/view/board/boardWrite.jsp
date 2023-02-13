@@ -30,7 +30,7 @@
     <section id="container">
         <div id="main_container">
             <div class="post_form_container">
-                <form action="#" class="post_form" id="fileForm" name="fileForm">
+                <form action="/board/${idolId}" method="post" class="post_form" id="fileForm" name="fileForm" enctype="multipart/form-data">
                     <div class="title">
                         NEW POST
                     </div>
@@ -59,7 +59,6 @@
 
     <script>
         var fileInput = document.querySelector("#userInputImg");
-
         function handleImage(e) {
             var reader = new FileReader();
             reader.onload = function (event) {
@@ -73,13 +72,10 @@
             };
             reader.readAsDataURL(e.target.files[0]);
         }
-
         // Show image
         fileInput.addEventListener('change', handleImage, false);
         var canvas = document.getElementById('imageCanvas');
         var ctx = canvas.getContext('2d');
-
-
         function inputTagClick() {
             document.fileForm.userInputImg.click()
         }

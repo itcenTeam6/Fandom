@@ -1,12 +1,15 @@
 package com.example.NewJeans.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Getter @Setter @ToString
@@ -29,7 +32,7 @@ public class Board {
 
     @CreationTimestamp
     private LocalDateTime boardDate;
-    
+
     private int boardCnt;
 
     private int boardLike;
