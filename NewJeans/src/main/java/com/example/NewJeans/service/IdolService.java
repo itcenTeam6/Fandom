@@ -2,11 +2,11 @@ package com.example.NewJeans.service;
 
 import com.example.NewJeans.dto.request.CreateIdolRequestDTO;
 import com.example.NewJeans.dto.request.ModifyIdolRequestDTO;
-import com.example.NewJeans.dto.response.DetailIdolImgResponseDTO;
 import com.example.NewJeans.dto.response.DetailIdolResponseDTO;
 import com.example.NewJeans.dto.response.ListIdolResponseDTO;
-import com.example.NewJeans.entity.Idol;
+import com.example.NewJeans.Entity.Idol;
 import com.example.NewJeans.repository.IdolRepository;
+import com.example.NewJeans.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -23,8 +23,15 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class IdolService {
     private final IdolRepository idolRepository;
+    private static final String IMAGE_PATH = "E:\\image";
 
     public DetailIdolResponseDTO create(CreateIdolRequestDTO createIdolRequestDTO){
+
+        //이미지 파일 -> 경로
+        String idolMainImg = FileUtils.uploadFile(createIdolRequestDTO.getImage(), IMAGE_PATH);
+        createIdolRequestDTO.setIdolMainImg(idolMainImg);
+
+        //DB에 아이돌 저장
         Idol idol = createIdolRequestDTO.toEntity();
         Idol savedIdol = idolRepository.save(idol);
 
@@ -52,8 +59,8 @@ public class IdolService {
         Idol verifiedIdol = findVerfiedIdol(idolId);
         Optional.ofNullable(modifyIdolRequestDTO.getIdolName())
                 .ifPresent(verifiedIdol::setIdolName);
-        Optional.ofNullable(modifyIdolRequestDTO.getIdolMainImg())
-                .ifPresent(verifiedIdol::setIdolMainImg);
+        Optional.ofNullable(modifyIdolRequestDTO.getImage())
+                .ifPresent(file -> verifiedIdol.setIdolMainImg(FileUtils.uploadFile(file,IMAGE_PATH)));
 
         Idol savedIdol = idolRepository.save(verifiedIdol);
         return new DetailIdolResponseDTO(savedIdol);

@@ -4,7 +4,7 @@ package com.example.NewJeans.service;
 import com.example.NewJeans.dto.request.SignUpRequestDTO;
 import com.example.NewJeans.dto.response.LoginResponseDTO;
 import com.example.NewJeans.dto.response.SignUpResponseDTO;
-import com.example.NewJeans.entity.Member;
+import com.example.NewJeans.Entity.Member;
 import com.example.NewJeans.exception.DuplicatedEmailException;
 import com.example.NewJeans.exception.NoRegisteredArgumentsException;
 import com.example.NewJeans.repository.MemberRepository;
@@ -67,8 +67,5 @@ public class MemberServcie {
         String token = tokenProvider.createToken(member);
 
         return new LoginResponseDTO(member, token);
-
-
     }
-
 }
