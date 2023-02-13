@@ -9,6 +9,8 @@ import com.example.NewJeans.service.IdolImgService;
 import com.example.NewJeans.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,7 @@ import javax.validation.constraints.Positive;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.constraints.Positive;
 
 @Controller
 @Slf4j
@@ -124,10 +127,16 @@ public class IdolImgController {
 
     // 관리자가 이미지 수정
     @RequestMapping(value="/{image-id}",method = {RequestMethod.PUT,RequestMethod.PATCH})
-    public String patchImage(Model model,
+    public ResponseEntity<?> patchImage(Model model,
                               @Positive @PathVariable("image-id") Long imageId,
                               @Validated @RequestBody ModifyIdolImgRequestDTO modifyIdolImgRequestDTO){
 //        authentication.getPrincipal(); //나중에 회원 권한 생기면 할것
+
+        //ModifyDTO가 잘못 입력된 경우 에러
+        if(result.hasErrors()){
+            log.warn("updateImage 핸들러 메서드 에러 발생 : {}",result.getFieldError());
+            return ResponseEntity.badRequest().build();
+        }
 
         try {
             DetailIdolImgResponseDTO detailIdolImgResponseDTO = idolImgService.update(imageId, modifyIdolImgRequestDTO);

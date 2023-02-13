@@ -1,0 +1,150 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700&display=swap');
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+}
+
+#imageCanvas{
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events:none;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+#img_id{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.post_form_container{
+    max-width: 550px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+
+.post_form{
+    padding: 40px;
+    background-color: white;
+    border: 1px solid white;
+    margin: 0 0 10px;
+    border-radius: 20px
+}
+
+.post_form .title{
+    margin: 0 10px 30px;
+    font-weight: 900;
+    font-size: 30px;
+    text-align: center;
+    color: #999;
+}
+
+
+.post_form .preview{
+    margin-bottom: 10px;
+}
+
+.post_form .preview .upload{
+    max-width: 500px;
+    height: 300px;
+    border: 1px solid #e6e6e6;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px 5px lightgray;
+}
+
+.post_btn > p {
+    color: #999;
+    margin-top: 20px;
+}
+
+.plus_icon{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    border: 2px solid #0DE5C0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.plus_icon span{
+    position: absolute;
+    display: block;
+    width: 2px;
+    height: 30px;
+    background: #0DE5C0;
+
+}
+
+.plus_icon span:nth-child(2){
+    transform:rotate(90deg);
+}
+
+.post_form p{
+    margin-bottom: 20px;
+}
+
+.post_form input[type=file]{
+    width: 100%;
+    background: 0 0;
+    border: 1px solid #efefef;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #262626;
+    font-size: 14px;
+    padding: 7px 8px 7px;
+}
+
+
+.post_form textarea{
+    width: 100%;
+    background: 0 0;
+    font-family: 'Noto Sans KR';
+    border: 1px solid #efefef;
+    border-radius: 20px;
+    box-sizing: border-box;
+    color: #262626;
+    font-size: 14px;
+    padding: 10px 10px 7px;
+    resize: none;
+}
+
+.post_form textarea:focus{
+    outline-color:#0DE5C0;
+}
+
+.submit_btn {
+    background: #0DE5C0;
+    border-color: #0DE5C0;
+    color: #fff;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 28px;
+    outline: none;
+    width: 100%;
+    padding: 0;
+    margin-top: 0px;
+    font-family: 'Noto Sans KR';
+    height: 40px;
+}
+
+.submit_btn:hover{
+    cursor: pointer;
+}
