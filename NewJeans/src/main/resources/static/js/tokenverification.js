@@ -1,4 +1,4 @@
- fetch('/tokenverification',{
+fetch('/tokenverification',{
     method:'GET',
     headers:{
         'content-type':'application/json',
