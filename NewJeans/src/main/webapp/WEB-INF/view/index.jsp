@@ -31,7 +31,7 @@
 </head>
 
 <body>
-    <jsp:include page="../header/header.jsp" />
+    <jsp:include page="./header/header.jsp" />
     <div class="wrap">
         <!-- section visual -->
         <section class="visual">
