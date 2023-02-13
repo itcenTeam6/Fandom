@@ -1,6 +1,6 @@
 package com.example.NewJeans.dto.request;
 
-import com.example.NewJeans.entity.Member;
+import com.example.NewJeans.Entity.Member;
 import lombok.*;
 
 import javax.validation.constraints.Email;

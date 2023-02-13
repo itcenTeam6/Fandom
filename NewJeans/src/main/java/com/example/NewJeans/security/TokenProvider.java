@@ -1,6 +1,6 @@
 package com.example.NewJeans.security;
 
-import com.example.NewJeans.entity.Member;
+import com.example.NewJeans.Entity.Member;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
