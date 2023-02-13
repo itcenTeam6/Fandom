@@ -75,10 +75,10 @@
                             <div class="commentBox">
                                 <div class="commentSet">
                                     <div class="commentUser">
-                                        <span class="commentId">TEST유저</span>
+                                        <span class="commentId"></span>
                                     </div>
                                     <div class="commentContents">
-                                        댓글 내용 💝💝💝💝💝💝 yayayayaaaaaay‼️‼️‼️
+
                                     </div>
                                 </div>
                             </div>
@@ -140,6 +140,9 @@
         let commentBox = document.querySelector(".commentBox");
         let commentContainer = document.querySelector(".showComment");
         let trash=document.querySelector("#trash");
+        let commentCreate=document.querySelector(".m_text");
+
+
         replyInput.addEventListener("keydown", submitEnter);
         replyBtn.addEventListener("click", makeComment);
         function submitEnter(event) {
@@ -183,6 +186,8 @@
                      location.href='/board/'+idolId+'/'+boardId
                       }
         }
+
+
 
 
 

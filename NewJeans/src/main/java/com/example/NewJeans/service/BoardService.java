@@ -58,14 +58,14 @@ public class BoardService {
             throws RuntimeException
     {
         //파일 -> 경로
-        String boardFile= FileUtils.uploadFile(createRequestDTO.getBoardImg(),IMAGE_PATH);
-        createRequestDTO.setBoardFile(boardFile);
+        //String boardFile= FileUtils.uploadFile(createRequestDTO.getBoardImg(),IMAGE_PATH);
+        //createRequestDTO.setBoardFile(boardFile);
 
         Idol idol=new Idol();
         idol.setIdolID(idolId);
 
         Board board=createRequestDTO.toEntity();
-        board.setBoardFile(board.getBoardFile());
+        //board.setBoardFile(board.getBoardFile());
         board.setIdolID(idol);
         board.setIdol(idolId);
         board.setMemNickName(board.getMemNickName()); //작성자 닉네임

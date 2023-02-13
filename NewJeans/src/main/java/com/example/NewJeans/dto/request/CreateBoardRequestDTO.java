@@ -19,7 +19,7 @@ public class CreateBoardRequestDTO {
 
     private String boardFile;
 
-    private MultipartFile boardImg;
+   // private MultipartFile boardImg;
 
     private String memNickName;  //필요없음
 
