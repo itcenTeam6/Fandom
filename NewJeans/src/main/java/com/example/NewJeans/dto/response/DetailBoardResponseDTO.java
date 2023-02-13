@@ -1,6 +1,7 @@
 package com.example.NewJeans.dto.response;
 
 import com.example.NewJeans.Entity.Board;
+import com.example.NewJeans.Entity.Member;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
@@ -19,6 +20,8 @@ public class DetailBoardResponseDTO {
 
 
     private Long boardId;
+
+    private Member member;
     private String memNickName;
 
     private String boardContent;
@@ -42,6 +45,7 @@ public class DetailBoardResponseDTO {
     public DetailBoardResponseDTO(Board entity){
 
         this.boardId=entity.getBoardID();
+        this.member=entity.getMember();
         this.memNickName=entity.getMemNickName();
         this.boardContent=entity.getBoardContent();
         this.boardFile=entity.getBoardFile();

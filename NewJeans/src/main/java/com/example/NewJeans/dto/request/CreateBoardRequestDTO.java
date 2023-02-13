@@ -14,14 +14,14 @@ import javax.validation.constraints.NotBlank;
 public class CreateBoardRequestDTO {
 
 
-    @NotBlank
+   //@NotBlank
     private String boardContent;
 
     private String boardFile;
 
    // private MultipartFile boardImg;
 
-    private String memNickName;  //필요없음
+    private String memNickName;
 
 
 

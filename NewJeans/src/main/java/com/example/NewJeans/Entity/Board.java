@@ -30,6 +30,7 @@ public class Board {
 
     private String boardFile;
 
+
     @CreationTimestamp
     private LocalDateTime boardDate;
 

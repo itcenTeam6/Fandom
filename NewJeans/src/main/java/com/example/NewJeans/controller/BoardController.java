@@ -1,6 +1,7 @@
 package com.example.NewJeans.controller;
 
 
+import com.example.NewJeans.Entity.Member;
 import com.example.NewJeans.dto.request.CreateBoardRequestDTO;
 import com.example.NewJeans.dto.request.ModifyBoardRequestDTO;
 import com.example.NewJeans.dto.response.ListBoardResponseDTO;
@@ -10,12 +11,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,16 +37,29 @@ public class BoardController {
     @GetMapping("/{idol-id}")   //아이돌 번호에 따라 페이징
     public String retrieveBoardList(
             Model model,
-            @AuthenticationPrincipal Long memId,//인증된 회원
+            Authentication authentication,
             @PathVariable("idol-id") Long idolId,
             @PageableDefault(size = 10, sort = "boardID", direction = Sort.Direction.DESC) Pageable pageable
 
     )
     {
+//        if(authentication == null){
+//            log.warn("로그인을 하세요");
+//            return "redirect:/";
+//        }
+//        Long userId = Long.parseLong((String) authentication.getPrincipal());
+
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Member member = (Member)principal;
+//        String memEmail=((Member) principal).getMemEmail();
+
+
         log.info("/board/{} Get request!",idolId);
         ListBoardResponseDTO listBoardResponseDTO = boardService.retrieve(idolId,pageable);
         model.addAttribute("ListBoardResponseDTO", listBoardResponseDTO);
         model.addAttribute("IdolId",idolId);
+        // model.addAttribute("userId",userId);
+        // model.addAttribute("memEmail",memEmail);
         return "board/boardList";
     }
 
@@ -62,14 +79,19 @@ public class BoardController {
     @PostMapping("/{idol-id}")
     public String createBoard(
             Model model,
-            //@AuthenticationPrincipal Long memId,
+            Authentication authentication,
             @PathVariable("idol-id") Long idolId,
-            @Validated @RequestBody CreateBoardRequestDTO requestDTO,
+            @Validated @ModelAttribute CreateBoardRequestDTO requestDTO,
             RedirectAttributes redirectAttributes,
+            @ModelAttribute MultipartFile file,
             BindingResult result
 
     )
+    throws Exception
     {
+//        Long userId = null;
+//        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
+
         if (result.hasErrors()) {
             log.warn("DTO 검증 에러 발생: {}", result.getFieldError());
             model.addAttribute("error","createBoard 에러");
@@ -78,7 +100,7 @@ public class BoardController {
         }
 
         try {
-            Long idol=boardService.create(requestDTO,idolId);
+            Long idol=boardService.create(requestDTO,idolId,file); //userId
             redirectAttributes.addAttribute("idol",idol);
             return "redirect:/board/{idol}"; //게시판 페이지로 리다이렉트
 
@@ -96,11 +118,14 @@ public class BoardController {
     @GetMapping("/{idol-id}/{board-id}")
     public String deleteBoard(
             Model model,
-            //@AuthenticationPrincipal Long memId,
+            Authentication authentication,
             @PathVariable("board-id") Long boardId,
             @PathVariable("idol-id") Long idolId
     )
     {
+        Long userId = null;
+        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
+
         log.info("/board/{} DELETE request!", boardId);
 
         if (boardId == null) {

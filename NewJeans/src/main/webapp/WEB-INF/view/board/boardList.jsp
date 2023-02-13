@@ -51,7 +51,9 @@
 
                         <div class="img_section">
                             <div class="trans_inner">
+                                <div>${board.boardFile}</div>
                                 <div>${board.boardContent}</div>
+
                         </div>
 
                         <div class="bottom_icons">
@@ -60,9 +62,13 @@
 
                                     <span class="lnr lnr-pencil"></span>
                                 </div>
+
                                 <div class="heart_btn" id="trash2" value="${board.boardId}">
-                                    <span class="lnr lnr-trash" id="trash" onclick="deleteByBoardId(${board.boardId})"></span>
+                                    <c:if test="${board.member==userId}">
+                                        <span class="lnr lnr-trash" id="trash" onclick="deleteByBoardId(${board.boardId})"></span>
+                                    </c:if>
                                 </div>
+
                             </div>
                         </div>
 
@@ -103,8 +109,8 @@
                                 <img src="/img/userProfile.png" alt="프로필사진">
                             </div>
                             <div class="detail">
-                                <div class="id m_text_profile">현재 접속한 유저의 무언가</div>
-                                <div class="ko_name">유저의 무언가</div>
+                                <div class="id m_text_profile">"${memEmail}"</div>
+
                             </div>
                         </div>
                         <article class="recommend">
@@ -153,7 +159,7 @@
 
         let idolId='${IdolId}';  /* 아이돌 아이디 */
 
-        /* 게시글 삭제 (유저 본인이 쓴 게시물 아니면 삭제 버튼 x  */
+        /* 게시글 삭제 (유저 본인이 쓴 게시물 아니면 삭제  x  */
         function deleteByBoardId(boardId){
 
                 var chk = confirm("정말 삭제하시겠습니까?");
