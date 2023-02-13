@@ -25,32 +25,33 @@ public class CommentController {
     private final CommentService commentService;
 
     //댓글 등록
-    @PostMapping("/create")
-    public String createComment(
+    @PostMapping("/create/{board-id}")
+    public int createComment(
             Model model,
             //@AuthenticationPrincipal Long memId,
+            @PathVariable("board-id") Long boardId,
             @Validated @RequestBody CommentRequestDTO requestDTO,
             BindingResult result
 
     ) {
         if (result.hasErrors()) {
             log.warn("DTO 검증 에러 발생: {}", result.getFieldError());
-            model.addAttribute("error", "createComment 에러");
-            return null; //페이지 만들어서 보내
+            //model.addAttribute("error", "createComment 에러");
+            return 0; //페이지 만들어서 보내
         }
 
         try {
-            commentService.create(requestDTO); //memNickName 추가
+            commentService.create(boardId,requestDTO); //memNickName 추가
             //model.addAttribute("commentRequestDTO", commentRequestDTO);
-            return "list";
+            return 1;
 
 //            return ResponseEntity
 //                    .ok()
 //                    .body(boardDetailResponseDTO);
         } catch (RuntimeException e) {
             log.error(e.getMessage());
-            model.addAttribute("error", "createBoard 에러");
-            return null; //페이지 만들어서 보내
+            //model.addAttribute("error", "createBoard 에러");
+            return 0; //페이지 만들어서 보내
 //            return ResponseEntity
 //                    .internalServerError()
 //                    .body(BoardListResponseDTO.builder().error(e.getMessage()));

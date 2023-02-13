@@ -24,11 +24,7 @@
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <script type="text/javascript">
-        function commentUpload() {
-            document.getElementById("inputButton").click()
-        }
-    </script>
+
 
 </head>
 
@@ -61,11 +57,11 @@
                         <div class="bottom_icons">
                             <div class="left_icons">
                                 <div class="heart_btn">
-                                    <span>${board.boardContent}</span>
+
                                     <span class="lnr lnr-pencil"></span>
                                 </div>
                                 <div class="heart_btn" id="trash2" value="${board.boardId}">
-                                    <span class="lnr lnr-trash" id="trash" ></span>
+                                    <span class="lnr lnr-trash" id="trash" onclick="deleteByBoardId(${board.boardId})"></span>
                                 </div>
                             </div>
                         </div>
@@ -87,10 +83,10 @@
                         <div class="comment_field" id="add-comment-post37">
                             <div class="replyComment">
                              <button id="inputButton" class="replyBtn">댓글</button>
-                                <form class="replyForm" action="" style="display:none">
+                                <form class="replyForm" name="commentInsertForm" action="" >
                                     <input class="replyInput" type="text" placeholder="댓글달기...">
                                     <div class="upload_btn m_text" data-name="comment"
-                                        onclick="javascript:commentUpload()">게시</div>
+                                        onclick="javascript:commentUpload(${board.boardId})">게시</div>
                                 </form>
                             </div>
                         </div>
@@ -150,42 +146,56 @@
                 makeComment();
             }
         }
-        function makeComment(e) {
-            e.preventDefault();
-            let commentText = replyInput.value;
-            let newCommentBox = document.createElement("div");
-            let newCommentSet = document.createElement("div");
-            let newCommentUser = document.createElement("div")
-            let newCommentId = document.createElement("span");
-            let newCommentContents = document.createElement("div");
-            newCommentBox.setAttribute("class", "commentBox");
-            newCommentSet.setAttribute("class", "commentSet");
-            newCommentUser.setAttribute("class", "commentUser")
-            newCommentId.setAttribute("class", "commentId");
-            newCommentContents.setAttribute("class", "commentContents");
-            newCommentId.innerText = "testUser";
-            newCommentContents.innerText = commentText;
-            commentContainer.appendChild(newCommentBox);
-            newCommentBox.appendChild(newCommentSet);
-            newCommentSet.appendChild(newCommentUser);
-            newCommentUser.appendChild(newCommentId);
-            newCommentSet.appendChild(newCommentContents);
-            initInput();
-        }
-        function initInput() {
-            replyInput.value = "";
-        }
+
         replyBtn.onclick=function(){
             replyForm.style.display='block';
         }
-        let idolId='${IdolId}';
-        let boardId=$("#trash2").attr("value");
-        trash.onclick=function(){
-                    var chk = confirm("정말 삭제하시겠습니까?");
-                    if (chk) {
-                     location.href='/board/'+idolId+'/'+boardId
-                      }
+
+        let idolId='${IdolId}';  /* 아이돌 아이디 */
+
+        /* 게시글 삭제 (유저 본인이 쓴 게시물 아니면 삭제 버튼 x  */
+        function deleteByBoardId(boardId){
+
+                var chk = confirm("정말 삭제하시겠습니까?");
+                 if (chk) {
+                    location.href='/board/'+idolId+'/'+boardId
+                  }
+
         }
+
+
+
+
+
+
+        /* 댓글 등록*/
+
+        function commentUpload(boardId){
+
+                var data={
+
+                       "cmtContent":"HI"
+                };
+
+                $.ajax({
+                     url: '/comment/create/'+46,
+                     type:'post',
+                     data:JSON.stringify(data),
+                     contentType : "application/json; charset=utf-8",
+                     success:function(data){
+                           if(data==1){
+                                alert("댓글 등록 성공!");
+
+                           }
+                           else{
+                                alert("댓글 등록 실패!");
+                           }
+                     }
+                });
+        }
+
+
+
 
 
 

@@ -37,16 +37,18 @@ public class CommentService {
 
 
     //댓글 작성
-    public void create(CommentRequestDTO requestDTO) {
+    public void create(Long boardId,CommentRequestDTO requestDTO) {
 
-        Board boardID = requestDTO.getBoardId();
-        Long boardId = boardID.getBoardID();
+        //Board board=new Board();
+        //board.setBoardID(boardId);
+
+
+        //Long boardId = boardID.getBoardID();
 
         Board board = boardRepository.findById(boardId).orElseThrow(() ->
                 new IllegalArgumentException("댓글 쓰기 실패: 해당 게시글이 존재하지 않습니다. " + boardId));
 
         requestDTO.setBoardId(board);
-
         Comment comment = requestDTO.toEntity();
         commentRepository.save(comment);
 
