@@ -4,14 +4,13 @@ import com.example.NewJeans.dto.request.CreateIdolImgRequestDTO;
 import com.example.NewJeans.dto.request.ModifyIdolImgRequestDTO;
 import com.example.NewJeans.dto.response.DetailIdolImgResponseDTO;
 import com.example.NewJeans.dto.response.ListIdolImgResponseDTO;
-import com.example.NewJeans.entity.Idol;
-import com.example.NewJeans.entity.IdolImg;
-import com.example.NewJeans.entity.MemberShip;
+import com.example.NewJeans.Entity.Idol;
+import com.example.NewJeans.Entity.IdolImg;
+import com.example.NewJeans.Entity.MemberShip;
 import com.example.NewJeans.repository.IdolImgRepository;
 import com.example.NewJeans.repository.IdolRepository;
 import com.example.NewJeans.repository.MemberShipRepository;
 import com.example.NewJeans.utils.FileUtils;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -43,7 +42,7 @@ public class IdolImgService {
         //존재하는 아이돌인지 확인하고 아이돌 매핑
         Optional<Idol> foundIdol = idolRepository.findByIdolName(idolImg.getIdolName());
         Idol idol = foundIdol.orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
-        idolImg.setIdol(idol);
+        idolImg.setIdolId(idol);
 
         //DB에 저장
         idolImgRepository.save(idolImg);
@@ -76,7 +75,6 @@ public class IdolImgService {
                 .stream()
                 .map(DetailIdolImgResponseDTO::new)
                 .collect(Collectors.toList());
-
 
 
         return ListIdolImgResponseDTO.builder()

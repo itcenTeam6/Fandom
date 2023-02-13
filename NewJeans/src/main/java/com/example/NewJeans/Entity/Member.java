@@ -1,10 +1,8 @@
-package com.example.NewJeans.entity;
+package com.example.NewJeans.Entity;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter@Setter@ToString
 @NoArgsConstructor

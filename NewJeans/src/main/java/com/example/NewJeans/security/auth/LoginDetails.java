@@ -1,6 +1,6 @@
 package com.example.NewJeans.security.auth;
 
-import com.example.NewJeans.entity.MemberShip;
+import com.example.NewJeans.Entity.MemberShip;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

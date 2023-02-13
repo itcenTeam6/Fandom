@@ -1,11 +1,8 @@
 package com.example.NewJeans.dto.request;
 
 
-import com.example.NewJeans.entity.IdolImg;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.constraints.NotBlank;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
