@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.filter.CorsFilter;
@@ -28,11 +29,11 @@ public class WebSecurityConfig {
                 .and()
                 .csrf()
                 .disable()
-                .httpBasic().disable();
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .authorizeRequests().antMatchers("/","/img/**","/css/**","/js/**","/member/**").permitAll()
-//                .anyRequest().authenticated();
+                .httpBasic().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests().antMatchers("/","/img/**","/css/**","/js/**","/member/**").permitAll()
+                .anyRequest().authenticated();
 
 //                .authorizeRequests()
 //                .antMatchers("/membership").access("hasRole('member') or hasRole('admin')");
