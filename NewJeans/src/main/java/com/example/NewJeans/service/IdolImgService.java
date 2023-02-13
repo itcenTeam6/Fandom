@@ -67,7 +67,7 @@ public class IdolImgService {
         idolRepository.findById(idolId).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
 
         // 페이징처리 + 목록 불러오기
-        Page<IdolImg> pageImgs = idolImgRepository.findAllById(idolId, PageRequest.of(page - 1, size, Sort.by(sort).descending()));
+        Page<IdolImg> pageImgs = idolImgRepository.findAllByIdolId_IdolID(idolId, PageRequest.of(page - 1, size, Sort.by(sort).descending()));
 
         // responseDTO 리스트로 변환
         List<IdolImg> listImgs = pageImgs.getContent();

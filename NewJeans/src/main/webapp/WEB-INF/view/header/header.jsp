@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,10 +26,14 @@
                     <img src="/img/WeverseLogo_main.png" alt="logo">
                 </a>
             </h1>
-            <a href="#" class="menu-open"><span class="menu-txt">Login</span> <span class="menu-img"></span></a>
-            <a href="#" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
-            <a href="boardList.html" class="menu-open"><span class="menu-txt">Board</span> <span class="menu-img"></span></a>
-            <a href="idolImg.html" class="menu-open"><span class="menu-txt">Idol</span> <span class="menu-img"></span></a>
+                 <c:if test="${cookieValue eq 'false'}">
+                    <a href="#" class="menu-open"><span class="menu-txt">Login</span> <span class="menu-img"></span></a>
+                 </c:if>
+                <c:if test="${cookieValue eq 'true'}">
+                    <a href="#" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
+                </c:if>
+           <a href="boardList.html" class="menu-open"><span class="menu-txt">Board</span> <span class="menu-img"></span></a>
+           <a href="idolImg.html" class="menu-open"><span class="menu-txt">Idol</span> <span class="menu-img"></span></a>
         </div>
     </header>
     <!-- //header -->
