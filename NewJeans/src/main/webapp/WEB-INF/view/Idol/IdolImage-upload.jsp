@@ -36,7 +36,7 @@
     <!-- 파일 업로드를 위한 form - 동기 처리 -->
     <form action="/membership/upload" method="post" enctype="multipart/form-data">
         <input type="file" name="file" multiple>
-        <input type="text" name="imgId", value="${}">
+        <input type="hidden" name="imgId" value="${imgId}" >
         <button type="submit">업로드</button>
     </form>
 
@@ -76,14 +76,14 @@
                 if (isImageFile(originFileName)) { // 파일이 이미지라면
                     const $img = document.createElement('img');
                     $img.classList.add('img-sizing');
-                    $img.setAttribute('src', '/member/upload/loadFile?fileName=' + fileName);
+                    $img.setAttribute('src', '/membership/upload/loadFile?fileName=' + fileName);
                     $img.setAttribute('alt', originFileName);
                     $('.uploaded-list').append($img);
                 }
                 // 이미지가 아니라면 다운로드 링크를 생성
                 else {
                     const $a = document.createElement('a');
-                    $a.setAttribute('href', '/member/upload/loadFile?fileName=' + fileName);
+                    $a.setAttribute('href', '/membership/upload/loadFile?fileName=' + fileName);
                     const $img = document.createElement('img');
                     $img.classList.add('img-sizing');
                     $img.setAttribute('src', '/img/file_icon.jpg');
@@ -141,7 +141,7 @@
                     method: 'POST',
                     body: formData
                 };
-                fetch('/member/upload/ajax-upload', reqInfo)
+                fetch('/membership/upload/ajax-upload', reqInfo)
                     .then(res => {
                         //console.log(res.status);
                         return res.json();

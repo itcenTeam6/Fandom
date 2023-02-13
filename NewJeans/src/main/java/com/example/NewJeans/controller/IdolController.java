@@ -51,7 +51,7 @@ public class IdolController {
     @GetMapping
     public String getIdols(Model model,
                            @RequestParam(name = "page", required = false, defaultValue = "1")int page,
-                           @RequestParam(name = "size", required = false, defaultValue = "10")int size,
+                           @RequestParam(name = "size", required = false, defaultValue = "5")int size,
                            @RequestParam(name = "sort", required = false, defaultValue = "idolID")String sort){
         try {
             ListIdolResponseDTO listIdolResponseDTO = idolService.findIdols(page, size, sort);
