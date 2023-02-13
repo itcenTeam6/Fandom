@@ -15,6 +15,7 @@
         totalPages = ${listIdolImgResponseDTO.totalPages} <br>
         hasNext = ${listIdolImgResponseDTO.hasNext} <br>
         hasPrevious = ${listIdolImgResponseDTO.hasPrevious} <br>
+        contents = ${contents}
 
        <c:forEach var = "idol" items = "${listIdolImgResponseDTO.idolImages}">
        ${idol.idolName} <br>

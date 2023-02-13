@@ -10,10 +10,13 @@ import com.example.NewJeans.service.MemberServcie;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @Controller
@@ -32,10 +35,13 @@ public class MemberController {
     }
 
     @PostMapping("/signin")
-    public @ResponseBody  ResponseEntity<?> signIn(@Validated @RequestBody LoginRequestDTO loginRequestDTO){
+    public @ResponseBody  ResponseEntity<?> signIn(@Validated @RequestBody LoginRequestDTO loginRequestDTO,
+                                                   HttpServletResponse response, Authentication authentication){
 
         try{
             LoginResponseDTO loginResponseDTO =memberServcie.getByCredentials(loginRequestDTO.getMemEmail(), loginRequestDTO.getMemPassword());
+            String token = loginResponseDTO.getToken();
+            response.setHeader("Authorization", "Bearer " + token);
             return ResponseEntity
                     .ok()
                     .body(loginResponseDTO);
