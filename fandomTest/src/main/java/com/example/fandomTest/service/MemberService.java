@@ -22,7 +22,7 @@ public class MemberService {
     private final TokenProvider tokenProvider;
 
     //로그인 검증
-    public LoginResponseDTO getByCredentials(
+    public LoginResponseDTO  getByCredentials(
             final String email,
             final String password
     ) {
@@ -66,7 +66,7 @@ public class MemberService {
         String encodedPassword = passwordEncoder.encode(rawPassword);
         signUpRequestDTO.setMemPassword(encodedPassword);
         Member member = memberRepository.save(signUpRequestDTO.toEntity());
-        log.info("회원 가입 성공 !! - user_id :{}", member.getMemID());
+        log.info("회원 가입 성공 !! - user_id :{} - user_NickName : {}", member.getMemID(), member.getMemNickName());
         return new SignUpResponseDTO(member);
     }
 }

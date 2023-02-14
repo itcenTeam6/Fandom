@@ -84,11 +84,19 @@ body {
 
 .contents .img_section{
     overflow:hidden;
+    white-space: wrap;
 }
 
 .contents .img_section img{
     width: 100%;
     border-radius: 20px;
+}
+
+.contents .img_section p{
+    font-family: 'Noto Sans KR';
+    font-size: 13px;
+    font-weight: 300;
+    margin: 20px 10px 20px 15px;
 }
 
 .contents .bottom_icons{
