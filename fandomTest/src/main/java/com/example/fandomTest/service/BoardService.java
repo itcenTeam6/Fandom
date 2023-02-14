@@ -9,6 +9,9 @@ import com.example.fandomTest.repository.IdolRepository;
 import com.example.fandomTest.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -36,4 +39,9 @@ public class BoardService {
     }
 
 
+//    public void findBoardLists(Long idolID, int page, int size) {
+//        Idol idol = idolRepository.findById(idolID).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않음"));
+//
+//        Page<Board> boardLists = boardRepository.findAllByIdolId_IdolIDOrderByBoardDateDesc(idolID, PageRequest.of(-1, size));
+//    }
 }

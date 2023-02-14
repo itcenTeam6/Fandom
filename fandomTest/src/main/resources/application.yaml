@@ -17,12 +17,13 @@ logging:
 spring:
   # DB source
   datasource:
-#    url: jdbc:mysql://localhost:3306/workspace?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
-#    username: myEdu
-#    password: q1w2e3r4
-    url: jdbc:mariadb://localhost:3306/newjeans
-    username: root
-    password: mariadb
+#    url: jdbc:mariadb://localhost:3306/newjeans
+#    username: root
+#    password: mariadb
+
+    url: jdbc:mysql://localhost:3306/workspace?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: myEdu
+    password: q1w2e3r4
   servlet:
     multipart:
       location:
@@ -37,8 +38,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
-#        direct: org.hibernate.dialect.MySQL5Dialect
-        direct: org.hibernate.dialect.MariaDB106Dialect
+        direct: org.hibernate.dialect.MySQL5Dialect
+#        direct: org.hibernate.dialect.MariaDB106Dialect
     show-sql: true
     hibernate:
       database: mysql

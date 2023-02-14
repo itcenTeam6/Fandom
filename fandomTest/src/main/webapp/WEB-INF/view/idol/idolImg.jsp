@@ -74,7 +74,7 @@
                     <c:if test="${idolImgList.hasPrevious}">
                         <li><a class="myPage" href="${cpath}/idolImg/idolImg.do?idolID=${idolID}&page=${idolImgList.page}">&laquo;</a></li>
                     </c:if>
-                    <c:forEach var="showPage" begin="${idolImgList.startPage}" end="${ idolImgList.endPage }">
+                    <c:forEach var="showPage" begin="${ idolImgList.startPage }" end="${ idolImgList.endPage }">
                         <c:if test="${showPage == idolImgList.page+1}">
                             <li class="active"><a class="myPage">${ showPage }</a></li>
                         </c:if>
