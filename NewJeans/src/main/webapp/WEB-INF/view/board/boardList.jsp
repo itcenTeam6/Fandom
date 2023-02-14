@@ -3,6 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <c:set var="cpath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
@@ -43,15 +44,18 @@
                                     <img src="/img/userProfile.png">
                                 </div>
                                 <div class="user_name">
-                                    <div class="nick_name m_text">${board.memNickName}</div>
-                                    <div class="country s_text">${board.boardDate}</div>
+                                    <div class="country s_text">
+
+                                         <div class="nick_name m_text"></div>
+                                          <div class="country s_text">${board.boardDate}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="img_section">
                             <div class="trans_inner">
-                             <img src="data:image/jpeg;base64,${asd}">
+                             <img src="data:image/jpeg;base64,${board.boardFilePath}">
                               <div>${board.boardContent}</div>
                         </div>
 
@@ -62,11 +66,10 @@
                                     <span class="lnr lnr-pencil"></span>
                                 </div>
 
-                        <c:if test="${board.member==member}">
                                 <div class="heart_btn" id="trash2" value="${board.boardId}">
                                         <span class="lnr lnr-trash" id="trash" onclick="deleteByBoardId(${board.boardId})"></span>
                                 </div>
-                        </c:if>
+
                             </div>
                         </div>
 
@@ -116,7 +119,7 @@
                                <span>
                                 ${ListBoardResponseDTO.boards[0].idolMainImg}
                                </span>
-                                <h1 class="thumb_text">BlackPink</h1>
+                                <h1 class="thumb_text"> ${ListBoardResponseDTO.boards[0].idolName}</h1>
                                 <div class="thumb_box"></div>
                             </div>
                         </article>
@@ -154,12 +157,13 @@
         replyBtn.onclick=function(){
             replyForm.style.display='block';
         }
+        /* 아이돌 아이디 */
 
-        let idolId='${IdolId}';  /* 아이돌 아이디 */
+
 
         /* 게시글 삭제 (유저 본인이 쓴 게시물 아니면 삭제  x  */
         function deleteByBoardId(boardId){
-
+                let idolId='${IdolId}';
                 var chk = confirm("정말 삭제하시겠습니까?");
                  if (chk) {
                     location.href='/board/'+idolId+'/'+boardId

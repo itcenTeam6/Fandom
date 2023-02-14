@@ -30,7 +30,7 @@ public class Board {
 
     private String boardFile;
 
-    private byte[] boardFilePath;
+    private String boardFilePath;
 
 
     @CreationTimestamp

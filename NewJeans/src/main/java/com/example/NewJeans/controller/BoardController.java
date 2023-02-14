@@ -76,25 +76,12 @@ public class BoardController {
         log.info("memEmail {}",userId);
         log.info("/board/{} Get request!",idolId);
         ListBoardResponseDTO listBoardResponseDTO = boardService.retrieve(idolId,pageable);
-        model.addAttribute("ListBoardResponseDTO", listBoardResponseDTO);
         model.addAttribute("IdolId",idolId);
         model.addAttribute("userId",userId);
         model.addAttribute("member",member);
+        model.addAttribute("ListBoardResponseDTO", listBoardResponseDTO);
 
 
-
-        for (DetailBoardResponseDTO o :listBoardResponseDTO.getBoards() ) {
-            try {
-                byte[] encode = Base64.encode(o.getBoardFilePath());
-                String s = new String(encode, "UTF-8");
-                model.addAttribute("asd",s);
-            } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-            }
-//
-            //log.info("boardFilePath:{}",o.getBoardFilePath());
-
-        }
         return "board/boardList";
     }
 

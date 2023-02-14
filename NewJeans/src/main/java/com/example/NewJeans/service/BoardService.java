@@ -21,6 +21,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,7 +41,7 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final IdolRepository idolRepository;
     private final MemberRepository memberRepository;
-    private static final String IMAGE_PATH="E:\\image";
+    private static final String IMAGE_PATH="C:\\image";
 
 
     //게시판 목록 조회  페이징 처리 필요
@@ -50,6 +51,11 @@ public class BoardService {
         //페이징 처리
         Page<Board> listBoards = boardRepository.findByIdolId(idolId,pageable);
 
+        Optional<Idol> idol = idolRepository.findById(idolId);
+
+        String idolName= idol.get().getIdolName();
+
+
 
         List<DetailBoardResponseDTO> dtoList = listBoards.stream()
                 .map(DetailBoardResponseDTO::new)
@@ -58,7 +64,6 @@ public class BoardService {
         for(int i=0 ;i<dtoList.size();i++) {
 
             String fileName = dtoList.get(i).getBoardFile();
-            //String filePath=dtoList.get(i).getBoardFilePath();
 
             log.info("/loadFile GET - {}", fileName);
 
@@ -81,15 +86,20 @@ public class BoardService {
                     // 4. 파일 순수데이터 바이트배열에 저장.
                     byte[] rawData = IOUtils.toByteArray(fis);
 
-                  dtoList.get(i).setBoardFilePath(rawData);
+                    //String으로 변환
+                    byte[] encode = Base64.encode(rawData);
+                    String s=new String(encode,"UTF-8");
 
-               // log.info("boardFilePath{}",dtoList.get(i).getBoardFilePath());
+                  dtoList.get(i).setBoardFilePath(s);
+
 
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+            dtoList.get(0).setIdolName(idolName);
 
-            }
+
+        }
          return ListBoardResponseDTO.builder()
                 .boards(dtoList)
                 .build();

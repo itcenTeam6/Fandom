@@ -28,7 +28,7 @@ public class DetailBoardResponseDTO {
 
     private String boardFile;
 
-    private  byte[] boardFilePath;
+    private  String boardFilePath;
 
     @JsonFormat(pattern = "yyyy년 MM월 dd일 a hh시 mm분 ss초")
     private LocalDateTime boardDate;
@@ -40,6 +40,8 @@ public class DetailBoardResponseDTO {
     private List<CommentResponseDTO> comments;
 
     private String idolMainImg;
+
+    private String idolName;
 
     // private Long idoId;
 
@@ -56,6 +58,7 @@ public class DetailBoardResponseDTO {
         this.boardLike=entity.getBoardLike();
         this.comments=entity.getComments().stream().map(CommentResponseDTO::new).collect(Collectors.toList());
         this.idolMainImg=entity.getIdolID().getIdolMainImg();
+        this.idolName=entity.getIdolID().getIdolName();
         //this.idoId=entity.getIdolID().getIdolID();
 
 
