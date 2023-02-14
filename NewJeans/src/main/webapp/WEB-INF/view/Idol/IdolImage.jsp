@@ -17,7 +17,7 @@ hasNext = ${listIdolImgResponseDTO.hasNext} <br>
 hasPrevious = ${listIdolImgResponseDTO.hasPrevious} <br>
 startPage = ${listIdolImgResponseDTO.startPage} <br>
 endPage = ${listIdolImgResponseDTO.endPage} <br>
-memberShip = ${memberShip}
+memberShip = ${memberShip} <br>
 
 <c:forEach var = "idol" items = "${listIdolImgResponseDTO.idolImages}">
     ${idol.imgPath} <br>
