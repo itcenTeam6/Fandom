@@ -32,7 +32,7 @@ public class WebSecurityConfig {
                 .httpBasic().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests().antMatchers("/","/logout","/img/**","/css/**","/js/**","/member/**").permitAll()
+                .authorizeRequests().antMatchers("/","/img/**","/css/**","/js/**","/member/**").permitAll()
                 .anyRequest().authenticated();
 
 //                .authorizeRequests()
