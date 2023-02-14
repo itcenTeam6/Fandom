@@ -22,16 +22,19 @@ public class HealthCheckController {
     @GetMapping("/")
     public String check(HttpServletRequest httpServletRequest, Model model){
 
+        
+
         try{
             Cookie[] cookies = httpServletRequest.getCookies();
             String cookieValue="";
 
-            for (Cookie cookie : cookies) {
-                String cookieName = cookie.getName();
-                if(cookieName.equals("ACCESS_TOKEN")){
-                    cookieValue=cookie.getValue();
-                }
-            }
+            if(cookies != null)
+              for (Cookie cookie : cookies) {
+                  String cookieName = cookie.getName();
+                  if(cookieName.equals("ACCESS_TOKEN")){
+                      cookieValue=cookie.getValue();
+                  }
+              }
             boolean validatedToken= tokenProvider.validatedToken(cookieValue);
             System.out.println("validatedToken = " + validatedToken);
             if (validatedToken){
