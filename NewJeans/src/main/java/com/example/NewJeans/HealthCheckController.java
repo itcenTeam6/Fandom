@@ -23,12 +23,14 @@ public class HealthCheckController {
         Cookie[] cookies = httpServletRequest.getCookies();
         String cookieValue="";
 
-        for (Cookie cookie : cookies) {
-            String cookieName = cookie.getName();
-            if(cookieName.equals("ACCESS_TOKEN")){
-                cookieValue=cookie.getValue();
+        if(cookies != null)
+            for (Cookie cookie : cookies) {
+                String cookieName = cookie.getName();
+                if(cookieName.equals("ACCESS_TOKEN")){
+                    cookieValue=cookie.getValue();
+                }
             }
-        }
+
         try{
             boolean validatedToken= tokenProvider.validatedToken(cookieValue);
             if (validatedToken){
