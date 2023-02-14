@@ -19,10 +19,7 @@ public class FileRequestDTO {
     private String saveName; // 저장 이름
     private String savePath; // 저장 경로
 
-    @Value("${file.dir}")
-    private String fileDir;
-
-    public FileRequestDTO(MultipartFile userInputImg){
+    public FileRequestDTO(MultipartFile userInputImg, String fileDir){
         this.orgName = userInputImg.getOriginalFilename(); // 원본 이름
 
         String uuid = UUID.randomUUID().toString(); // 랜덤문자 생성
@@ -32,5 +29,3 @@ public class FileRequestDTO {
         this.savePath = fileDir + this.saveName; // 저장 경로
     }
 }
-
-

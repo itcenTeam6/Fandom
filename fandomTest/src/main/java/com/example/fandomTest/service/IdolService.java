@@ -18,11 +18,9 @@ public class IdolService {
 
     public List<Idol> getIdolList() {
         List<Idol> idolList = idolRepository.findAll();
-
         if (idolList.isEmpty()) {
             throw new RuntimeException("idolList is Empty");
         }
-
         return idolList;
     }
 

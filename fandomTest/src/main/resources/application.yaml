@@ -58,4 +58,4 @@ spring:
 
 file:
   dir:
-    E:/Fandom/fandomTest/build/resources/main/static/userImg/
+    E:/Fandom/fandomTest/src/main/resources/static/userImg/
