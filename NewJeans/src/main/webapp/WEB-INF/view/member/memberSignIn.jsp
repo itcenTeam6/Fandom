@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/memberStyle.css">
+    //<link rel="stylesheet" href="/css/memberStyle.css">
     <link rel="stylesheet" href="/css/my.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
@@ -112,10 +112,14 @@ $loginBtn.onclick=function(){
                                        var date = new Date();
                                        date.setTime(date.getTime() + 1*60*10000);
 
-                                        document.cookie = "ACCESS_TOKEN="+result.token+"; path=/; max-age=600"
-                                        document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; path=/; max-age=600";
-                                        //document.cookie = "ACCESS_TOKEN="+result.token+"; expires="+date+"; path=/; max-age=500"
-                                       //document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; expires="+date+"; path=/; max-age=500";
+
+
+                                        document.cookie = "ACCESS_TOKEN="+result.token+"; path=/; max-age=500;"
+                                        document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; path=/; max-age=500;"
+                                        console.log('쿠키 생성');
+
+                                        //document.cookie = "ACCESS_TOKEN="+result.token+"; expires="+date+"; path=/;"
+                                       //document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; expires="+date+"; path=/;";
 
                                           localStorage.clear()
                                            //localStorage.setItem('ACCESS_TOKEN',result.token);
