@@ -20,8 +20,11 @@ public class LoginResponseDTO {
 
     private String token;
 
+    private String memNickname;
+
     public LoginResponseDTO(Member member, String token){
         this.memEmail=member.getMemEmail();
         this.token=token;
+        this.memNickname=member.getMemNickname();
     }
 }
