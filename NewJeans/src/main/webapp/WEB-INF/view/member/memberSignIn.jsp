@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    //<link rel="stylesheet" href="/css/memberStyle.css">
+    <link rel="stylesheet" href="/css/memberStyle.css">
     <link rel="stylesheet" href="/css/my.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
