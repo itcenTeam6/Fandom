@@ -25,51 +25,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 
-    <script text="text/javascript">
-        function LoadMain(){
-            location.href = '/';
-        }
-
-        function LoadBoardList(idolID){
-            location.href = '${cpath}/board/boardList.do?idolID=' + String(idolID);
-        }
-
-        function LoadBoardWrite(idolID){
-            location.href = '${cpath}/board/boardWrite.do?idolID=' + String(idolID);
-        }
-
-        function LoadIdolImg(idolID){
-            location.href = '${cpath}/idolImg/idolImg.do?idolID=' + String(idolID);
-        }
-
-        function commentUpload() {
-            document.getElementById("inputButton").click()
-        }
-
-        function LoadPage(idolID){
-            console.log(idolID)
-        }
-    </script>
 </head>
 
 <body>
-    <!-- header -->
-    <header>
-        <div class="inner-header">
-            <h1 class="logo">
-                <a href="javascript:LoadMain()">
-                    <img src="/img/WeverseLogo_main.png" alt="logo">
-                </a>
-            </h1>
-            <a href="#" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
-        </div>
-        <div class="outer-header">
-            <a href="javascript:LoadBoardList(${ idolID })">Feed</a>
-            <a href="javascript:LoadBoardWrite(${ idolID })">Post</a>
-            <a href="javascript:LoadIdolImg(${ idolID })">Media</a>
-        </div>
-    </header>
-    <!-- //header -->
+    <jsp:include page="../header/innerHeader.jsp" />
     <section id="img_container">
         <div id="profile_container">
             <div class="container gallery-container">

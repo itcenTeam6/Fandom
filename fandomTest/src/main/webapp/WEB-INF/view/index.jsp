@@ -31,6 +31,10 @@
         function LoadIdolFeed(idolID){
             location.href = "${cpath}/board/boardList.do?idolID=" + String(idolID);
         }
+
+        function LoadLogin(){
+            location.href = "${cpath}/member/logIn.do"
+        }
       </script>
 </head>
 
@@ -46,7 +50,12 @@
                         <div class="txt">
                             <h3 class="origin_p">Interact with<br>Our K-POP IDOL</h3>
                             <h3 class="myIdolName">${ idol.idolName }</h3>
-                            <a href="javascript:LoadIdolFeed(${ idol.idolID })">More Contents<span class="lnr lnr-chevron-right"></span></a>
+                            <c:if test="${cookieValue eq 'true'}">
+                                <a href="javascript:LoadIdolFeed(${ idol.idolID })">More Contents<span class="lnr lnr-chevron-right"></span></a>
+                            </c:if>
+                            <c:if test="${cookieValue eq 'false'}">
+                                <a href="javascript:LoadLogin()">More Contents<span class="lnr lnr-chevron-right"></span></a>
+                            </c:if>
                         </div>
                     </li>
                 </c:forEach>
@@ -65,7 +74,12 @@
                 <ul class="animate" data-animate="fadeInUp" data-duration="1s" data-delay="0s">
                     <c:forEach var="idol" items="${ idolList }">
                         <li>
-                            <a href="javascript:LoadIdolFeed(${ idol.idolID })">
+                            <c:if test="${cookieValue eq 'true'}">
+                                <a href="javascript:LoadIdolFeed(${ idol.idolID })">
+                            </c:if>
+                            <c:if test="${cookieValue eq 'false'}">
+                                <a href="javascript:LoadLogin()">
+                            </c:if>
                                 <img class="mainIdolImgPo"
                                     src="${ idol.idolMainImg }">
                                 <div class="name">
