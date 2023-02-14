@@ -23,4 +23,8 @@ public class Member {
 
     @Column(nullable = false)
     private String memPassword; // 회원 비밀번호
+
+
+    @Column(nullable = false)
+    private String memNickname; //회원 닉네임
 }
