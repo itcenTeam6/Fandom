@@ -49,23 +49,7 @@
 
 </head>
 <body>
-    <!-- header -->
-    <header>
-        <div class="inner-header">
-            <h1 class="logo">
-                <a href="javascript:LoadMain()">
-                    <img src="/img/WeverseLogo_main.png" alt="logo">
-                </a>
-            </h1>
-            <a href="#" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
-        </div>
-        <div class="outer-header">
-            <a href="javascript:LoadBoardList(${ idol.idolID })">Feed</a>
-            <a href="javascript:LoadBoardWrite(${ idol.idolID })">Post</a>
-            <a href="javascript:LoadIdolImg(${ idol.idolID })">Media</a>
-        </div>
-    </header>
-    <!-- //header -->
+    <jsp:include page="../header/innerHeader.jsp" />
     <section id="container">
         <section id="main_container">
             <div class="inner">

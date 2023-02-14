@@ -91,6 +91,7 @@ public class MemberController {
         log.info("{} 중복 여부 ?? = {}",memEmail,flag);
         return ResponseEntity.ok().body(flag);
     }
+    
     @PostMapping("/signup")
     public  @ResponseBody ResponseEntity<?> signUp(@Validated @RequestBody SignUpRequestDTO signUpRequestDTO, BindingResult result){
         log.info("/api/auth/signup POST!  - {}" ,signUpRequestDTO);

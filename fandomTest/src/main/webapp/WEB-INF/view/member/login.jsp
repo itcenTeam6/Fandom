@@ -46,7 +46,7 @@
 
             <div class="text-center">
                 <p class="mem">Not a member?</p>
-                <a href="/member/signup" class="registration">Registration</a>
+                <a href="/member/register.do" class="registration">Registration</a>
             </div>
         </div>
     </main>
@@ -105,13 +105,18 @@
                         'content-type': 'application/json'
                     },
                     body: JSON.stringify(userValue)
-                })
+                }).then(t => t.json())
                     .then(result => {
                         if (result.message) {
                             alert(result.message);
                         } else {
-                            localStorage.setItem('ACCESS_TOKEN', result.token);
-                            localStorage.setItem('LOGIN_USERNAME', result.userName);
+                            var date = new Date();
+                            date.setTime(date.getTime() + 1 * 60 * 10000);
+
+                            document.cookie = "ACCESS_TOKEN=" + result.token + "; path=/; max-age=600"
+                            document.cookie = "LOGIN_USEREMAIL=" + result.memEmail + "; path=/; max-age=600";
+
+                            localStorage.clear()
                             window.location.href = '/';
                         }
                     })
