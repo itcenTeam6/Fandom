@@ -14,14 +14,18 @@ import com.example.NewJeans.repository.MemberRepository;
 import com.example.NewJeans.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -43,51 +47,75 @@ public class BoardService {
     @Transactional
     public ListBoardResponseDTO retrieve(Long idolId, Pageable pageable){ //Long memId,,int page, int size, String sort
 
+        //페이징 처리
         Page<Board> listBoards = boardRepository.findByIdolId(idolId,pageable);
 
-        //페이징처리
-        //Page<Board> pageBoards = boardRepository.findAll(PageRequest.of(page - 1, size,Sort.by(sort).descending()));
-        //List<Board> listBoards= pageBoards.getContent();
 
         List<DetailBoardResponseDTO> dtoList = listBoards.stream()
                 .map(DetailBoardResponseDTO::new)
                 .collect(Collectors.toList());
 
+        for(int i=0 ;i<dtoList.size();i++) {
 
-        return ListBoardResponseDTO.builder()
+            String fileName = dtoList.get(i).getBoardFile();
+            //String filePath=dtoList.get(i).getBoardFilePath();
+
+            log.info("/loadFile GET - {}", fileName);
+
+            File f = new File(IMAGE_PATH + fileName);
+
+            if (!f.exists()) {
+                return null;
+            }
+
+            try (FileInputStream fis = new FileInputStream(f)) {
+
+                    // 파일명을 원래대로 복구
+                    fileName = fileName.substring(fileName.lastIndexOf("_") + 1);
+
+                    // 파일명이 한글인 경우 인코딩 재설정
+                    String encoding = new String(
+                            fileName.getBytes("UTF-8"), "ISO-8859-1");
+
+
+                    // 4. 파일 순수데이터 바이트배열에 저장.
+                    byte[] rawData = IOUtils.toByteArray(fis);
+
+                  dtoList.get(i).setBoardFilePath(rawData);
+
+               // log.info("boardFilePath{}",dtoList.get(i).getBoardFilePath());
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+            }
+         return ListBoardResponseDTO.builder()
                 .boards(dtoList)
                 .build();
-
     }
+
 
     //게시물 등록
     public Long create(
-            final CreateBoardRequestDTO createRequestDTO, final Long idolId, MultipartFile file) //Long userId,
+            final CreateBoardRequestDTO createRequestDTO, final Long idolId, MultipartFile fileList,Long userId) //Long userId,
             throws RuntimeException, IOException {
         //파일 -> 경로
-        //String boardFile= FileUtils.uploadFile(createRequestDTO.getBoardImg(),IMAGE_PATH);
-        //createRequestDTO.setBoardFile(boardFile);
-        String boardFile=System.getProperty("user.dir")+"/src/main/resources/static/files";
-        UUID uuid=UUID.randomUUID();
-        String filename=uuid+"_"+file.getOriginalFilename();
-        File saveFile=new File(boardFile,filename);
-        file.transferTo(saveFile);
-        Board board=createRequestDTO.toEntity();
-        //board.setFilePath(filename);
-        board.setBoardFile("/files/"+filename);
-
-
+        String boardFile= FileUtils.uploadFile(fileList,IMAGE_PATH);
+        log.info("boardFile:{}",boardFile);
+        createRequestDTO.setBoardFile(boardFile);
 
         Idol idol=new Idol();
         idol.setIdolID(idolId);
 
-//        Member member=new Member();
-//        member.setMemID(userId);
+        Member member=new Member();
+        member.setMemID(userId);
 
-        //board.setBoardFile(board.getBoardFile());
+        Board board=createRequestDTO.toEntity();
+        board.setBoardFile(board.getBoardFile());
         board.setIdolID(idol);
         board.setIdol(idolId);
-        //board.setMember(member);
+        board.setMember(member);
         board.setMemNickName(board.getMemNickName()); //작성자 닉네임
         boardRepository.save(board);
         log.info("게시물이 등록되었습니다. 내용:{} 파일:{}",createRequestDTO.getBoardContent(),createRequestDTO.getBoardFile());

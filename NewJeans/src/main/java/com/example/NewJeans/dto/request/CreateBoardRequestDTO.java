@@ -19,18 +19,14 @@ public class CreateBoardRequestDTO {
 
     private String boardFile;
 
-   // private MultipartFile boardImg;
-
-    private String memNickName;
-
-
+   // private String memNickName;
 
 
     public Board toEntity(){
         return Board.builder()
                 .boardContent(this.boardContent)
                 .boardFile(this.boardFile)
-                .memNickName(this.memNickName)
+                //.memNickName(this.memNickName)
                 .build();
     }
 

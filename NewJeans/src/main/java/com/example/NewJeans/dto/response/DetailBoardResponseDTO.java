@@ -22,11 +22,13 @@ public class DetailBoardResponseDTO {
     private Long boardId;
 
     private Member member;
-    private String memNickName;
+    //private String memNickName;
 
     private String boardContent;
 
     private String boardFile;
+
+    private  byte[] boardFilePath;
 
     @JsonFormat(pattern = "yyyy년 MM월 dd일 a hh시 mm분 ss초")
     private LocalDateTime boardDate;
@@ -46,7 +48,7 @@ public class DetailBoardResponseDTO {
 
         this.boardId=entity.getBoardID();
         this.member=entity.getMember();
-        this.memNickName=entity.getMemNickName();
+        //this.memNickName=entity.getMemNickName();
         this.boardContent=entity.getBoardContent();
         this.boardFile=entity.getBoardFile();
         this.boardDate=entity.getBoardDate();

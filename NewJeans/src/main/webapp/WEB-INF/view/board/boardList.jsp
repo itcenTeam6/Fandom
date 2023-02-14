@@ -51,9 +51,8 @@
 
                         <div class="img_section">
                             <div class="trans_inner">
-                                <div>${board.boardFile}</div>
-                                <div>${board.boardContent}</div>
-
+                             <img src="data:image/jpeg;base64,${asd}">
+                              <div>${board.boardContent}</div>
                         </div>
 
                         <div class="bottom_icons">
@@ -63,12 +62,11 @@
                                     <span class="lnr lnr-pencil"></span>
                                 </div>
 
+                        <c:if test="${board.member==member}">
                                 <div class="heart_btn" id="trash2" value="${board.boardId}">
-                                    <c:if test="${board.member==userId}">
                                         <span class="lnr lnr-trash" id="trash" onclick="deleteByBoardId(${board.boardId})"></span>
-                                    </c:if>
                                 </div>
-
+                        </c:if>
                             </div>
                         </div>
 
@@ -109,7 +107,7 @@
                                 <img src="/img/userProfile.png" alt="프로필사진">
                             </div>
                             <div class="detail">
-                                <div class="id m_text_profile">"${memEmail}"</div>
+                                <div class="id m_text_profile">${userId}</div>
 
                             </div>
                         </div>
@@ -174,31 +172,7 @@
 
 
 
-        /* 댓글 등록*/
 
-        function commentUpload(boardId){
-
-                var data={
-
-                       "cmtContent":"HI"
-                };
-
-                $.ajax({
-                     url: '/comment/create/'+46,
-                     type:'post',
-                     data:JSON.stringify(data),
-                     contentType : "application/json; charset=utf-8",
-                     success:function(data){
-                           if(data==1){
-                                alert("댓글 등록 성공!");
-
-                           }
-                           else{
-                                alert("댓글 등록 실패!");
-                           }
-                     }
-                });
-        }
 
 
 

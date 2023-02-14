@@ -88,7 +88,7 @@
                 </div>
                 <ul class="animate" data-animate="fadeInUp" data-duration="1s" data-delay="0s">
                     <li>
-                        <a href="#">
+                        <a href="/board/1">
                             <img class="mainIdolImgPo"
                                 src="https://images.chosun.com/resizer/gst8Y76TWvb559SjLSh43AmEUrU=/2000x1333/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/GO7X3DGRXZDGAPFJJRGNZBR4VI.jpg"
                                 alt="">
@@ -99,7 +99,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/board/1">
+                        <a href="#">
                             <img class="mainIdolImgPo"
                                 src="https://4kwallpapers.com/images/wallpapers/blackpink-pubg-mobile-pink-background-2560x1440-3105.jpg"
                                 alt="">

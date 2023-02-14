@@ -16,6 +16,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
@@ -34,14 +36,36 @@ public class MemberController {
         return "member/memberSignUp";
     }
 
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+
+        try{
+            Cookie[] cookies = request.getCookies();
+            if(cookies != null){ // 쿠키가 한개라도 있으면 실행
+                for(int i=0; i< cookies.length; i++){
+                    cookies[i].setMaxAge(0); // 유효시간을 0으로 설정
+                    cookies[i].setPath("/"); // 유효시간을 0으로 설정
+                    response.addCookie(cookies[i]); // 응답 헤더에 추가
+                }
+            }
+            return "redirect:/";
+        }catch (Exception e){
+            return "redirect:/";
+        }
+
+
+
+    }
+
     @PostMapping("/signin")
     public @ResponseBody  ResponseEntity<?> signIn(@Validated @RequestBody LoginRequestDTO loginRequestDTO,
                                                    HttpServletResponse response, Authentication authentication){
-
         try{
             LoginResponseDTO loginResponseDTO =memberServcie.getByCredentials(loginRequestDTO.getMemEmail(), loginRequestDTO.getMemPassword());
             String token = loginResponseDTO.getToken();
-            response.setHeader("Authorization", "Bearer " + token);
+
+            //response.setHeader("Authorization", "Bearer " + token);
             return ResponseEntity
                     .ok()
                     .body(loginResponseDTO);

@@ -30,6 +30,8 @@ public class Board {
 
     private String boardFile;
 
+    private byte[] boardFilePath;
+
 
     @CreationTimestamp
     private LocalDateTime boardDate;

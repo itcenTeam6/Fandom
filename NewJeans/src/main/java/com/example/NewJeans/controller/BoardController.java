@@ -4,16 +4,19 @@ package com.example.NewJeans.controller;
 import com.example.NewJeans.Entity.Member;
 import com.example.NewJeans.dto.request.CreateBoardRequestDTO;
 import com.example.NewJeans.dto.request.ModifyBoardRequestDTO;
+import com.example.NewJeans.dto.response.DetailBoardResponseDTO;
 import com.example.NewJeans.dto.response.ListBoardResponseDTO;
 import com.example.NewJeans.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +25,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -39,27 +45,56 @@ public class BoardController {
             Model model,
             Authentication authentication,
             @PathVariable("idol-id") Long idolId,
-            @PageableDefault(size = 10, sort = "boardID", direction = Sort.Direction.DESC) Pageable pageable
+            @PageableDefault(size = 10, sort = "boardID", direction = Sort.Direction.DESC) Pageable pageable,
+            HttpServletRequest request
 
     )
     {
-//        if(authentication == null){
-//            log.warn("로그인을 하세요");
-//            return "redirect:/";
-//        }
-//        Long userId = Long.parseLong((String) authentication.getPrincipal());
+        if(authentication == null){
+            log.warn("로그인을 하세요");
+            return "redirect:/";
+        }
+        Long member = null;
+        if (authentication != null) member = Long.parseLong((String) authentication.getPrincipal());
+        
+        String userId = null;
+        
+        try{
+            Cookie[] cookies = request.getCookies();
+            for (Cookie cookie : cookies) {
+                String cookieName = cookie.getName();
+                if(cookieName.equals("LOGIN_USEREMAIL")){
+                    userId=cookie.getValue();
+                }
+            }
+        }catch (Exception e){
+            return null;
+        }
 
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        Member member = (Member)principal;
-//        String memEmail=((Member) principal).getMemEmail();
 
-
+        
+        log.info("memEmail {}",userId);
         log.info("/board/{} Get request!",idolId);
         ListBoardResponseDTO listBoardResponseDTO = boardService.retrieve(idolId,pageable);
         model.addAttribute("ListBoardResponseDTO", listBoardResponseDTO);
         model.addAttribute("IdolId",idolId);
-        // model.addAttribute("userId",userId);
-        // model.addAttribute("memEmail",memEmail);
+        model.addAttribute("userId",userId);
+        model.addAttribute("member",member);
+
+
+
+        for (DetailBoardResponseDTO o :listBoardResponseDTO.getBoards() ) {
+            try {
+                byte[] encode = Base64.encode(o.getBoardFilePath());
+                String s = new String(encode, "UTF-8");
+                model.addAttribute("asd",s);
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException(e);
+            }
+//
+            //log.info("boardFilePath:{}",o.getBoardFilePath());
+
+        }
         return "board/boardList";
     }
 
@@ -83,35 +118,46 @@ public class BoardController {
             @PathVariable("idol-id") Long idolId,
             @Validated @ModelAttribute CreateBoardRequestDTO requestDTO,
             RedirectAttributes redirectAttributes,
-            @ModelAttribute MultipartFile file,
+            @RequestParam("file") List<MultipartFile> fileList,
             BindingResult result
 
     )
-    throws Exception
-    {
-//        Long userId = null;
-//        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
+    throws Exception {
+        Long userId = null;
+        if (authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
 
-        if (result.hasErrors()) {
-            log.warn("DTO 검증 에러 발생: {}", result.getFieldError());
-            model.addAttribute("error","createBoard 에러");
-            return null; //에러페이지
+        log.info("/upload POST! - {}", fileList);
 
+        for (MultipartFile file : fileList) {
+            log.info("file-name: {}", file.getName());
+            log.info("file-origin-name: {}", file.getOriginalFilename());
+            log.info("file-size: {}KB", (double) file.getSize() / 1024);
+            log.info("file-type: {}", file.getContentType());
+            System.out.println("==================================================================");
+
+
+            if (result.hasErrors()) {
+                log.warn("DTO 검증 에러 발생: {}", result.getFieldError());
+                model.addAttribute("error", "createBoard 에러");
+                return null; //에러페이지
+
+            }
+
+            try {
+                Long idol = boardService.create(requestDTO, idolId, file, userId); //userId
+                redirectAttributes.addAttribute("idol", idol);
+                return "redirect:/board/{idol}"; //게시판 페이지로 리다이렉트
+
+            } catch (RuntimeException e) {
+                log.error(e.getMessage());
+                model.addAttribute("error", "createBoard 에러");
+
+                return null; ////에러페이지
+            }
         }
-
-        try {
-            Long idol=boardService.create(requestDTO,idolId,file); //userId
-            redirectAttributes.addAttribute("idol",idol);
-            return "redirect:/board/{idol}"; //게시판 페이지로 리다이렉트
-
-        } catch (RuntimeException e) {
-            log.error(e.getMessage());
-            model.addAttribute("error","createBoard 에러");
-
-            return null; ////에러페이지
-        }
-
+        return null;
     }
+
 
 
     //게시글 삭제 요청    (작성자 OR 관리자일 경우만 삭제)
@@ -123,8 +169,8 @@ public class BoardController {
             @PathVariable("idol-id") Long idolId
     )
     {
-        Long userId = null;
-        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
+//        Long userId = null;
+//        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
 
         log.info("/board/{} DELETE request!", boardId);
 

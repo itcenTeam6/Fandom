@@ -34,7 +34,7 @@
                     <div class="title">
                         NEW POST
                     </div>
-                    <input type="file" name="userInputImg" id="userInputImg" style="display: none;">
+                    <input type="file" name="file" id="userInputImg" style="display: none;">
                     <div class="preview" onclick="javascript:inputTagClick()">
                         <div class="upload">
                             <div class="post_btn">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <p>
-                        <textarea name="content" id="text_field" cols="100" rows="15"
+                        <textarea name="boardContent" id="text_field" cols="100" rows="15"
                             placeholder="Input your text"></textarea>
                     </p>
                     <input class="submit_btn" type="submit" value="submit">
