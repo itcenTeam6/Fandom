@@ -17,30 +17,25 @@ logging:
 spring:
   # DB source
   datasource:
-#    url: jdbc:mysql://localhost:3306/workspace?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
-#    username: myEdu
-#    password: q1w2e3r4
-    url: jdbc:mariadb://localhost:3306/newjeans
-    username: root
-    password: mariadb
-  servlet:
-    multipart:
-      location=E:\\Fandom\\fandomTest\\build\\resources\\main\\static\\userImg
-      max-file-size=10MB
-      max-request-size=50MB
+    url: jdbc:mysql://localhost:3306/workspace?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: myEdu
+    password: q1w2e3r4
+#    url: jdbc:mariadb://localhost:3306/newjeans
+#    username: root
+#    password: mariadb
 
   # JPA config
   jpa:
     properties:
       hibernate:
         format_sql: true
-#        direct: org.hibernate.dialect.MySQL5Dialect
-        direct: org.hibernate.dialect.MariaDB106Dialect
+        direct: org.hibernate.dialect.MySQL5Dialect
+#        direct: org.hibernate.dialect.MariaDB106Dialect
     show-sql: true
     hibernate:
       database: mysql
       generate-ddl: true
-      ddl-auto: update
+      ddl-auto: create
       naming:
         physical-strategy=org:
           hibernate:
