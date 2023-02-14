@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.net.HttpCookie;
 
 @Controller
@@ -20,27 +21,32 @@ public class HealthCheckController {
     private final TokenProvider tokenProvider;
     @GetMapping("/")
     public String check(HttpServletRequest httpServletRequest, Model model){
-        Cookie[] cookies = httpServletRequest.getCookies();
-        String cookieValue="";
 
-        for (Cookie cookie : cookies) {
-            String cookieName = cookie.getName();
-            if(cookieName.equals("ACCESS_TOKEN")){
-                cookieValue=cookie.getValue();
-            }
-        }
         try{
+            Cookie[] cookies = httpServletRequest.getCookies();
+            String cookieValue="";
+
+            for (Cookie cookie : cookies) {
+                String cookieName = cookie.getName();
+                if(cookieName.equals("ACCESS_TOKEN")){
+                    cookieValue=cookie.getValue();
+                }
+            }
             boolean validatedToken= tokenProvider.validatedToken(cookieValue);
+            System.out.println("validatedToken = " + validatedToken);
             if (validatedToken){
             model.addAttribute("cookieValue","true");
+                return "index";
+            }else{
+                model.addAttribute("cookieValue","false");
+                return "index";
             }
         }catch (Exception e){
             model.addAttribute("cookieValue","false");
+            return "index";
         }
 
-
-
-        log.info("Server is running...");
-        return "index";
     }
+
+
 }
