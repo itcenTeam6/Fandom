@@ -19,7 +19,7 @@
 
 ### 팀 소개
 
-<img src="./docs/img/YAPICK.png" alt="로고">
+<img src="./docs/img/로고.png" alt="로고">
 
 아이티센 그룹 23-1 한국IT직업전문학교 자바&클라우드반 20조
 
@@ -144,11 +144,11 @@
 ## 🛠 데이터 설계
 
 
-<img src="./docs/img/브렌치 전략.png" alt="ERD 차트">
+<img src="./docs/img/ERD.png" alt="ERD 차트">
 
 <br>
 
 ## 📌 GitHub-Flow
 
 
-<img src="./docs/img/브렌치 전략.png" alt="git Flow 차트">
+<img src="./docs/img/깃플로우.png" alt="깃플로우 차트">
