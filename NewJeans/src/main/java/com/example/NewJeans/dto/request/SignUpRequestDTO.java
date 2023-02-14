@@ -22,10 +22,14 @@ public class SignUpRequestDTO {
     @Size(min = 8,max = 20)
     private String memPassword;
 
+    @NotBlank
+    private String memNickname;
+
     public Member toEntity(){
         return Member.builder()
                 .memEmail(this.memEmail)
                 .memPassword(this.memPassword)
+                .memNickname(this.memNickname)
                 .build();
     }
 }

@@ -22,6 +22,8 @@ public class HealthCheckController {
     @GetMapping("/")
     public String check(HttpServletRequest httpServletRequest, Model model){
 
+
+
         try{
             Cookie[] cookies = httpServletRequest.getCookies();
             String cookieValue="";

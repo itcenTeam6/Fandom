@@ -41,12 +41,12 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final IdolRepository idolRepository;
     private final MemberRepository memberRepository;
-    private static final String IMAGE_PATH="C:\\image";
+    private static final String IMAGE_PATH="E:\\image";
 
 
     //게시판 목록 조회  페이징 처리 필요
     @Transactional
-    public ListBoardResponseDTO retrieve(Long idolId, Pageable pageable){ //Long memId,,int page, int size, String sort
+    public ListBoardResponseDTO retrieve(Long idolId, Pageable pageable){
 
         //페이징 처리
         Page<Board> listBoards = boardRepository.findByIdolId(idolId,pageable);
@@ -103,7 +103,7 @@ public class BoardService {
 
     //게시물 등록
     public Long create(
-            final CreateBoardRequestDTO createRequestDTO, final Long idolId, MultipartFile fileList,Long userId) //Long userId,
+            final CreateBoardRequestDTO createRequestDTO, final Long idolId, MultipartFile fileList,Long userId,String userNickName) //Long userId,
             throws RuntimeException, IOException {
         //파일 -> 경로
         String boardFile= FileUtils.uploadFile(fileList,IMAGE_PATH);
@@ -121,7 +121,7 @@ public class BoardService {
         board.setIdolID(idol);
         board.setIdol(idolId);
         board.setMember(member);
-        board.setMemNickName(board.getMemNickName()); //작성자 닉네임
+        board.setMemNickName(userNickName); //작성자 닉네임
         boardRepository.save(board);
         log.info("게시물이 등록되었습니다. 내용:{} 파일:{}",createRequestDTO.getBoardContent(),createRequestDTO.getBoardFile());
 
@@ -130,7 +130,7 @@ public class BoardService {
     }
 
     //게시물 삭제
-    public void delete(final Long boardId, final Long idolId){ //final Long memId,
+    public void delete(final Long boardId, final Long idolId){
         try {
             boardRepository.deleteById(boardId);
         } catch (Exception e) {
@@ -144,7 +144,7 @@ public class BoardService {
 //
     //게시물 수정
     public void update(
-            final Long boardId,final Long idolId, final ModifyBoardRequestDTO requestDTO){ //final Long memId,
+            final Long boardId,final Long idolId, final ModifyBoardRequestDTO requestDTO){
 
         Optional<Board> targetEntity=boardRepository.findById(boardId);
 

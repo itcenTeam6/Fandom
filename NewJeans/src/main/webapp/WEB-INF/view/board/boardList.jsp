@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="user_name">
                                     <div class="country s_text">
-                                         <div class="nick_name m_text"></div>
+                                         <div class="nick_name m_text">${board.memNickName}</div>
                                             <div class="country s_text">${board.boardDate}</div>
                                     </div>
                                 </div>

@@ -23,7 +23,8 @@ public class DetailBoardResponseDTO {
     private Long boardId;
 
     private Member member;
-    //private String memNickName;
+
+    private String memNickName;
 
     private String boardContent;
 
@@ -44,14 +45,14 @@ public class DetailBoardResponseDTO {
 
     private String idolName;
 
-    // private Long idoId;
+
 
 
     public DetailBoardResponseDTO(Board entity){
 
         this.boardId=entity.getBoardID();
         this.member=entity.getMember();
-        //this.memNickName=entity.getMemNickName();
+        this.memNickName=entity.getMemNickName();
         this.boardContent=entity.getBoardContent();
         this.boardFile=entity.getBoardFile();
         this.boardDate=entity.getBoardDate();
@@ -60,7 +61,7 @@ public class DetailBoardResponseDTO {
         this.comments=entity.getComments().stream().map(CommentResponseDTO::new).collect(Collectors.toList());
         this.idolMainImg=entity.getIdolID().getIdolMainImg();
         this.idolName=entity.getIdolID().getIdolName();
-        //this.idoId=entity.getIdolID().getIdolID();
+
 
 
     }

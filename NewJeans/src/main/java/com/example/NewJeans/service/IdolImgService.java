@@ -121,23 +121,17 @@ public class IdolImgService {
         return optionalIdolImg.orElseThrow(() -> new RuntimeException("이미지가 존재하지 않습니다."));
     }
 
-    public boolean isMemberShip(Long userId) {
-        if(userId == null) return false; // 인증객체가 없다 == 로그인 안했다
-        MemberShip memberShip = memberShipRepository.findByMem_MemID(userId); //멤버의 아이디로 멤버쉽의 유형을 가져옴
-        // 멤버쉽 회원이거나 관리자면 컨텐츠를 볼 수 있음
-        return memberShip != null && (memberShip.getMsType().equals("yes") || memberShip.getMsType().equals("ADMIN"));
-    }
-
-    public boolean isAdmin(Long userId) {
-        if(userId == null) return false; // 인증객체가 없다 == 로그인 안했다
-        MemberShip memberShip = memberShipRepository.findByMem_MemID(userId);
-        return memberShip != null && memberShip.getMsType().equals("ADMIN");
-    }
-
     public void changePath(Long imgId, String imgPath) {
         IdolImg verifiedIdolImg = findVerifiedIdolImg(imgId);
         if(imgPath == null) throw new RuntimeException("이미지경로가 존재하지 않습니다.");
         else verifiedIdolImg.setImgPath(imgPath);
         idolImgRepository.save(verifiedIdolImg);
+    }
+
+    public boolean isMemberShip(Long memId, Long idolId) {
+        Optional<MemberShip> optionalMemberShip = memberShipRepository.findByMem_MemIDAndIdol_IdolID(memId, idolId);
+        if(optionalMemberShip.isEmpty()) return false; //커뮤니티 멤버가 아니면 거짓
+        MemberShip memberShip = optionalMemberShip.get();
+        return memberShip.getMsType().equals("yes"); //멤버쉽 회원이면 참, 멤버쉽 회원이 아니면 거짓
     }
 }

@@ -28,74 +28,67 @@ public class MemberController {
     private final MemberServcie memberServcie;
 
     @GetMapping("/signin")
-    public String signIn(){
+    public String signIn() {
         return "member/memberSignIn";
     }
+
     @GetMapping("/signup")
-    public String signUp(){
+    public String signUp() {
         return "member/memberSignUp";
     }
 
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response){
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
 
-        try{
+        try {
             Cookie[] cookies = request.getCookies();
-            if(cookies != null){ // 쿠키가 한개라도 있으면 실행
-                for(int i=0; i< cookies.length; i++){
+            if (cookies != null) { // 쿠키가 한개라도 있으면 실행
+                for (int i = 0; i < cookies.length; i++) {
                     cookies[i].setMaxAge(0); // 유효시간을 0으로 설정
                     cookies[i].setPath("/"); // 유효시간을 0으로 설정
                     response.addCookie(cookies[i]); // 응답 헤더에 추가
                 }
             }
             return "redirect:/";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "redirect:/";
         }
-
-
-
     }
 
     @PostMapping("/signin")
-    public @ResponseBody  ResponseEntity<?> signIn(@Validated @RequestBody LoginRequestDTO loginRequestDTO,
-                                                   HttpServletResponse response, Authentication authentication){
-        try{
-            LoginResponseDTO loginResponseDTO =memberServcie.getByCredentials(loginRequestDTO.getMemEmail(), loginRequestDTO.getMemPassword());
+    public @ResponseBody ResponseEntity<?> signIn(@Validated @RequestBody LoginRequestDTO loginRequestDTO,
+                                                  HttpServletResponse response, Authentication authentication) {
+        try {
+            LoginResponseDTO loginResponseDTO = memberServcie.getByCredentials(loginRequestDTO.getMemEmail(), loginRequestDTO.getMemPassword());
             String token = loginResponseDTO.getToken();
-
             //response.setHeader("Authorization", "Bearer " + token);
             return ResponseEntity
                     .ok()
                     .body(loginResponseDTO);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             return ResponseEntity
                     .badRequest()
                     .build();
-
         }
-
     }
-
-
 
     @GetMapping("/check")
-    public @ResponseBody ResponseEntity<?> checkEmail(String memEmail){
+    public @ResponseBody ResponseEntity<?> checkEmail(String memEmail) {
 
-        if (memEmail ==null || memEmail.trim().equals("")){
+        if (memEmail == null || memEmail.trim().equals("")) {
             return ResponseEntity.badRequest().body("이메일을 전달해 주세요");
         }
-
         boolean flag = memberServcie.isDuplicate(memEmail);
-        log.info("{} 중복 여부 ?? = {}",memEmail,flag);
+        log.info("{} 중복 여부 ?? = {}", memEmail, flag);
         return ResponseEntity.ok().body(flag);
     }
-    @PostMapping("/signup")
-    public  @ResponseBody ResponseEntity<?> signUp(@Validated @RequestBody SignUpRequestDTO signUpRequestDTO, BindingResult result){
-        log.info("/api/auth/signup POST!  - {}" ,signUpRequestDTO);
 
-        if (result.hasErrors()){
+    @PostMapping("/signup")
+    public @ResponseBody ResponseEntity<?> signUp(@Validated @RequestBody SignUpRequestDTO signUpRequestDTO, BindingResult result) {
+        log.info("/api/auth/signup POST!  - {}", signUpRequestDTO);
+
+        if (result.hasErrors()) {
             log.warn(result.toString());
             return ResponseEntity
                     .badRequest()
@@ -107,21 +100,16 @@ public class MemberController {
             return ResponseEntity
                     .ok()
                     .body(signUpResponseDTO);
-
-        }catch (NoRegisteredArgumentsException e){
+        } catch (NoRegisteredArgumentsException e) {
             log.warn("필수 가입 정보를 다시 확인하세요.");
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());
-        }catch (DuplicatedEmailException e){
+        } catch (DuplicatedEmailException e) {
             log.warn("중복되었습니다. 다른 이메일을 작성해 주세요");
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());
         }
     }
-
-
-
-
 }

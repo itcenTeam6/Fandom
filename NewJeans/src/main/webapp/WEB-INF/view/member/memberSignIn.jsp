@@ -13,26 +13,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/memberStyle.css">
     <link rel="stylesheet" href="/css/my.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
     <main class="login-body slider-bg">
-        <div class="login-form">
+        <div class="login-form" style="height :800px !important">
 
                 <h2>Login</h2>
-                <div class="form-input">
-                    <label for="name">Email</label> <input type="email" name="userEmail" id="memEmail" placeholder="Email">
-                        <span id="memEmailRight"></span>
+                <div class="form-input" style="height :80px !important">
+                    <label for="name">Email</label>
+                     <input type="email" name="userEmail" id="memEmail" placeholder="Email">
+                    <span id="memEmailRight"></span>
                 </div>
-                <div class="form-input">
+                <div class="form-input" style="height :80px !important">
                     <label for="name">Password</label> <input type="password" name="userPw" id="memPassword" placeholder="Password">
                         <span id="memPasswordRight"></span>
                 </div>
                 <div class="form-input pt-30">
-                    <input type="submit" name="submit" value="login" id="loginBtn">
+                    <input type="submit" name="submit" value="login" id="loginBtn" style="margin-top: 0px !important;">
                 </div>
 
             <!-- Forget Password -->
@@ -47,25 +47,17 @@
 <script>
 let flag1=false;
 let flag2=false;
-
-
 const $memEmail=document.getElementById('memEmail');
 const $memEmailRight=document.getElementById('memEmailRight');
 const $memPassword=document.getElementById('memPassword');
 const $memPasswordRight=document.getElementById('memPasswordRight');
-
 const $signUpBtn=document.getElementById('signUpBtn');
 const $loginBtn=document.getElementById('loginBtn');
-
-
-
 $memEmail.onkeyup=function() {
         const emailRegex = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
-
         if (!$memEmail.value) {
             $memEmailRight.style.color='red';
             $memEmailRight.innerHTML ='아이디는 필수로 입력해야 합니다.';
-
         }else if (!emailRegex.test($memEmail.value)) {
          $memEmailRight.style.color='red';
               $memEmailRight.innerHTML ='이메일 형식에 맞춰서 입력해 주세요.';
@@ -73,10 +65,7 @@ $memEmail.onkeyup=function() {
             $memEmailRight.innerHTML ='';
             flag1=true;
         }
-
 }
-
-
 $memPassword.onkeyup=function() {
     const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
     if (!$memPassword.value) {
@@ -89,9 +78,7 @@ $memPassword.onkeyup=function() {
                 $memPasswordRight.innerHTML = '';
                 flag2=true;
             }
-
 };
-
 $loginBtn.onclick=function(){
     if(flag1 &&flag2){
            const userValue={
@@ -101,7 +88,7 @@ $loginBtn.onclick=function(){
               fetch('/member/signin',{
                             method:'POST',
                             headers:{
-                                'content-type':'application/json'
+                                'content-type':'application/json; charset=utf-8;'
                             },
                             body:JSON.stringify(userValue)
                         }).then(t=>t.json())
@@ -111,23 +98,17 @@ $loginBtn.onclick=function(){
                                        }else{
                                        var date = new Date();
                                        date.setTime(date.getTime() + 1*60*10000);
-
-                                        document.cookie = "ACCESS_TOKEN="+result.token+"; path=/; max-age=600"
-                                        document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; path=/; max-age=600";
-                                        //document.cookie = "ACCESS_TOKEN="+result.token+"; expires="+date+"; path=/; max-age=500"
-                                       //document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; expires="+date+"; path=/; max-age=500";
-
-                                          localStorage.clear()
-                                           //localStorage.setItem('ACCESS_TOKEN',result.token);
-                                           //localStorage.setItem('LOGIN_USEREMAIL',result.memEmail);
-                                            window.location.href='/';
+                                       console.log(result);
+                                        document.cookie = "ACCESS_TOKEN="+result.token+"; path=/; max-age=500;"
+                                        document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; path=/; max-age=500;"
+                                        document.cookie = "LOGIN_NICKNAME="+result.memNickname+"; path=/; max-age=500;"
+                                        //document.cookie = "ACCESS_TOKEN="+result.token+"; expires="+date+"; path=/;"
+                                       //document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; expires="+date+"; path=/;";
+                                           window.location.href='/';
                                        }
                                    })
    }
 }
-
-
-
 </script>
 </body>
 </html>

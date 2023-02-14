@@ -69,6 +69,7 @@ public class BoardController {
                 if(cookieName.equals("LOGIN_USEREMAIL")){
                     userId=cookie.getValue();
                 }
+
             }
         }catch (Exception e){
             return null;
@@ -115,13 +116,28 @@ public class BoardController {
             @Validated @ModelAttribute CreateBoardRequestDTO requestDTO,
             RedirectAttributes redirectAttributes,
             @RequestParam("file") List<MultipartFile> fileList,
-            BindingResult result
+            BindingResult result,
+            HttpServletRequest request
 
     )
     throws Exception {
         Long userId = null;
         if (authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
 
+        String userNickName=null;
+        try{
+            Cookie[] cookies = request.getCookies();
+            for (Cookie cookie : cookies) {
+                String cookieName = cookie.getName();
+                if(cookieName.equals("LOGIN_NICKNAME")){
+                    userNickName=cookie.getValue();
+                }
+
+            }
+        }catch (Exception e){
+            return null;
+        }
+        log.info("userNickName {}",userNickName);
         log.info("/upload POST! - {}", fileList);
 
         for (MultipartFile file : fileList) {
@@ -140,7 +156,7 @@ public class BoardController {
             }
 
             try {
-                Long idol = boardService.create(requestDTO, idolId, file, userId); //userId
+                Long idol = boardService.create(requestDTO, idolId, file, userId,userNickName); //userId
                 redirectAttributes.addAttribute("idol", idol);
                 return "redirect:/board/{idol}"; //게시판 페이지로 리다이렉트
 
@@ -165,8 +181,6 @@ public class BoardController {
             @PathVariable("idol-id") Long idolId
     )
     {
-//        Long userId = null;
-//        if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
 
         log.info("/board/{} DELETE request!", boardId);
 
