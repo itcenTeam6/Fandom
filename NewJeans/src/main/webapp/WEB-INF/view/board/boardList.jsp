@@ -45,9 +45,8 @@
                                 </div>
                                 <div class="user_name">
                                     <div class="country s_text">
-
                                          <div class="nick_name m_text"></div>
-                                          <div class="country s_text">${board.boardDate}</div>
+                                            <div class="country s_text">${board.boardDate}</div>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +55,8 @@
                         <div class="img_section">
                             <div class="trans_inner">
                              <img src="data:image/jpeg;base64,${board.boardFilePath}">
-                              <div>${board.boardContent}</div>
+
+                             <div>${board.boardContent}</div>
                         </div>
 
                         <div class="bottom_icons">
@@ -66,9 +66,13 @@
                                     <span class="lnr lnr-pencil"></span>
                                 </div>
 
-                                <div class="heart_btn" id="trash2" value="${board.boardId}">
+
+                                    <div class="heart_btn" id="trash2" value="${board.boardId}">
+                                    <c:if test="${member eq board.member.memID}">
                                         <span class="lnr lnr-trash" id="trash" onclick="deleteByBoardId(${board.boardId})"></span>
-                                </div>
+                                    </c:if>
+                                    </div>
+
 
                             </div>
                         </div>
@@ -115,11 +119,10 @@
                             </div>
                         </div>
                         <article class="recommend">
+
                             <div class="myprofile_thumb">
-                               <span>
-                                ${ListBoardResponseDTO.boards[0].idolMainImg}
-                               </span>
-                                <h1 class="thumb_text"> ${ListBoardResponseDTO.boards[0].idolName}</h1>
+                                <img src="${IdolMainImg}">
+                                <h1 class="thumb_text">"${IdolName}"</h1>
                                 <div class="thumb_box"></div>
                             </div>
                         </article>
@@ -157,8 +160,6 @@
         replyBtn.onclick=function(){
             replyForm.style.display='block';
         }
-        /* 아이돌 아이디 */
-
 
 
         /* 게시글 삭제 (유저 본인이 쓴 게시물 아니면 삭제  x  */
@@ -170,6 +171,8 @@
                   }
 
         }
+
+
 
 
 

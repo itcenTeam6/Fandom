@@ -16,7 +16,7 @@
 	        location.href = "/"
 	    }
 		function LoadBoardList(){
-            location.href = "/boardList.do"
+            location.href = "/board/${IdolId}"
         }
         function LoadBoardWrite(){
             location.href = "/board/${IdolId}/boardWrite"

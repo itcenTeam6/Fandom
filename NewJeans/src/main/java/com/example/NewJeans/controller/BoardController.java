@@ -5,8 +5,10 @@ import com.example.NewJeans.Entity.Member;
 import com.example.NewJeans.dto.request.CreateBoardRequestDTO;
 import com.example.NewJeans.dto.request.ModifyBoardRequestDTO;
 import com.example.NewJeans.dto.response.DetailBoardResponseDTO;
+import com.example.NewJeans.dto.response.DetailIdolResponseDTO;
 import com.example.NewJeans.dto.response.ListBoardResponseDTO;
 import com.example.NewJeans.service.BoardService;
+import com.example.NewJeans.service.IdolService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -37,6 +39,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
+    private final IdolService idolService;
 
 
     //게시글 조회  (무한스크롤 필요)
@@ -76,10 +79,16 @@ public class BoardController {
         log.info("memEmail {}",userId);
         log.info("/board/{} Get request!",idolId);
         ListBoardResponseDTO listBoardResponseDTO = boardService.retrieve(idolId,pageable);
+        DetailIdolResponseDTO detailIdolResponseDTO = idolService.findIdol(idolId);
+        String idolName=detailIdolResponseDTO.getIdolName();
+        String idolMainImg=detailIdolResponseDTO.getIdolMainImg();
+
         model.addAttribute("IdolId",idolId);
         model.addAttribute("userId",userId);
         model.addAttribute("member",member);
         model.addAttribute("ListBoardResponseDTO", listBoardResponseDTO);
+        model.addAttribute("IdolName",idolName);
+        model.addAttribute("IdolMainImg",idolMainImg);
 
 
         return "board/boardList";
@@ -97,7 +106,7 @@ public class BoardController {
     }
 
 
-    //게시글 등록 요청    (파일 업로드 추가 필요)
+    //게시글 등록 요청
     @PostMapping("/{idol-id}")
     public String createBoard(
             Model model,

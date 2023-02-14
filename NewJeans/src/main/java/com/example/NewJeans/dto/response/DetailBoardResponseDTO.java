@@ -4,6 +4,7 @@ import com.example.NewJeans.Entity.Board;
 import com.example.NewJeans.Entity.Member;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,7 +31,7 @@ public class DetailBoardResponseDTO {
 
     private  String boardFilePath;
 
-    @JsonFormat(pattern = "yyyy년 MM월 dd일 a hh시 mm분 ss초")
+    @DateTimeFormat(pattern = "yyyy년 MM월 dd일 a hh시 mm분 ss초")
     private LocalDateTime boardDate;
 
     private int boardCnt;

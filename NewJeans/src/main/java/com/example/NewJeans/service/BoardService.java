@@ -51,11 +51,6 @@ public class BoardService {
         //페이징 처리
         Page<Board> listBoards = boardRepository.findByIdolId(idolId,pageable);
 
-        Optional<Idol> idol = idolRepository.findById(idolId);
-
-        String idolName= idol.get().getIdolName();
-
-
 
         List<DetailBoardResponseDTO> dtoList = listBoards.stream()
                 .map(DetailBoardResponseDTO::new)
@@ -96,7 +91,7 @@ public class BoardService {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            dtoList.get(0).setIdolName(idolName);
+
 
 
         }
