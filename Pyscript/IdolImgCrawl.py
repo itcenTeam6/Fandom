@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from tqdm import tqdm
 from random import sample
-import mariadb
+import mariadb, pymysql
 import json, time, os
 
 class IdolImgCrawlingApp:
@@ -37,13 +37,15 @@ class IdolImgCrawlingApp:
         browser.delete_all_cookies()
         time.sleep(1)
         
-        for name in tqdm(groupLi):
+        for name in groupLi:
+            print(name)
+            
             # input name
             searchBox = browser.find_element(By.XPATH, '//*[@id="nx_query"]')
             ActionChains(browser).click(searchBox).double_click(searchBox).send_keys(Keys.DELETE).send_keys(name).send_keys(Keys.ENTER).perform()
         
             # pageDown
-            for _ in range(8):
+            for _ in range(10):
                 browser.find_element(By.TAG_NAME, 'body').send_keys(Keys.PAGE_DOWN)
                 time.sleep(0.7)
         
@@ -51,12 +53,16 @@ class IdolImgCrawlingApp:
             starImg = browser.find_elements(By.CSS_SELECTOR, 'div.photo_tile._grid  > div._item > div._photoBox > div.thumb > a > img')
             
             imgLi = []
-            for ele in starImg:
+            for ele in tqdm(starImg):
                 ActionChains(browser).move_to_element(ele).perform()
                 time.sleep(0.3)
-                ele.click()
                 
-                imgLi.append(browser.find_element(By.XPATH, '//*[@id="main_pack"]/section[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div[1]/div[1]/img').get_attribute('src'))
+                try:
+                    ele.click()
+                    imgLi.append(browser.find_element(By.XPATH, '//*[@id="main_pack"]/section[2]/div/div[2]/div/div/div[1]/div[1]/div/div/div[1]/div[1]/img').get_attribute('src'))
+                except:
+                    pass
+                
                 
             with open(os.path.join(self.imgFolder, groupName, f'{name}.json'), 'w', encoding='utf-8') as f:
                 json.dump({name : imgLi}, f, ensure_ascii=False)
@@ -64,13 +70,19 @@ class IdolImgCrawlingApp:
         browser.close()
         browser.quit()
         
-    def dbConnection(self):
+    def mariaDBconnection(self):
         connection = mariadb.connect(user="root", password="mariadb", host="127.0.0.1", port=3306, database="newjeans")
         cursor = connection.cursor()
         return connection, cursor
     
+    def mySqlDBConnection(self):
+        connection = pymysql.connect(host='localhost', port=3306, user='myEdu', password='q1w2e3r4', db='workspace', charset='utf8')
+        cursor = connection.cursor()
+        return connection, cursor
+    
     def insertIdol(self):
-        connection, cursor = self.dbConnection()
+        # connection, cursor = self.mariaDBconnection()
+        connection, cursor = self.mySqlDBConnection()
         
         try:
             sql = "insert into idol (idolid, idol_name, idol_main_img, idol_sub_img) values (%s, %s, %s, %s)"
@@ -97,7 +109,7 @@ class IdolImgCrawlingApp:
                  "https://rare-gallery.com/mocahbig/394887-twice-k-pop-members-alcohol-free-4k-pc-wallpaper.jpg",
                  "https://w0.peakpx.com/wallpaper/239/739/HD-wallpaper-twice-chaeryeong-dahyun-jeongyeon-jihyo-mina-momo-nayeon-sana-twice-tzuyu.jpg"),
                 (8, "ITZY",
-                 "https://rare-gallery.com/uploads/posts/346263-ITZY-Kpop-K-pop-Girls-Members.jpg",
+                 "https://images.alphacoders.com/114/1146229.jpg",
                  "http://img.sportsworldi.com/content/image/2020/08/11/20200811513135.jpg")
             ]
             
@@ -111,7 +123,8 @@ class IdolImgCrawlingApp:
         connection.close()
         
     def insertIdolImg(self):
-        connection, cursor = self.dbConnection()
+        # connection, cursor = self.mariaDBconnection()
+        connection, cursor = self.mySqlDBConnection()
         
         try:
             sql = """
@@ -134,7 +147,9 @@ class IdolImgCrawlingApp:
                             jsonData = json.load(f)
                             f.close()
                         
-                        msTypeLi = sample(["yes"] * 40 + ["no"] * 20, k=60)
+                        preCal = len(jsonData[idolName]) * 0.6
+                        yesCnt = preCal if preCal == int(preCal) else int(preCal)
+                        msTypeLi = sample(["yes"] * int(yesCnt) + ["no"] * int((len(jsonData[idolName]) - yesCnt)), k=len(jsonData[idolName]))
                         for idx, val in enumerate(jsonData[idolName]):
                             insertData.append((idolName, val, msTypeLi[idx], idolId))
             
@@ -158,7 +173,7 @@ if __name__ == "__main__":
         "있지" : ["있지"]
     }
     
-    app.makeFolder(idolDict)
+    # app.makeFolder(idolDict)
     
     # for idol in idolDict:
     #     app.groupCrawling(groupName=idol, groupLi=idolDict[idol])

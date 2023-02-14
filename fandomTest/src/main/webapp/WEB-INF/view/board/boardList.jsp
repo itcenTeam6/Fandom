@@ -248,7 +248,7 @@
                         <article class="recommend">
                             <div class="myprofile_thumb">
                                 <img
-                                    src="${ boardDTO.idol.idolMainImg }">
+                                    src="${ boardDTO.idol.idolSubImg }">
                                 <h1 class="thumb_text">${ boardDTO.idol.idolName }</h1>
                                 <div class="thumb_box"></div>
                             </div>
