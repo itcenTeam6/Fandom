@@ -28,12 +28,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        System.out.println("토큰 : " + request.getHeader("Authorization"));
+//        System.out.println("토큰 : " + request.getHeader("Authorization"));
 
         try {
-            System.out.println(request.getHeader("Authorization"));
+//            System.out.println(request.getHeader("Authorization"));
             String token = parseBearerToken(request);
-            log.info("Jwt Token Filter is running.... - token : {}",token);
+            log.info("Jwt Token Filter is running.... - token : {}", token);
 
             if (token !=null){
                 String userId = provider.validateANdGetUserId(token);

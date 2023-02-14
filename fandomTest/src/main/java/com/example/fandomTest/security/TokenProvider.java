@@ -25,7 +25,6 @@ public class TokenProvider {
         );
 
         return Jwts.builder()
-
                 .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()),
                         SignatureAlgorithm.HS512)
                 .setSubject(member.getMemID().toString())
@@ -47,5 +46,10 @@ public class TokenProvider {
     }
     public String getSubject(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public  boolean validatedToken(String token){
+        Claims claims = Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(SECRET_KEY.getBytes())).build().parseClaimsJws(token).getBody();
+        return claims != null;
     }
 }

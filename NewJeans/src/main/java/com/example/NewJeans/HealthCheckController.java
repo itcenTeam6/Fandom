@@ -22,7 +22,7 @@ public class HealthCheckController {
     @GetMapping("/")
     public String check(HttpServletRequest httpServletRequest, Model model){
 
-
+        
 
         try{
             Cookie[] cookies = httpServletRequest.getCookies();
@@ -37,7 +37,7 @@ public class HealthCheckController {
             boolean validatedToken= tokenProvider.validatedToken(cookieValue);
             System.out.println("validatedToken = " + validatedToken);
             if (validatedToken){
-                model.addAttribute("cookieValue","true");
+            model.addAttribute("cookieValue","true");
                 return "index";
             }else{
                 model.addAttribute("cookieValue","false");

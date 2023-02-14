@@ -28,8 +28,8 @@
             location.href = '${cpath}/member/register.do';
         }
 
-        function LoadBoard(){
-            location.href = '${cpath}/board/boardList.do';
+        function LogOut(){
+            location.href = '${cpath}/member/logOut.do'
         }
     </script>
 </head>
@@ -43,11 +43,13 @@
                     <img src="/img/WeverseLogo_main.png" alt="logo">
                 </a>
             </h1>
-            <a href="javascript:LoadLogIn()" class="menu-open"><span class="menu-txt">Login</span> <span class="menu-img"></span></a>
-            <a href="javascript:LoadRegister()" class="menu-open"><span class="menu-txt">Register</span> <span class="menu-img"></span></a>
-            <a href="#" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
-            <!-- test 용 -->
-            <a href="javascript:LoadBoard()" class="menu-open"><span class="menu-txt">Board</span> <span class="menu-img"></span></a>
+                 <c:if test="${cookieValue eq 'false'}">
+                    <a href="javascript:LoadLogIn()" class="menu-open"><span class="menu-txt">Login</span> <span class="menu-img"></span></a>
+                    <a href="javascript:LoadRegister()" class="menu-open"><span class="menu-txt">Register</span> <span class="menu-img"></span></a>
+                 </c:if>
+                <c:if test="${cookieValue eq 'true'}">
+                    <a href="javascript:LogOut()" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
+                </c:if>
         </div>
     </header>
     <!-- //header -->

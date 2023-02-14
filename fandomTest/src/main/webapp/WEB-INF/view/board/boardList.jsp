@@ -49,23 +49,7 @@
 
 </head>
 <body>
-    <!-- header -->
-    <header>
-        <div class="inner-header">
-            <h1 class="logo">
-                <a href="javascript:LoadMain()">
-                    <img src="/img/WeverseLogo_main.png" alt="logo">
-                </a>
-            </h1>
-            <a href="#" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
-        </div>
-        <div class="outer-header">
-            <a href="javascript:LoadBoardList(${ idol.idolID })">Feed</a>
-            <a href="javascript:LoadBoardWrite(${ idol.idolID })">Post</a>
-            <a href="javascript:LoadIdolImg(${ idol.idolID })">Media</a>
-        </div>
-    </header>
-    <!-- //header -->
+    <jsp:include page="../header/innerHeader.jsp" />
     <section id="container">
         <section id="main_container">
             <div class="inner">
@@ -88,7 +72,9 @@
                             <div class="trans_inner">
                                 <div><img
                                         src="https://upload.wikimedia.org/wikipedia/commons/e/ee/BLACKPINK_PUBG_Mobile_Sept_2020_ad_%28derived%29.jpg"
-                                        alt="visual01"></div>
+                                        alt="visual01">
+                                <p>게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글</p>
+                                </div>
                             </div>
                         </div>
 
@@ -255,15 +241,15 @@
                                 <img src="/img/userProfile.png" alt="프로필사진">
                             </div>
                             <div class="detail">
-                                <div class="id m_text_profile">현재 접속한 유저의 무언가</div>
-                                <div class="ko_name">유저의 무언가</div>
+                                <div class="id m_text_profile">${ boardDTO.userNick }</div>
+                                <div class="ko_name">${ boardDTO.userEmail }</div>
                             </div>
                         </div>
                         <article class="recommend">
                             <div class="myprofile_thumb">
                                 <img
-                                    src="${ idol.idolMainImg }">
-                                <h1 class="thumb_text">${ idol.idolName }</h1>
+                                    src="${ boardDTO.idol.idolMainImg }">
+                                <h1 class="thumb_text">${ boardDTO.idol.idolName }</h1>
                                 <div class="thumb_box"></div>
                             </div>
                         </article>

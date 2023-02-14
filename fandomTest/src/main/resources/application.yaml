@@ -25,9 +25,12 @@ spring:
     password: mariadb
   servlet:
     multipart:
-      location=E:\\Fandom\\fandomTest\\build\\resources\\main\\static\\userImg
-      max-file-size=10MB
-      max-request-size=50MB
+      location:
+        E:/Fandom/fandomTest/build/resources/main/static/userImg
+      max-file-size:
+        10MB
+      max-request-size:
+        50MB
 
   # JPA config
   jpa:
@@ -53,4 +56,6 @@ spring:
       prefix: /WEB-INF/view/
       suffix: .jsp
 
-
+file:
+  dir:
+    E:/Fandom/fandomTest/src/main/resources/static/userImg/

@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -13,20 +14,20 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class LoginResponseDTO {
-
+public class SignUpResponseDTO {
     @NotBlank
     @Email
     private String memEmail;
 
-    private String token;
+    @NotBlank
+    @Size(min = 8,max = 20)
+    private String memPassword;
 
+    @NotBlank
     private String memNickName;
 
-    public LoginResponseDTO(Member member, String token){
+    public SignUpResponseDTO(Member member) {
         this.memEmail=member.getMemEmail();
         this.memNickName=member.getMemNickName();
-        this.token=token;
     }
-
 }
