@@ -43,8 +43,8 @@ public class BoardController {
         }
 
         log.info("boardList.do - idolID is {}", idolID);
-        log.info("userEmail is {}", userEmail.getValue());
-        log.info("userNick is {}", userNick.getValue());
+        log.info("cookieValue is {}", cookieValue);
+
 
         model.addAttribute("idolID", idolID);
 
