@@ -39,7 +39,7 @@ public class BoardController {
         }
 
         log.info("boardList.do - idolID is {}", idolID);
-        log.info("cookieValue is {}", cookieValue.);
+        log.info("cookieValue is {}", cookieValue);
 
         Idol idol = idolService.getIdol(idolID);
         model.addAttribute("idolID", idolID);
