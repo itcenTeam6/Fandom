@@ -9,20 +9,26 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Default</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <title>LogIn</title>
+    <meta name="author" content="Soon9">
+    <meta name="description" content="Soon9's web studio">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main-responsive.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/my.css">
+    <link rel="stylesheet" href="/css/my.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
+    <jsp:include page="../header/header.jsp" />
     <main class="login-body slider-bg">
-
-            <div class="login-form" style="height :800px !important">
-                <h2>Registration Here</h2>
+        <div class="register-form">
+            <h2>Register</h2>
                 <div class="form-input" style="height :100px !important">
                     <label for="name">Email Address</label>
                     <input type="email" name="userEmail" id="memEmail" placeholder="Email Address">
@@ -121,7 +127,7 @@ $memNickname.onkeyup=function() {
                 $memNicknameRightRight.innerHTML ='닉네임은  필수값입니다!';
                 $memNicknameRightRight.style.color='red';
             } else if (!nameRegex.test($memNickname.value)) {
-                $memNicknameRightRight.innerHTML = '2글자 ~ 12글자 사이 영어,한글만 입력해 주세요..';
+                $memNicknameRightRight.innerHTML = '2글자 ~ 12글자 사이 영어,한글만 입력해 주세요!';
                  $memNicknameRightRight.style.color='red';
             } else {
                 $memNicknameRightRight.innerHTML = '사용 가능한 닉네임입니다.';

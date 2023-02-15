@@ -15,7 +15,7 @@ import java.util.Date;
 @Service
 @Slf4j
 public class TokenProvider {
-    private static final String SECRET_KEY="Q4NSl604sgyHJj1qwEkRasdUeR4uUAt7WJraD7EN3O9DVccyYuHxMEbuuuXXyYJkal13eqgB0F7Bq4H";
+    private static final String SECRET_KEY="Q4NSl604sgyHJj1qwEkRasdUeR4uUAt7WJraD7EN3O9DVccyYuHxMEbuuuXXyYJkal13eqgB0F7Bq4Hwoksdvon123ovb";
 
     public String createToken(Member member){
 
@@ -25,6 +25,7 @@ public class TokenProvider {
         );
 
         return Jwts.builder()
+
                 .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()),
                         SignatureAlgorithm.HS512)
                 .setSubject(member.getMemID().toString())
@@ -33,6 +34,7 @@ public class TokenProvider {
                 .setExpiration(expireDate)
                 .compact();
     }
+
 
     public String validateANdGetUserId(String token){
 
@@ -45,9 +47,8 @@ public class TokenProvider {
         return claims.getSubject();
     }
     public String getSubject(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(SECRET_KEY.getBytes()).parseClaimsJws(token).getBody().getSubject();
     }
-
     public  boolean validatedToken(String token){
         Claims claims = Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(SECRET_KEY.getBytes())).build().parseClaimsJws(token).getBody();
         return claims != null;

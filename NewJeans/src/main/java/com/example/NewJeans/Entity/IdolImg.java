@@ -24,7 +24,7 @@ public class IdolImg {
     @JoinColumn(name="idolID")
     private Idol idolId;
 
-    @Column(nullable = false,length = 3000)
+    @Column(nullable = false, length = 3000)
     private String imgPath;
 
     @Column(nullable = false)

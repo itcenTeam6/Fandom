@@ -28,12 +28,11 @@
             </h1>
                  <c:if test="${cookieValue eq 'false'}">
                     <a href="/member/signin" class="menu-open"><span class="menu-txt">Login</span> <span class="menu-img"></span></a>
+                     <a href="/member/signup" class="menu-open"><span class="menu-txt">Register</span> <span class="menu-img"></span></a>
                  </c:if>
                 <c:if test="${cookieValue eq 'true'}">
                     <a href="/member/logout" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
                 </c:if>
-           <a href="boardList.html" class="menu-open"><span class="menu-txt">Board</span> <span class="menu-img"></span></a>
-           <a href="idolImg.html" class="menu-open"><span class="menu-txt">Idol</span> <span class="menu-img"></span></a>
         </div>
     </header>
     <!-- //header -->

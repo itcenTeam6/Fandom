@@ -19,11 +19,13 @@ public class SignUpResponseDTO {
     @NotBlank
     @Email
     private String memEmail;
-    @NotBlank
-    @Size(min = 8,max = 20)
-    private String memPassword;
+
+    private String memNickName;
 
     public SignUpResponseDTO(Member member) {
         this.memEmail=member.getMemEmail();
+        this.memNickName = member.getMemNickname();
     }
+
+
 }

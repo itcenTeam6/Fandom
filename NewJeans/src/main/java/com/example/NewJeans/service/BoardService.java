@@ -1,13 +1,13 @@
 package com.example.NewJeans.service;
 
 
+import com.example.NewJeans.Entity.Board;
+import com.example.NewJeans.Entity.Idol;
 import com.example.NewJeans.Entity.Member;
 import com.example.NewJeans.dto.request.CreateBoardRequestDTO;
 import com.example.NewJeans.dto.request.ModifyBoardRequestDTO;
 import com.example.NewJeans.dto.response.DetailBoardResponseDTO;
 import com.example.NewJeans.dto.response.ListBoardResponseDTO;
-import com.example.NewJeans.Entity.Board;
-import com.example.NewJeans.Entity.Idol;
 import com.example.NewJeans.repository.BoardRepository;
 import com.example.NewJeans.repository.IdolRepository;
 import com.example.NewJeans.repository.MemberRepository;
@@ -17,21 +17,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
