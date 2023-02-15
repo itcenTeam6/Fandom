@@ -139,3 +139,125 @@
 .login-form .registration:hover {
     color: #fff
 }
+
+.register-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 480px;
+    height: 750px;
+    padding: 40px 45px 60px 45px;
+    transform: translate(-50%, -50%);
+    background: white;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    font-family: 'Noto Sans KR';
+}
+
+@media (max-width: 575px) {
+    .login-form {
+        width: 282px;
+        padding: 90px 15px 15px 15px
+    }
+}
+
+.register-form h2 {
+    color: #999999a4;
+    font-size: 32px;
+    margin: 0;
+    text-align: center;
+    font-weight: 900;
+    font-family: 'Noto Sans KR';
+	color: #0DE5C0;
+	margin-bottom: 60px
+}
+
+.register-form .form-input {
+	position: relative;
+    margin-top: 20px;
+	margin-bottom: 20px;
+    font-family: 'Noto Sans KR';
+}
+
+.register-form .form-input label {
+    font-size: 12px;
+    font-weight: 400;
+    color: #20262ecc;
+}
+
+.register-form .form-input input {
+    outline: none;
+    height: 40px;
+    padding: 10px;
+    width: 100%;
+    background: transparent;
+    font-size: 18px;
+    border: none;
+    color: black;
+}
+
+.register-form .form-input input::placeholder {
+    color: #999999a4
+}
+
+.register-form .form-input span{
+	margin-left: 9px;
+	font-size: 12px;
+}
+
+.register-form .form-input input[type="submit"] {
+    background: #0DE5C0;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-transform: capitalize;
+    line-height: 1;
+    font-size: 18px;
+    font-weight: 800;
+    border-radius: 18px;
+    transition: .4s;
+	margin-top: 110px;
+	font-family: 'Noto Sans KR';
+}
+
+.register-form .form-input input[type="submit"]:hover{
+	font-size: 21px;
+}
+
+.register-form .text-center .mem{
+	font-family: 'Noto Sans KR';
+	color: #999999a4;
+	font-size: 14px;
+}
+
+.register-form .form-input input[type="button"] {
+    background: #0DE5C0;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-transform: capitalize;
+    line-height: 1;
+    font-size: 18px;
+    font-weight: 800;
+    border-radius: 18px;
+    transition: .4s;
+	margin-top: 80px;
+	font-family: 'Noto Sans KR';
+}
+
+.register-form .form-input input[type="button"]:hover {
+	font-size: 21px;
+}
+
+.register-form .registration {
+    display: block;
+    color: #0DE5C0;
+	font-family: 'Noto Sans KR';
+    font-weight: 700;
+    text-decoration: underline;
+    margin-bottom: 5px
+}
+
+.register-form .registration:hover {
+    color: #fff
+}

@@ -67,11 +67,9 @@
         <section class="contents">
             <div class="project">
                 <div class="top">
-                    <!-- magenta -->
-                    <h3 class="animate" data-animate="fadeInUp" data-duration="1s" data-delay="0s">Meet New K-POP IDOL
-                    </h3>
+                    <h3 class="animate" data-animate="fadeInUp" data-duration="1s" data-delay="0s">Meet New K-POP IDOL </h3>
                 </div>
-                <ul class="animate" data-animate="fadeInUp" data-duration="1s" data-delay="0s">
+                <ul>
                     <c:forEach var="idol" items="${ idolList }">
                         <li>
                             <c:if test="${cookieValue eq 'true'}">
@@ -89,51 +87,6 @@
                             </a>
                         </li>
                     </c:forEach>
-                </ul>
-
-                <!-- 임시용 -->
-                <ul class="animate" data-animate="fadeInUp" data-duration="1s" data-delay="0s">
-                    <li>
-                        <a href="#">
-                            <img class="mainIdolImgPo"
-                                src="https://dbkpop.com/wp-content/uploads/2022/09/le_sserafim_antifragile_teaser_frozen_aquamarine_all_group_2.jpg"
-                                alt="">
-                            <div class="name">
-                                <span>K-POP IDOL</span>
-                                <h3>LESSERAFIM</h3>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="mainIdolImgPo"
-                                src="https://img.khan.co.kr/news/2022/11/08/news-p.v1.20221108.aabaa9e1f02f4e149257b60cf19c2b2f_P1.jpg"
-                                alt="">
-                            <div class="name">
-                                <span>K-POP IDOL</span>
-                                <h3>(G)-IDLE</h3>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="mainIdolImgPo" src="https://wallpapercave.com/wp/wp4390658.jpg" alt="">
-                            <div class="name">
-                                <span>K-POP IDOL</span>
-                                <h3>TWICE</h3>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="mainIdolImgPo"
-                                src="https://cdn.clien.net/web/api/file/F01/13158556/2e6e71a7c8886b.jpg" alt="">
-                            <div class="name">
-                                <span>K-POP IDOL</span>
-                                <h3>ITZY</h3>
-                            </div>
-                        </a>
-                    </li>
                 </ul>
             </div>
         </section>

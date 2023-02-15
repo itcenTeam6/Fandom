@@ -1,6 +1,10 @@
 {
     "win32_chromedriver_109.0.5414_for_109.0.5414": {
-        "timestamp": "13/02/2023",
+        "timestamp": "14/02/2023",
         "binary_path": "Driver\\.wdm\\drivers\\chromedriver\\win32\\109.0.5414\\chromedriver.exe"
+    },
+    "win32_chromedriver_110.0.5481_for_110.0.5481": {
+        "timestamp": "14/02/2023",
+        "binary_path": "Driver\\.wdm\\drivers\\chromedriver\\win32\\110.0.5481\\chromedriver.exe"
     }
 }

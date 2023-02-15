@@ -25,7 +25,6 @@ public class TokenProvider {
         );
 
         return Jwts.builder()
-
                 .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()),
                         SignatureAlgorithm.HS512)
                 .setSubject(member.getMemID().toString())

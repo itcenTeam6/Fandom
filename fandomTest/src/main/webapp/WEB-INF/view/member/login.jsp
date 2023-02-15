@@ -15,7 +15,6 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
     <!-- css -->
     <link rel="stylesheet" href="/css/main.css">
@@ -67,11 +66,11 @@
             const emailRegex = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
 
             if (!$memEmail.value) {
-                $memEmailRight.style.color = 'red';
+                $memEmailRight.style.color = '#f21a3f';
                 $memEmailRight.innerHTML = '아이디는 필수로 입력해야 합니다.';
 
             } else if (!emailRegex.test($memEmail.value)) {
-                $memEmailRight.style.color = 'red';
+                $memEmailRight.style.color = '#f21a3f';
                 $memEmailRight.innerHTML = '이메일 형식에 맞춰서 입력해 주세요.';
             } else {
                 $memEmailRight.innerHTML = '';
@@ -83,10 +82,10 @@
             const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
             if (!$memPassword.value) {
                 $memPasswordRight.innerHTML = '비밀번호는 필수값입니다!';
-                $memPasswordRight.style.color = 'red';
+                $memPasswordRight.style.color = '#f21a3f';
             } else if (!pwRegex.test($memPassword.value)) {
                 $memPasswordRight.innerHTML = '8글자 이상의 영문,숫자,특수문자를 포함해주세요!';
-                $memPasswordRight.style.color = 'red';
+                $memPasswordRight.style.color = '#f21a3f';
             } else {
                 $memPasswordRight.innerHTML = '';
                 flag2 = true;
@@ -113,8 +112,9 @@
                             var date = new Date();
                             date.setTime(date.getTime() + 1 * 60 * 10000);
 
-                            document.cookie = "ACCESS_TOKEN=" + result.token + "; path=/; max-age=600"
+                            document.cookie = "ACCESS_TOKEN=" + result.token + "; path=/; max-age=600";
                             document.cookie = "LOGIN_USEREMAIL=" + result.memEmail + "; path=/; max-age=600";
+                            document.cookie = "LOGIN_USERNICK=" + result.memNickName + "; path=/; max-age=600";
 
                             localStorage.clear()
                             window.location.href = '/';
