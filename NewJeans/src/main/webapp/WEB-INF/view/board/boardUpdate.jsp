@@ -24,6 +24,22 @@
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+    /* $(document).ready(function () {
+                if ("${ responseDTO.fileExist }") {
+                    const updateCanvas = document.getElementById("imageCanvas");
+                    const updateCtx = updateCanvas.getContext("2d");
+                    const updateImg = new Image();
+
+                    updateImg.src = "data:image/jpeg;base64,${ responseDTO.boardFilePath }"
+
+                    updateImg.onload = function () {
+                        updateCtx.drawImage(updateImg, 0, 0, 300, 300);
+                    }
+                }
+            }) */
+    </script>
 </head>
 
 <body>
