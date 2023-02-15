@@ -57,8 +57,10 @@ public class MemberController {
     }
 
     @PostMapping("/signin")
-    public @ResponseBody ResponseEntity<?> signIn(@Validated @RequestBody LoginRequestDTO loginRequestDTO,
-                                                  HttpServletResponse response, Authentication authentication) {
+    public @ResponseBody ResponseEntity<?> signIn(
+            @Validated @RequestBody LoginRequestDTO loginRequestDTO,
+            HttpServletResponse response, Authentication authentication
+    ) {
         try {
             LoginResponseDTO loginResponseDTO = memberServcie.getByCredentials(loginRequestDTO.getMemEmail(), loginRequestDTO.getMemPassword());
             String token = loginResponseDTO.getToken();
@@ -85,7 +87,10 @@ public class MemberController {
     }
 
     @PostMapping("/signup")
-    public @ResponseBody ResponseEntity<?> signUp(@Validated @RequestBody SignUpRequestDTO signUpRequestDTO, BindingResult result) {
+    public @ResponseBody ResponseEntity<?> signUp(
+            @Validated @RequestBody SignUpRequestDTO signUpRequestDTO,
+            BindingResult result
+    ) {
         log.info("/api/auth/signup POST!  - {}", signUpRequestDTO);
 
         if (result.hasErrors()) {
@@ -94,7 +99,6 @@ public class MemberController {
                     .badRequest()
                     .body(result.toString());
         }
-
         try {
             SignUpResponseDTO signUpResponseDTO = memberServcie.create(signUpRequestDTO);
             return ResponseEntity

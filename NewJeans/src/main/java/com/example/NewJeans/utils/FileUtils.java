@@ -12,15 +12,12 @@ import java.util.Map;
 import java.util.UUID;
 
 public class FileUtils {
-
-
     // MIME TYPE 설정을 위한 맵 만들기
     private static final Map<String, MediaType> mediaMap;
 
     static {
         mediaMap = new HashMap<>();
         mediaMap.put("JPG", MediaType.IMAGE_JPEG);
-        mediaMap.put("GIF", MediaType.IMAGE_GIF);
         mediaMap.put("PNG", MediaType.IMAGE_PNG);
     }
 
@@ -32,8 +29,6 @@ public class FileUtils {
         }
         return null;
     }
-
-
 
     // 1. 사용자가 파일을 업로드했을 때 새로운 파일명을 생성해서
     //    반환하고 해당 파일명으로 업로드하는 메서드

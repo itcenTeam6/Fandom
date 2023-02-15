@@ -13,14 +13,12 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public class CreateBoardRequestDTO {
 
-
    //@NotBlank
     private String boardContent;
 
     private String boardFile;
 
    // private String memNickName;
-
 
     public Board toEntity(){
         return Board.builder()

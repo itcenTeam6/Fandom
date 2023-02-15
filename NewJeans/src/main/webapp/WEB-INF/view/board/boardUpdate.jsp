@@ -23,6 +23,23 @@
     <link rel="stylesheet" href="/css/innerPage.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+    /* $(document).ready(function () {
+                if ("${ responseDTO.fileExist }") {
+                    const updateCanvas = document.getElementById("imageCanvas");
+                    const updateCtx = updateCanvas.getContext("2d");
+                    const updateImg = new Image();
+
+                    updateImg.src = "data:image/jpeg;base64,${ responseDTO.boardFilePath }"
+
+                    updateImg.onload = function () {
+                        updateCtx.drawImage(updateImg, 0, 0, 300, 300);
+                    }
+                }
+            }) */
+    </script>
 </head>
 
 <body>
@@ -30,11 +47,13 @@
     <section id="container">
         <div id="main_container">
             <div class="post_form_container">
-                <form action="${cpath}/board/${idolID}" class="post_form" id="fileForm" name="fileForm" method="POST" enctype="multipart/form-data">
+                <form action="${cpath}/board/updatePost" class="post_form" id="fileForm" name="fileForm" method="POST" enctype="multipart/form-data">
                     <div class="title">
-                        POST
+                        UPDATE
                     </div>
-                    <input type="file" id="InputImg" name="file" accept=".jpg, .jpeg, .png" style="display: none;">
+                    <input type="file" id="InputImg" name="boardFile" accept=".jpg, .jpeg, .png" style="display: none;">
+                    <input type="text" id="IdolID" name="IdolID" value="${idolID}" style="display: none;">
+                    <input type="text" id="boardID" name="boardID" value="${responseDTO.boardId}" style="display: none;">
                     <div class="preview" onclick="javascript:inputTagClick()">
                         <div class="upload">
                             <div class="post_btn">
@@ -48,8 +67,7 @@
                         </div>
                     </div>
                     <p>
-                        <textarea name="boardContent" id="text_field" cols="100" rows="15"
-                            placeholder="Input your text" required></textarea>
+                        <textarea name="boardContent" id="text_field" cols="100" rows="15" required>${ fn:trim(responseDTO.boardContent) }</textarea>
                     </p>
                     <input class="submit_btn" type="submit" value="Submit">
                 </form>

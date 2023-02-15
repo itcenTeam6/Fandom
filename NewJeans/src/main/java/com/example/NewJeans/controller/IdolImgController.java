@@ -26,7 +26,6 @@ public class IdolImgController {
     private final IdolImgService idolImgService;
     private final TokenProvider tokenProvider;
 
-
     //멤버쉽 이미지 보기
     @GetMapping("/idolImg.do")
     public String getImages(
@@ -57,12 +56,12 @@ public class IdolImgController {
     @GetMapping("/join")
     public String joinMemberShip(
             Model model, HttpServletRequest request,
-            @Positive @RequestParam("idol-id")Long idolId,
+            @Positive @RequestParam("idol-id") Long idolId,
             @CookieValue(value = "LOGIN_USEREMAIL", required = false) Cookie userEmail
     ){
+        log.info("join Get userEmail {}", userEmail.getValue());
         idolImgService.addMemberShip(userEmail.getValue(), idolId);
-
-        return "redirect:/board/boardList.do?idolID=" + idolId;
+        return "redirect:/board/" + idolId;
     }
 
     //쿠키로 저장된 토큰으로부터 유저 정보를 받아오는 메서드

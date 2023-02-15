@@ -77,4 +77,16 @@ public class IdolService {
         Optional<Idol> optionalIdol = idolRepository.findById(idolId);
         return optionalIdol.orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
     }
+
+    public List<Idol> getIdolList() {
+        List<Idol> idolList = idolRepository.findAll();
+        if (idolList.isEmpty()) {
+            throw new RuntimeException("idolList is Empty");
+        }
+        return idolList;
+    }
+
+    public Idol getIdol(final Long idolID){
+        return idolRepository.findById(idolID).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
+    }
 }

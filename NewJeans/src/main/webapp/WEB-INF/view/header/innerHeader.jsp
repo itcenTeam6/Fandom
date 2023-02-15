@@ -2,6 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="cpath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,40 +13,47 @@
 	<title>Document</title>
 
 	<script type="text/javascript">
-	    function LoadMain(){
-	        location.href = "/"
-	    }
-		function LoadBoardList(){
-            location.href = "/board/${IdolId}"
+
+        function LoadMain(){
+            location.href = '/';
         }
-        function LoadBoardWrite(){
-            location.href = "/board/${IdolId}/boardWrite"
+
+        function LoadBoardList(idolID){
+            location.href = '${cpath}/board/' + String(idolID);
         }
-        function LoadIdolImg(){
-            location.href = "/idolImg.do"
+
+        function LoadBoardWrite(idolID){
+            location.href = '${cpath}/board/' + idolID + '/boardWrite';
+        }
+
+        function LoadIdolImg(idolID){
+            location.href = '${cpath}/idolImg/idolImg.do?idolID=' + idolID;
+        }
+
+        function LogOut(){
+            location.href = '${cpath}/member/logout'
         }
 	</script>
 </head>
 
 <body>
-	<!-- header -->
-	<header>
-		<div class="inner-header">
-			<h1 class="logo">
-				<a href="javascript:LoadMain()">
-					<img src="/img/logo.png" alt="logo">
-					<img src="/img/logo2.png" alt="logo">
-				</a>
-			</h1>
-			<a href="#" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
-		</div>
-		<div class="outer-header">
-			<a href="javascript:LoadBoardList()">BoardList</a>
-			<a href="javascript:LoadBoardWrite()">BoardWrite</a>
-			<a href="javascript:LoadIdolImg()">Idol</a>
-		</div>
-	</header>
-	<!-- //header -->
+    <!-- header -->
+    <header>
+        <div class="inner-header">
+            <h1 class="logo">
+                <a href="javascript:LoadMain()">
+                    <img src="/img/WeverseLogo_main.png" alt="logo">
+                </a>
+            </h1>
+            <a href="javascript:LogOut()" class="menu-open"><span class="menu-txt">LogOut</span> <span class="menu-img"></span></a>
+        </div>
+        <div class="outer-header">
+            <a href="javascript:LoadBoardList(${ idolID })">Feed</a>
+            <a href="javascript:LoadBoardWrite(${ idolID })">Post</a>
+            <a href="javascript:LoadIdolImg(${ idolID })">Media</a>
+        </div>
+    </header>
+    <!-- //header -->
 </body>
 
 </html>

@@ -54,4 +54,5 @@ public class Board {
     //게시판 조회, 추가, 삭제를 위한 외래키
     private Long idol;
 
+    private boolean fileExist;
 }

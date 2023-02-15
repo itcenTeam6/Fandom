@@ -8,6 +8,7 @@
     <title>JSP Sample Page</title>
 </head>
     <body>
+        <h1>ERROR PAGE</h1>
         <div> ${errorMessage}</div>
     </body>
 </html>
