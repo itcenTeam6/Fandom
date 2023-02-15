@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface MemberShipRepository  extends JpaRepository<MemberShip, Long> {
-//    MemberShip findByMem_MemID(@Param(value = "memId")Long memId);
+    //    MemberShip findByMem_MemID(@Param(value = "memId")Long memId);
     Optional<MemberShip> findByMem_MemIDAndIdol_IdolID(@Param(value = "memId")Long memId, @Param(value = "idolId")Long idolId);
 }

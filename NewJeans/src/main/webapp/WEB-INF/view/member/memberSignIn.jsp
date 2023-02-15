@@ -6,7 +6,6 @@
 <c:set var="cpath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>App landing</title>
@@ -16,7 +15,6 @@
     <link rel="stylesheet" href="/css/my.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
-
 <body>
     <main class="login-body slider-bg">
         <div class="login-form" style="height :800px !important">
@@ -48,15 +46,12 @@
 let flag1=false;
 let flag2=false;
 
-
 const $memEmail=document.getElementById('memEmail');
 const $memEmailRight=document.getElementById('memEmailRight');
 const $memPassword=document.getElementById('memPassword');
 const $memPasswordRight=document.getElementById('memPasswordRight');
-
 const $signUpBtn=document.getElementById('signUpBtn');
 const $loginBtn=document.getElementById('loginBtn');
-
 
 
 $memEmail.onkeyup=function() {
@@ -65,7 +60,6 @@ $memEmail.onkeyup=function() {
         if (!$memEmail.value) {
             $memEmailRight.style.color='red';
             $memEmailRight.innerHTML ='아이디는 필수로 입력해야 합니다.';
-
         }else if (!emailRegex.test($memEmail.value)) {
          $memEmailRight.style.color='red';
               $memEmailRight.innerHTML ='이메일 형식에 맞춰서 입력해 주세요.';
@@ -73,9 +67,7 @@ $memEmail.onkeyup=function() {
             $memEmailRight.innerHTML ='';
             flag1=true;
         }
-
 }
-
 
 $memPassword.onkeyup=function() {
     const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
@@ -89,7 +81,6 @@ $memPassword.onkeyup=function() {
                 $memPasswordRight.innerHTML = '';
                 flag2=true;
             }
-
 };
 
 $loginBtn.onclick=function(){
@@ -109,22 +100,12 @@ $loginBtn.onclick=function(){
                                        if(result.message){
                                            alert(result.message);
                                        }else{
-                                       var date = new Date();
-                                       date.setTime(date.getTime() + 1*60*10000);
-
-                                       console.log(result);
-
-
-
-
-                                        document.cookie = "ACCESS_TOKEN="+result.token+"; path=/; max-age=500;"
-                                        document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; path=/; max-age=500;"
-                                        document.cookie = "LOGIN_NICKNAME="+result.memNickname+"; path=/; max-age=500;"
-
-                                        //document.cookie = "ACCESS_TOKEN="+result.token+"; expires="+date+"; path=/;"
-                                       //document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; expires="+date+"; path=/;";
-
-                                           window.location.href='/';
+                                        var date = new Date();
+                                        date.setTime(date.getTime() + 1*60*10000);
+                                        document.cookie = "ACCESS_TOKEN="+result.token+"; path=/; max-age=1*60*30;"
+                                        document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; path=/; max-age=1*60*30;"
+                                        document.cookie = "LOGIN_NICKNAME="+result.memNickname+"; path=/; max-age=1*60*30;"
+                                        window.location.href='/';
                                        }
                                    })
    }

@@ -88,7 +88,7 @@
                 </div>
                 <ul class="animate" data-animate="fadeInUp" data-duration="1s" data-delay="0s">
                     <li>
-                        <a href="#">
+                        <a href="/board/1">
                             <img class="mainIdolImgPo"
                                 src="https://images.chosun.com/resizer/gst8Y76TWvb559SjLSh43AmEUrU=/2000x1333/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/GO7X3DGRXZDGAPFJJRGNZBR4VI.jpg"
                                 alt="">
@@ -99,7 +99,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/board/2">
                             <img class="mainIdolImgPo"
                                 src="https://4kwallpapers.com/images/wallpapers/blackpink-pubg-mobile-pink-background-2560x1440-3105.jpg"
                                 alt="">
@@ -110,7 +110,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/board/3">
                             <img class="mainIdolImgPo"
                                 src="https://rare-gallery.com/uploads/posts/340441-Aespa-Kpop-K-pop-Girl-Group-Girls-Members-Karina-Ningning-Giselle-Winter.jpg"
                                 alt="">
@@ -121,7 +121,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/board/4">
                             <img class="mainIdolImgPo" src="https://pbs.twimg.com/media/FFgr7uBVIAAoYYx.jpg:large"
                                 alt="">
                             <div class="name">
@@ -134,7 +134,7 @@
                 </ul>
                 <ul class="animate" data-animate="fadeInUp" data-duration="1s" data-delay="0s">
                     <li>
-                        <a href="#">
+                        <a href="/board/5">
                             <img class="mainIdolImgPo"
                                 src="https://dbkpop.com/wp-content/uploads/2022/09/le_sserafim_antifragile_teaser_frozen_aquamarine_all_group_2.jpg"
                                 alt="">
@@ -145,7 +145,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/board/6">
                             <img class="mainIdolImgPo"
                                 src="https://img.khan.co.kr/news/2022/11/08/news-p.v1.20221108.aabaa9e1f02f4e149257b60cf19c2b2f_P1.jpg"
                                 alt="">
@@ -156,7 +156,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/board/7">
                             <img class="mainIdolImgPo" src="https://wallpapercave.com/wp/wp4390658.jpg" alt="">
                             <div class="name">
                                 <span>K-POP IDOL</span>
@@ -165,7 +165,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/board/8">
                             <img class="mainIdolImgPo"
                                 src="https://cdn.clien.net/web/api/file/F01/13158556/2e6e71a7c8886b.jpg" alt="">
                             <div class="name">
