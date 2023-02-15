@@ -84,11 +84,19 @@ body {
 
 .contents .img_section{
     overflow:hidden;
+    white-space: wrap;
 }
 
 .contents .img_section img{
     width: 100%;
     border-radius: 20px;
+}
+
+.contents .img_section p{
+    font-family: 'Noto Sans KR';
+    font-size: 13px;
+    font-weight: 300;
+    margin: 20px 10px 20px 15px;
 }
 
 .contents .bottom_icons{
@@ -250,7 +258,7 @@ body {
     position: absolute;
     bottom: 5%;
     left: 50%;
-    font-size: 50px;
+    font-size: 42px;
     transform: translate(-50%, -50%);
     color: white;
     z-index: 2;
@@ -258,10 +266,10 @@ body {
 
 .thumb_box {
     background: linear-gradient(to bottom, transparent, black);
-    position: absolute; 
-    z-index: 1; 
-    width: 100%; 
-    height: 160px; 
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 160px;
     bottom: 0%;
 }
 
@@ -274,7 +282,7 @@ body {
 .side_box .user_profile{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     font-size: 14px;
     color:#262626;
     margin-bottom: 20px;
@@ -283,6 +291,10 @@ body {
     background-color: #99999915;
     border-radius: 20px;
     height: 100px;
+}
+
+.side_box .user_profile .profile_thumb{
+    margin-left: 25px;
 }
 
 .side_box .detail .id{
@@ -413,11 +425,3 @@ body {
     line-height: 18px;
     width: auto;
 }
-
-
-
-
-
-
-
-

@@ -91,16 +91,7 @@
                             </div>
                         </div>
 
-                        <div class="comment_field" id="add-comment-post37">
-                            <div class="replyComment">
-                             <button id="inputButton" class="replyBtn">댓글</button>
-                                <form class="replyForm" name="commentInsertForm" action="" >
-                                    <input class="replyInput" type="text" placeholder="댓글달기...">
-                                    <div class="upload_btn m_text" data-name="comment"
-                                        onclick="javascript:commentUpload(${board.boardId})">게시</div>
-                                </form>
-                            </div>
-                        </div>
+
                     </article>
                   </c:forEach>
                      <!-- Article =============================================== -->

@@ -35,5 +35,5 @@ public class MemberShip {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="IdolID")
-    private Idol Idol;
+    private Idol idol;
 }

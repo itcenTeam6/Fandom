@@ -7,6 +7,7 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,8 +33,8 @@ public class DetailBoardResponseDTO {
 
     private  String boardFilePath;
 
-    @DateTimeFormat(pattern = "yyyy년 MM월 dd일 a hh시 mm분 ss초")
-    private LocalDateTime boardDate;
+
+    private String boardDate;
 
     private int boardCnt;
 
@@ -55,7 +56,7 @@ public class DetailBoardResponseDTO {
         this.memNickName=entity.getMemNickName();
         this.boardContent=entity.getBoardContent();
         this.boardFile=entity.getBoardFile();
-        this.boardDate=entity.getBoardDate();
+        this.boardDate=entity.getBoardDate().toString();
         this.boardCnt=entity.getBoardCnt();
         this.boardLike=entity.getBoardLike();
         this.comments=entity.getComments().stream().map(CommentResponseDTO::new).collect(Collectors.toList());

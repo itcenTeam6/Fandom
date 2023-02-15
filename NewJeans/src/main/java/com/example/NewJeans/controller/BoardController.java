@@ -84,6 +84,10 @@ public class BoardController {
         String idolName=detailIdolResponseDTO.getIdolName();
         String idolMainImg=detailIdolResponseDTO.getIdolMainImg();
 
+
+        //log.info("boardDate :{}",listBoardResponseDTO.getBoards());
+
+
         model.addAttribute("IdolId",idolId);
         model.addAttribute("userId",userId);
         model.addAttribute("member",member);

@@ -32,7 +32,6 @@ public class Board {
 
     private String boardFilePath;
 
-
     @CreationTimestamp
     private LocalDateTime boardDate;
 

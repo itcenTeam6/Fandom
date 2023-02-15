@@ -27,6 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -86,6 +88,17 @@ public class BoardService {
                     String s=new String(encode,"UTF-8");
 
                   dtoList.get(i).setBoardFilePath(s);
+                  String localDateTime= dtoList.get(i).getBoardDate();
+                  String boardDateDay=localDateTime.substring(0,10);
+                  String boardDateTime=localDateTime.substring(11,19);
+                  String boardDate=boardDateDay+" "+boardDateTime;
+                    log.info("localDateTime:{}",localDateTime);
+                    log.info("boardDateDay:{}",boardDateDay);
+                    log.info("boardDateTime:{}",boardDateTime);
+                     log.info("boardDate:{}",boardDate);
+                  dtoList.get(i).setBoardDate(boardDate);
+
+
 
 
             } catch (Exception e) {
