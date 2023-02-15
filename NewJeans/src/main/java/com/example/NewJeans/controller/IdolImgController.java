@@ -139,8 +139,8 @@ public class IdolImgController {
     // 관리자가 이미지 수정
     @RequestMapping(value="/{image-id}",method = {RequestMethod.PUT,RequestMethod.PATCH})
     public String patchImage(Model model,
-                              @Positive @PathVariable("image-id") Long imageId,
-                              @Validated @RequestBody ModifyIdolImgRequestDTO modifyIdolImgRequestDTO){
+                             @Positive @PathVariable("image-id") Long imageId,
+                             @Validated @RequestBody ModifyIdolImgRequestDTO modifyIdolImgRequestDTO){
 
 //        Long userId = null;
 //        if(authentication != null) userId = Long.parseLong((String)authentication.getPrincipal());
