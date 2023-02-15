@@ -16,17 +16,5 @@ class IdolImgRepositoryTest {
 
     @Autowired
     IdolImgRepository idolImgRepository;
-    @Test
-    void findByIdolIdTest(){
 
-        Idol idol = Idol.builder()
-                .idolID(1L)
-                .idolName("NewJeans")
-                .idolMainImg("https//www.youtube.com")
-                .build();
-
-        List<IdolImg> byIdolId = idolImgRepository.findByIdolId(idol);
-
-        out.println(byIdolId.size());
-    }
 }

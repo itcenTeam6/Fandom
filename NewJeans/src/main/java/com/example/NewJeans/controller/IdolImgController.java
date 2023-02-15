@@ -185,6 +185,19 @@ public class IdolImgController {
         }
     }
 
+
+    @GetMapping("/join")
+    public String joinMemberShip(Model model, HttpServletRequest request,
+                                 @Positive @RequestParam("idol-id")Long idolId){
+        Long memId = getTokenSubject(request);
+
+        idolImgService.addMemberShip(memId,idolId);
+
+        return "redirect:/Idol/idolImg";
+    }
+
+
+
     //쿠키로 저장된 토큰으로부터 유저 정보를 받아오는 메서드
     private Long getTokenSubject(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();

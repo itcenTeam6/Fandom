@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.validation.constraints.Positive;
 import java.io.File;
 import java.io.IOException;
 
@@ -30,9 +31,11 @@ public class BoardController {
 
     @GetMapping(value = "/boardList.do")
     public String boardList(
-            @RequestParam(value = "idolID") Long idolID,
+            @Positive @RequestParam(value = "idolID") Long idolID,
             @CookieValue(value = "LOGIN_USEREMAIL", required = false) Cookie userEmail,
             @CookieValue(value = "LOGIN_USERNICK", required = false) Cookie userNick,
+            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "8") int size,
             Model model
     ) {
         if (userEmail == null) {
@@ -40,8 +43,16 @@ public class BoardController {
         }
 
         log.info("boardList.do - idolID is {}", idolID);
-        log.info("userEmail is {}", userEmail.getValue());
-        log.info("userNick is {}", userNick.getValue());
+        log.info("cookieValue is {}", cookieValue);
+
+
+        model.addAttribute("idolID", idolID);
+
+//        try {
+//            boardService.findBoardLists(idolID, page, size, sort);
+//        }catch (RuntimeException e){
+//            log.warn("boardList GET 에러 : {}", e.getMessage());
+//        }
 
         Idol idol = idolService.getIdol(idolID);
 
@@ -51,7 +62,6 @@ public class BoardController {
                 .userNick(userNick.getValue())
                 .build();
 
-        model.addAttribute("idolID", idolID);
         model.addAttribute("boardDTO", boardDTO);
         return "board/boardList";
     }
@@ -101,6 +111,7 @@ public class BoardController {
 
         model.addAttribute("idolID", postRequestDTO.getIdolID());
 
-        return "redirect:/board/boardList.do";
+//        return "redirect:/board/boardList.do";
+        return "board/boardWrite";
     }
 }

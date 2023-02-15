@@ -2,7 +2,6 @@ package com.example.fandomTest.controller;
 
 import com.example.fandomTest.dto.response.ListIdolImgResponseDTO;
 import com.example.fandomTest.service.IdolImgService;
-import com.example.fandomTest.service.IdolService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
