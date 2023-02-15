@@ -33,7 +33,6 @@ public class DetailBoardResponseDTO {
 
     private  String boardFilePath;
 
-
     private String boardDate;
 
     private int boardCnt;

@@ -26,8 +26,9 @@ public class Comment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memID")
-    private Member memID;
+    private Member memId;
 
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String cmtContent;
 
     @CreationTimestamp

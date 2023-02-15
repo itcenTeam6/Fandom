@@ -25,6 +25,7 @@ public class IdolService {
     }
 
     public Idol getIdol(final Long idolID){
+        log.info("Idol getIdol");
         return idolRepository.findById(idolID).orElseThrow(NullPointerException::new);
     }
 }

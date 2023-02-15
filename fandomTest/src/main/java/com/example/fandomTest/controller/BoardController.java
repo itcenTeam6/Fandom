@@ -4,12 +4,20 @@ import com.example.fandomTest.dto.request.FileRequestDTO;
 import com.example.fandomTest.dto.request.PostRequestDTO;
 import com.example.fandomTest.dto.request.PostSaveRequestDTO;
 import com.example.fandomTest.dto.response.BoardResponseDTO;
+import com.example.fandomTest.dto.response.ListBoardResponseDTO;
+import com.example.fandomTest.dto.response.memberResponseDTO;
 import com.example.fandomTest.entity.Idol;
+import com.example.fandomTest.repository.MemberShipRepository;
 import com.example.fandomTest.service.BoardService;
+import com.example.fandomTest.service.IdolImgService;
 import com.example.fandomTest.service.IdolService;
+import com.example.fandomTest.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +34,8 @@ import java.io.IOException;
 public class BoardController {
     private final BoardService boardService;
     private final IdolService idolService;
+    private final IdolImgService idolImgService;
+    private final MemberService memberService;
     @Value("${file.dir}")
     private String fileDir;
 
@@ -34,8 +44,7 @@ public class BoardController {
             @Positive @RequestParam(value = "idolID") Long idolID,
             @CookieValue(value = "LOGIN_USEREMAIL", required = false) Cookie userEmail,
             @CookieValue(value = "LOGIN_USERNICK", required = false) Cookie userNick,
-            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
-            @RequestParam(name = "size", required = false, defaultValue = "8") int size,
+            @PageableDefault(size = 10, sort = "boardID", direction = Sort.Direction.DESC) Pageable pageable,
             Model model
     ) {
         if (userEmail == null) {
@@ -43,26 +52,26 @@ public class BoardController {
         }
 
         log.info("boardList.do - idolID is {}", idolID);
-        log.info("cookieValue is {}", cookieValue);
 
-
+        // idolID attribute
         model.addAttribute("idolID", idolID);
 
-//        try {
-//            boardService.findBoardLists(idolID, page, size, sort);
-//        }catch (RuntimeException e){
-//            log.warn("boardList GET 에러 : {}", e.getMessage());
-//        }
+        // membership 여부 attribute
+        boolean memberShipForBoard = idolImgService.isMemberShipForBoard(userEmail.getValue(), idolID);
+        model.addAttribute("memberShipForBoard", memberShipForBoard);
 
+        // idol 객체 attribute
         Idol idol = idolService.getIdol(idolID);
+        model.addAttribute("idol", idol);
 
-        BoardResponseDTO boardDTO = BoardResponseDTO.builder()
-                .idol(idol)
-                .userEmail(userEmail.getValue())
-                .userNick(userNick.getValue())
-                .build();
+        // member 객체 attribute
+        memberResponseDTO emailAndNick = memberService.getEmailAndNick(userEmail.getValue());
+        model.addAttribute("emailAndNick", emailAndNick);
 
-        model.addAttribute("boardDTO", boardDTO);
+        // boardList attribute
+        ListBoardResponseDTO listBoardResponseDTO = boardService.retrieve(idolID, pageable);
+        model.addAttribute("listBoard", listBoardResponseDTO);
+
         return "board/boardList";
     }
 

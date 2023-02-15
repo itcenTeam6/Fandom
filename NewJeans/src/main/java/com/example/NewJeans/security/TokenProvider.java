@@ -52,11 +52,7 @@ public class TokenProvider {
     }
     public  boolean validatedToken(String token){
         Claims claims = Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(SECRET_KEY.getBytes())).build().parseClaimsJws(token).getBody();
-        if(claims !=null){
-            return  true;
-        }else{
-            return  false;
-        }
+        return claims != null;
     }
 
 

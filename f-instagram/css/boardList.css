@@ -363,6 +363,18 @@ body {
 
 }
 
+.side_box .memberShipBtn{
+    width: 291px;
+    height: 40px;
+    background-color: #0DE5C0;
+    border: none;
+    border-radius: 15px;
+    font-family: 'Noto Sans KR';
+    font-size: 14px;
+    font-weight: 800;
+    color: white;
+}
+
 @media screen and (max-width:1000px){
 
     #header .inner{
