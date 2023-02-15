@@ -100,14 +100,12 @@ $loginBtn.onclick=function(){
                                        if(result.message){
                                            alert(result.message);
                                        }else{
-                                       var date = new Date();
-                                       date.setTime(date.getTime() + 1*60*10000);
+                                        var date = new Date();
+                                        date.setTime(date.getTime() + 1*60*10000);
                                         document.cookie = "ACCESS_TOKEN="+result.token+"; path=/; max-age=1*60*30;"
                                         document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; path=/; max-age=1*60*30;"
                                         document.cookie = "LOGIN_NICKNAME="+result.memNickname+"; path=/; max-age=1*60*30;"
-
-
-                                           window.location.href='/';
+                                        window.location.href='/';
                                        }
                                    })
    }
