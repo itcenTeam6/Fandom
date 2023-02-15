@@ -1,123 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>LogIn</title>
-    <meta name="author" content="Soon9">
-    <meta name="description" content="Soon9's web studio">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript">
+        function clear_test() {
+            var fileCnt = 2;
+            if (fileCnt > 0) {
+                for (var i = 0; i < fileCnt; i++) {
+                    if (document.getElementsByName("ATTACH_FILE_NAME")[i].value != null) {
+                        //document.getElementsByName("ATTACH_FILE_NAME")[i].value = "";     //이걸론 초기화가 안됨
 
-    <!-- css -->
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/main-responsive.css">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/my.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
-
-<body>
-    <jsp:include page="../header/header.jsp" />
-    <main class="login-body slider-bg">
-        <div class="login-form">
-            <h2>Login</h2>
-            <div class="form-input">
-                <label for="name">Email</label>
-                <input type="email" name="userEmail" id="memEmail" placeholder="Input your Email">
-                <span id="memEmailRight"></span>
-            </div>
-            <div class="form-input">
-                <label for="name">Password</label>
-                <input type="password" name="userPw" id="memPassword" placeholder="Input your Password">
-                <span id="memPasswordRight"></span>
-            </div>
-            <div class="form-input pt-30">
-                <input type="submit" name="submit" value="login" id="loginBtn">
-            </div>
-
-            <div class="text-center">
-                <p class="mem">Not a member?</p>
-                <a href="/member/register.do" class="registration">Registration</a>
-            </div>
-        </div>
-    </main>
-    <script src="/js/bootstrap.min.js"></script>
-    <script>
-        let flag1 = false;
-        let flag2 = false;
-
-        const $memEmail = document.getElementById('memEmail');
-        const $memEmailRight = document.getElementById('memEmailRight');
-        const $memPassword = document.getElementById('memPassword');
-        const $memPasswordRight = document.getElementById('memPasswordRight');
-
-        const $signUpBtn = document.getElementById('signUpBtn');
-        const $loginBtn = document.getElementById('loginBtn');
-
-        $memEmail.onkeyup = function () {
-            const emailRegex = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
-
-            if (!$memEmail.value) {
-                $memEmailRight.style.color = '#f21a3f';
-                $memEmailRight.innerHTML = '아이디는 필수로 입력해야 합니다.';
-
-            } else if (!emailRegex.test($memEmail.value)) {
-                $memEmailRight.style.color = '#f21a3f';
-                $memEmailRight.innerHTML = '이메일 형식에 맞춰서 입력해 주세요.';
-            } else {
-                $memEmailRight.innerHTML = '';
-                flag1 = true;
-            }
-        }
-
-        $memPassword.onkeyup = function () {
-            const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
-            if (!$memPassword.value) {
-                $memPasswordRight.innerHTML = '비밀번호는 필수값입니다!';
-                $memPasswordRight.style.color = '#f21a3f';
-            } else if (!pwRegex.test($memPassword.value)) {
-                $memPasswordRight.innerHTML = '8글자 이상의 영문,숫자,특수문자를 포함해주세요!';
-                $memPasswordRight.style.color = '#f21a3f';
-            } else {
-                $memPasswordRight.innerHTML = '';
-                flag2 = true;
-            }
-        };
-
-        $loginBtn.onclick = function () {
-            if (flag1 && flag2) {
-                const userValue = {
-                    memEmail: $memEmail.value,
-                    memPassword: $memPassword.value
+                        var files = document.getElementsByName("ATTACH_FILE_NAME");
+                        files[i].select();
+                        document.selection.clear();
+                    }
                 }
-                fetch('/member/logIn.do', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(userValue)
-                }).then(t => t.json())
-                    .then(result => {
-                        if (result.message) {
-                            alert(result.message);
-                        } else {
-                            var date = new Date();
-                            date.setTime(date.getTime() + 1 * 60 * 10000);
-
-                            document.cookie = "ACCESS_TOKEN=" + result.token + "; path=/; max-age=600";
-                            document.cookie = "LOGIN_USEREMAIL=" + result.memEmail + "; path=/; max-age=600";
-                            document.cookie = "LOGIN_USERNICK=" + result.memNickName + "; path=/; max-age=600";
-
-                            localStorage.clear()
-                            window.location.href = '/';
-                        }
-                    })
             }
         }
     </script>
+</head>
+
+<body>
+    <input type="file" name="ATTACH_FILE_NAME" />
+
+    <input type="file" name="ATTACH_FILE_NAME" />
+
+    <input type="button" value="초기화 버튼" onclick="clear_test()" />
 </body>
 
 </html>

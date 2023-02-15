@@ -1,5 +1,5 @@
 server:
-  port: 8089
+  port: 8086
   servlet:
     jsp:
       init-parameters:
@@ -53,4 +53,4 @@ spring:
 
 file:
   dir:
-    D:/Fandom/fandomTest/src/main/resources/static/userImg
+    D:/Fandom/image/

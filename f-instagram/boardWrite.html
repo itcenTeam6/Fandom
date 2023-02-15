@@ -4,17 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Hong Studio</title>
-    
+
     <meta name="author" content="Soon9">
     <meta name="description" content="Soon9's web studio">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-    
+
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/boardWrite.css">
     <link rel="stylesheet" href="css/innerPage.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+    <script>
+        /* $(document).ready(function () {
+            if ("${ responseDTO.fileExist }") {
+                const updateCanvas = document.getElementById("imageCanvas");
+                const updateCtx = updateCanvas.getContext("2d");
+                const updateImg = new Image();
+
+                updateImg.src = "data:image/jpeg;base64,${ responseDTO.boardFilePath }"
+
+                updateImg.onload = function () {
+                    updateCtx.drawImage(updateImg, 0, 0, 300, 300);
+                }
+            }
+        }) */
+    </script>
 
 </head>
 
@@ -63,8 +80,8 @@
                         </div>
                     </div>
                     <p>
-                        <textarea name="content" id="text_field" cols="100" rows="15"
-                            placeholder="Input your text" required></textarea>
+                        <textarea name="content" id="text_field" cols="100" rows="15" placeholder="Input your text"
+                            required></textarea>
                     </p>
                     <input class="submit_btn" type="submit" value="Submit">
                 </form>
@@ -88,7 +105,7 @@
             };
             reader.readAsDataURL(e.target.files[0]);
         }
-        
+
         // Show image
         fileInput.addEventListener('change', handleImage, false);
         var canvas = document.getElementById('imageCanvas');

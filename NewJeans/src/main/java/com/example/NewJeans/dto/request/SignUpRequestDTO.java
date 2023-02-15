@@ -23,13 +23,13 @@ public class SignUpRequestDTO {
     private String memPassword;
 
     @NotBlank
-    private String memNickname;
+    private String memNickName;
 
     public Member toEntity(){
         return Member.builder()
                 .memEmail(this.memEmail)
                 .memPassword(this.memPassword)
-                .memNickname(this.memNickname)
+                .memNickname(this.memNickName)
                 .build();
     }
 }

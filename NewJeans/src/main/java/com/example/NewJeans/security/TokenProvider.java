@@ -15,7 +15,6 @@ import java.util.Date;
 @Service
 @Slf4j
 public class TokenProvider {
-
     private static final String SECRET_KEY="Q4NSl604sgyHJj1qwEkRasdUeR4uUAt7WJraD7EN3O9DVccyYuHxMEbuuuXXyYJkal13eqgB0F7Bq4Hwoksdvon123ovb";
 
     public String createToken(Member member){
@@ -26,7 +25,6 @@ public class TokenProvider {
         );
 
         return Jwts.builder()
-
                 .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()),
                         SignatureAlgorithm.HS512)
                 .setSubject(member.getMemID().toString())
@@ -54,7 +52,4 @@ public class TokenProvider {
         Claims claims = Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(SECRET_KEY.getBytes())).build().parseClaimsJws(token).getBody();
         return claims != null;
     }
-
-
-
 }

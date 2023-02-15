@@ -19,51 +19,25 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode
 @Builder
 public class DetailBoardResponseDTO {
-
-
     private Long boardId;
-
     private Member member;
-
     private String memNickName;
-
     private String boardContent;
-
     private String boardFile;
-
-    private  String boardFilePath;
-
+    private String boardFilePath;
     private String boardDate;
-
-    private int boardCnt;
-
-    private int boardLike;
-
+    private boolean fileExist;
     private List<CommentResponseDTO> comments;
 
-    private String idolMainImg;
-
-    private String idolName;
-
-
-
-
     public DetailBoardResponseDTO(Board entity){
-
         this.boardId=entity.getBoardID();
         this.member=entity.getMember();
         this.memNickName=entity.getMemNickName();
         this.boardContent=entity.getBoardContent();
         this.boardFile=entity.getBoardFile();
         this.boardDate=entity.getBoardDate().toString();
-        this.boardCnt=entity.getBoardCnt();
-        this.boardLike=entity.getBoardLike();
         this.comments=entity.getComments().stream().map(CommentResponseDTO::new).collect(Collectors.toList());
-        this.idolMainImg=entity.getIdolID().getIdolMainImg();
-        this.idolName=entity.getIdolID().getIdolName();
-
-
-
+        this.fileExist=entity.isFileExist();
     }
 
 }
