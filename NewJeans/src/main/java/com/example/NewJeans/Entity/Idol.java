@@ -21,7 +21,9 @@ public class Idol {
     @Column(nullable = false)
     private String idolName;
 
-    @Column(nullable = false)
+    @Column(nullable = false,length = 3000)
     private String idolMainImg;
+
+    private String  idolSubImg;
 
 }
