@@ -6,7 +6,6 @@
 <c:set var="cpath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>App landing</title>
@@ -16,7 +15,6 @@
     <link rel="stylesheet" href="/css/my.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
-
 <body>
     <main class="login-body slider-bg">
         <div class="login-form" style="height :800px !important">
@@ -98,12 +96,9 @@ $loginBtn.onclick=function(){
                                        }else{
                                        var date = new Date();
                                        date.setTime(date.getTime() + 1*60*10000);
-                                       console.log(result);
-                                        document.cookie = "ACCESS_TOKEN="+result.token+"; path=/; max-age=500;"
-                                        document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; path=/; max-age=500;"
-                                        document.cookie = "LOGIN_NICKNAME="+result.memNickname+"; path=/; max-age=500;"
-                                        //document.cookie = "ACCESS_TOKEN="+result.token+"; expires="+date+"; path=/;"
-                                       //document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; expires="+date+"; path=/;";
+                                        document.cookie = "ACCESS_TOKEN="+result.token+"; path=/; max-age=1*60*30;"
+                                        document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; path=/; max-age=1*60*30;"
+                                        document.cookie = "LOGIN_NICKNAME="+result.memNickname+"; path=/; max-age=1*60*30;"
                                            window.location.href='/';
                                        }
                                    })

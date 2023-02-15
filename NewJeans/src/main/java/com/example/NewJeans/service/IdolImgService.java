@@ -134,4 +134,11 @@ public class IdolImgService {
         MemberShip memberShip = optionalMemberShip.get();
         return memberShip.getMsType().equals("yes"); //멤버쉽 회원이면 참, 멤버쉽 회원이 아니면 거짓
     }
+
+    public void addMemberShip(Long memId, Long idolId) {
+        Optional<MemberShip> optionalMemberShip = memberShipRepository.findByMem_MemIDAndIdol_IdolID(memId, idolId);
+        MemberShip memberShip = optionalMemberShip.orElseThrow(() -> new RuntimeException("존재하지 않는 멤버회원입니다."));
+        memberShip.setMsType("yes");
+        memberShipRepository.save(memberShip);
+    }
 }
