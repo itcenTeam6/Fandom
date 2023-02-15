@@ -6,20 +6,27 @@
 <c:set var="cpath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <title>App landing</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <title>LogIn</title>
+    <meta name="author" content="Soon9">
+    <meta name="description" content="Soon9's web studio">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main-responsive.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/my.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
+    <jsp:include page="../header/header.jsp" />
     <main class="login-body slider-bg">
-        <div class="login-form" style="height :800px !important">
-
-                <h2>Login</h2>
+        <div class="login-form">
                 <div class="form-input" style="height :80px !important">
                     <label for="name">Email</label>
                      <input type="email" name="userEmail" id="memEmail" placeholder="Email">
@@ -33,8 +40,6 @@
                     <input type="submit" name="submit" value="login" id="loginBtn" style="margin-top: 0px !important;">
                 </div>
 
-            <!-- Forget Password -->
-            <!-- <a href="#" class="forget">Forget Password</a> -->
             <div class="text-center">
             <p class="mem">Not a member?</p>
             <a href="/member/signup" class="registration">Registration</a>

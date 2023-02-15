@@ -143,8 +143,10 @@ body {
     margin-top: 0px;
     font-family: 'Noto Sans KR';
     height: 40px;
+    transition: .4s;
 }
 
 .submit_btn:hover{
     cursor: pointer;
+    font-size: 18px;
 }

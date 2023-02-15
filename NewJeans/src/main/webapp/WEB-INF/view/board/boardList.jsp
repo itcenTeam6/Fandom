@@ -122,7 +122,6 @@
         </section>
     </section>
     <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/boardList.js"></script>
     <script src="/js/scrolla.jquery.min.js"></script>
     <script src="/js/slick.min.js"></script>
     <script src="/js/script.js"></script>
@@ -130,7 +129,7 @@
         /*
         대충 어케어케 현재 유저 닉네임이든 아이디든 받아서 넣을 수 있도록
         대충 어케어케 게시글 pk 받아서 querySelector로 선택할 수 있도록
-        */
+
         let replyInput = document.querySelector(".replyInput");
         let replyBtn = document.querySelector(".replyBtn");
         let replyForm = document.querySelector(".replyForm");
@@ -151,7 +150,7 @@
         replyBtn.onclick=function(){
             replyForm.style.display='block';
         }
-
+    */
 
         /* 게시글 삭제 (유저 본인이 쓴 게시물 아니면 삭제  x  */
         function deleteByBoardId(boardId){

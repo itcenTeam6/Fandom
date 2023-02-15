@@ -118,6 +118,9 @@ public class BoardService {
         log.info("boardFile:{}",boardFile);
         createRequestDTO.setBoardFile(boardFile);
 
+        log.info("--------------------------------------------------------------");
+        log.info("111111111111111111111111111111111111111111111111111111111111111");
+        log.info("--------------------------------------------------------------");
         Idol idol=new Idol();
         idol.setIdolID(idolId);
 
@@ -130,8 +133,20 @@ public class BoardService {
         board.setIdol(idolId);
         board.setMember(member);
         board.setMemNickName(userNickName); //작성자 닉네임
+
+        log.info("--------------------------------------------------------------");
+        log.info("{}",board);
+        log.info("33333333333333333333333333333333333333");
+        log.info("--------------------------------------------------------------");
         boardRepository.save(board);
         log.info("게시물이 등록되었습니다. 내용:{} 파일:{}",createRequestDTO.getBoardContent(),createRequestDTO.getBoardFile());
+
+        log.info("--------------------------------------------------------------");
+        log.info("2222222222222222222222222222222222222222222222");
+        log.info("--------------------------------------------------------------");
+
+
+
 
         return idolId;
 
