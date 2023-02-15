@@ -8,9 +8,12 @@
 
 메인화면
 <img src="./docs/img/소개1.png" alt="소개1">
+<br>
 
 게시판
 <img src="./docs/img/소개2.png" alt="소개2">
+<br>
+
 
 멤버쉽 회원용 컨텐츠
 <img src="./docs/img/소개3.png" alt="소개3">
