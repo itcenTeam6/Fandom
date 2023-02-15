@@ -1,5 +1,5 @@
 server:
-  port: 8085
+  port: 8087
   servlet:
     jsp:
       init-parameters:
@@ -31,7 +31,7 @@ spring:
     hibernate:
       database: mysql
       generate-ddl: true
-      ddl-auto: none
+      ddl-auto: update
 
   # JSP
   mvc:

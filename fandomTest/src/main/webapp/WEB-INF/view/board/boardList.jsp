@@ -26,24 +26,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script text="text/javascript">
-        function LoadMain(){
-            location.href = '/';
-        }
-
-        function LoadBoardList(idolID){
-            location.href = '${cpath}/board/boardList.do?idolID=' + String(idolID);
-        }
-
-        function LoadBoardWrite(idolID){
-            location.href = '${cpath}/board/boardWrite.do?idolID=' + String(idolID);
-        }
-
-        function LoadIdolImg(idolID){
-            location.href = '${cpath}/idolImg/idolImg.do?idolID=' + String(idolID);
-        }
-
         function commentUpload() {
             document.getElementById("inputButton").click()
+        }
+
+        function JoinMemberShip(){
+            alert("멤버십 가입하시겠습니까??")
+            location.href = "${cpath}/idolImg/join?idol-id=" + "${idolID}";
         }
     </script>
 
@@ -55,184 +44,70 @@
             <div class="inner">
                 <div class="contents_box">
                     <!-- Article =============================================== -->
-                    <article class="contents">
-                        <div class="top">
-                            <div class="user_container">
-                                <div class="profile_img">
-                                    <img src="/img/userProfile.png">
-                                </div>
-                                <div class="user_name">
-                                    <div class="nick_name m_text">post 등록 작성자</div>
-                                    <div class="country s_text">post 등록 일자</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="img_section">
-                            <div class="trans_inner">
-                                <div><img
-                                        src="https://upload.wikimedia.org/wikipedia/commons/e/ee/BLACKPINK_PUBG_Mobile_Sept_2020_ad_%28derived%29.jpg"
-                                        alt="visual01">
-                                <p>게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글게시글</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bottom_icons">
-                            <div class="left_icons">
-                                <div class="heart_btn">
-                                    <span class="lnr lnr-pencil"></span>
-                                </div>
-                                <div class="heart_btn">
-                                    <span class="lnr lnr-trash"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Comment ============= -->
-                        <div class="showComment">
-                            <div class="commentBox">
-                                <div class="commentSet">
-                                    <div class="commentUser">
-                                        <span class="commentId">TEST유저</span>
+                    <c:forEach var="boardItem" items="${listBoard.boards}">
+                        <article class="contents">
+                            <div class="top">
+                                <div class="user_container">
+                                    <div class="profile_img">
+                                        <img src="/img/userProfile.png">
                                     </div>
-                                    <div class="commentContents">
-                                        댓글 내용 💝💝💝💝💝💝 yayayayaaaaaay‼️‼️‼️
+                                    <div class="user_name">
+                                        <div class="nick_name m_text">${ boardItem.memNickName }</div>
+                                        <div class="country s_text">${ boardItem.boardDate }</div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="comment_field" id="add-comment-post37">
-                            <div class="replyComment">
-                                <form class="replyForm" action="">
-                                    <input class="replyInput" type="text" placeholder="댓글달기...">
-                                    <div class="upload_btn m_text" data-name="comment"
-                                        onclick="javascript:commentUpload()">게시</div>
-                                    <button id="inputButton" class="replyBtn" style="display: none;"></button>
-                                </form>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Article =============================================== -->
-                    <article class="contents">
-                        <div class="top">
-                            <div class="user_container">
-                                <div class="profile_img">
-                                    <img src="/img/userProfile.png">
-                                </div>
-                                <div class="user_name">
-                                    <div class="nick_name m_text">post 등록 작성자</div>
-                                    <div class="country s_text">post 등록 일자</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="img_section">
-                            <div class="trans_inner">
-                                <div><img
-                                        src="https://upload.wikimedia.org/wikipedia/commons/e/ee/BLACKPINK_PUBG_Mobile_Sept_2020_ad_%28derived%29.jpg"
-                                        alt="visual01"></div>
-                            </div>
-                        </div>
-
-                        <div class="bottom_icons">
-                            <div class="left_icons">
-                                <div class="heart_btn">
-                                    <span class="lnr lnr-pencil"></span>
-                                </div>
-                                <div class="heart_btn">
-                                    <span class="lnr lnr-trash"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Comment ============= -->
-                        <div class="showComment">
-                            <div class="commentBox">
-                                <div class="commentSet">
-                                    <div class="commentUser">
-                                        <span class="commentId">TEST유저</span>
-                                    </div>
-                                    <div class="commentContents">
-                                        댓글 내용 💝💝💝💝💝💝 yayayayaaaaaay‼️‼️‼️
+                            <div class="img_section">
+                                <div class="trans_inner">
+                                    <div>
+                                        <c:if test="{!empty boardItem.boardFile }">
+                                            <img src="${ boardItem.boardFile }" alt="visual01">
+                                        </c:if>
+                                        <p>${ boardItem.boardContent }</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="comment_field" id="add-comment-post37">
-                            <div class="replyComment">
-                                <form class="replyForm" action="">
-                                    <input class="replyInput" type="text" placeholder="댓글달기...">
-                                    <div class="upload_btn m_text" data-name="comment"
-                                        onclick="javascript:commentUpload()">게시</div>
-                                    <button id="inputButton" class="replyBtn" style="display: none;"></button>
-                                </form>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Article =============================================== -->
-                    <article class="contents">
-                        <div class="top">
-                            <div class="user_container">
-                                <div class="profile_img">
-                                    <img src="/img/userProfile.png">
-                                </div>
-                                <div class="user_name">
-                                    <div class="nick_name m_text">post 등록 작성자</div>
-                                    <div class="country s_text">post 등록 일자</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="img_section">
-                            <div class="trans_inner">
-                                <div><img
-                                        src="https://upload.wikimedia.org/wikipedia/commons/e/ee/BLACKPINK_PUBG_Mobile_Sept_2020_ad_%28derived%29.jpg"
-                                        alt="visual01"></div>
-                            </div>
-                        </div>
-
-                        <div class="bottom_icons">
-                            <div class="left_icons">
-                                <div class="heart_btn">
-                                    <span class="lnr lnr-pencil"></span>
-                                </div>
-                                <div class="heart_btn">
-                                    <span class="lnr lnr-trash"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Comment ============= -->
-                        <div class="showComment">
-                            <div class="commentBox">
-                                <div class="commentSet">
-                                    <div class="commentUser">
-                                        <span class="commentId">TEST유저</span>
+                            <div class="bottom_icons">
+                                <div class="left_icons">
+                                    <div class="heart_btn">
+                                        <span class="lnr lnr-pencil"></span>
                                     </div>
-                                    <div class="commentContents">
-                                        댓글 내용 💝💝💝💝💝💝 yayayayaaaaaay‼️‼️‼️
+                                    <div class="heart_btn">
+                                        <span class="lnr lnr-trash"></span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="comment_field" id="add-comment-post37">
-                            <div class="replyComment">
-                                <form class="replyForm" action="">
-                                    <input class="replyInput" type="text" placeholder="댓글달기...">
-                                    <div class="upload_btn m_text" data-name="comment"
-                                        onclick="javascript:commentUpload()">게시</div>
-                                    <button id="inputButton" class="replyBtn" style="display: none;"></button>
-                                </form>
+                            <!-- Comment ============= -->
+                            <div class="showComment">
+                                <div class="commentBox">
+                                    <c:forEach var="comment" items="${boardItem.comments}">
+                                        <div class="commentSet">
+                                            <div class="commentUser">
+                                                <span class="commentId">${ comment.memNickName }</span>
+                                            </div>
+                                            <div class="commentContents">
+                                                ${ comment.cmtContent }
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
                             </div>
-                        </div>
-                    </article>
 
+                            <div class="comment_field" id="add-comment-post37">
+                                <div class="replyComment">
+                                    <form class="replyForm" action="">
+                                        <input class="replyInput" type="text" placeholder="댓글달기...">
+                                        <div class="upload_btn m_text" data-name="comment"
+                                            onclick="javascript:commentUpload()">게시</div>
+                                        <button id="inputButton" class="replyBtn" style="display: none;"></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </article>
+                    </c:forEach>
 
                     <!-- Side Box============================================== -->
                     <div class="side_box">
@@ -241,18 +116,21 @@
                                 <img src="/img/userProfile.png" alt="프로필사진">
                             </div>
                             <div class="detail">
-                                <div class="id m_text_profile">${ boardDTO.userNick }</div>
-                                <div class="ko_name">${ boardDTO.userEmail }</div>
+                                <div class="id m_text_profile">${ emailAndNick.memNickName }</div>
+                                <div class="ko_name">${ emailAndNick.memEmail }</div>
                             </div>
                         </div>
                         <article class="recommend">
                             <div class="myprofile_thumb">
                                 <img
-                                    src="${ boardDTO.idol.idolSubImg }">
-                                <h1 class="thumb_text">${ boardDTO.idol.idolName }</h1>
+                                    src="${ idol.idolSubImg }">
+                                <h1 class="thumb_text">${ idol.idolName }</h1>
                                 <div class="thumb_box"></div>
                             </div>
                         </article>
+                        <c:if test="${memberShipForBoard eq 'false'}">
+                            <button class="memberShipBtn" onclick="javascript:JoinMemberShip()">Join MemberShip !!</button>
+                        </c:if>
                     </div>
                 </div>
         </section>

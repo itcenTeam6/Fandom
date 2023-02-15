@@ -3,6 +3,7 @@ package com.example.fandomTest.service;
 import com.example.fandomTest.dto.request.SignUpRequestDTO;
 import com.example.fandomTest.dto.response.LoginResponseDTO;
 import com.example.fandomTest.dto.response.SignUpResponseDTO;
+import com.example.fandomTest.dto.response.memberResponseDTO;
 import com.example.fandomTest.entity.Member;
 import com.example.fandomTest.exception.DuplicatedEmailException;
 import com.example.fandomTest.exception.NoRegisteredArgumentsException;
@@ -68,6 +69,14 @@ public class MemberService {
         Member member = memberRepository.save(signUpRequestDTO.toEntity());
         log.info("회원 가입 성공 !! - user_id :{} - user_NickName : {}", member.getMemID(), member.getMemNickName());
         return new SignUpResponseDTO(member);
+    }
+
+    public memberResponseDTO getEmailAndNick(final String email){
+        Member byMemEmail = memberRepository.findByMemEmail(email);
+        return memberResponseDTO.builder()
+                .memEmail(byMemEmail.getMemEmail())
+                .memNickName(byMemEmail.getMemNickName())
+                .build();
     }
 }
 
