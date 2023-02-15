@@ -81,8 +81,8 @@ class IdolImgCrawlingApp:
         return connection, cursor
     
     def insertIdol(self):
-        # connection, cursor = self.mariaDBconnection()
-        connection, cursor = self.mySqlDBConnection()
+        connection, cursor = self.mariaDBconnection()
+        # connection, cursor = self.mySqlDBConnection()
         
         try:
             sql = "insert into idol (idolid, idol_name, idol_main_img, idol_sub_img) values (%s, %s, %s, %s)"
@@ -123,8 +123,8 @@ class IdolImgCrawlingApp:
         connection.close()
         
     def insertIdolImg(self):
-        # connection, cursor = self.mariaDBconnection()
-        connection, cursor = self.mySqlDBConnection()
+        connection, cursor = self.mariaDBconnection()
+        # connection, cursor = self.mySqlDBConnection()
         
         try:
             sql = """

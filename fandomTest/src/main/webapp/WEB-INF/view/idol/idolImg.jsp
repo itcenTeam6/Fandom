@@ -35,8 +35,8 @@
                 <div class="tz-gallery">
                     <div class="row myRow">
                         <c:forEach var="idolImg" items="${idolImgList.idolImages}">
+                            <!-- 모든 회원에게 공개 -->
                             <c:if test="${idolImg.msType eq 'yes'}">
-                                <!-- MemberShip 회원용 -->
                                 <div class="mycol-md-2">
                                     <a class="lightbox" href="${idolImg.imgPath}">
                                         <img class="img-fluid"
@@ -46,21 +46,33 @@
                                 </div>
                             </c:if>
                             <c:if test="${idolImg.msType eq 'no'}">
-                                <!-- Non MemberShip 회원용 -->
-                                <div class="mycol-md-2">
-                                    <a class="lightbox">
-                                        <div class="memberShip">
-                                            <div class="memberShipImg">
-                                                <img class="img-fluid myBlur"
-                                                    src="${idolImg.imgPath}"
-                                                    alt="Bridge">
+                                <!-- 멤버십 회원이라서 블러 안됨 -->
+                                <c:if test="${memberShip eq 'true'}">
+                                    <div class="mycol-md-2">
+                                        <a class="lightbox" href="${idolImg.imgPath}">
+                                            <img class="img-fluid"
+                                                src="${idolImg.imgPath}"
+                                                alt="Park">
+                                        </a>
+                                    </div>
+                                </c:if>
+                                <!-- 멤버십 회원이 아니라서 블러 됨 -->
+                                <c:if test="${memberShip eq 'false'}">
+                                    <div class="mycol-md-2">
+                                        <a class="lightbox">
+                                            <div class="memberShip">
+                                                <div class="memberShipImg">
+                                                    <img class="img-fluid myBlur"
+                                                        src="${idolImg.imgPath}"
+                                                        alt="Bridge">
+                                                </div>
+                                                <div class="memberShipTxt">
+                                                    <h5>MemberShip Only</h5>
+                                                </div>
                                             </div>
-                                            <div class="memberShipTxt">
-                                                <h5>MemberShip Only</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
+                                        </a>
+                                    </div>
+                                </c:if>
                             </c:if>
                         </c:forEach>
                     </div>

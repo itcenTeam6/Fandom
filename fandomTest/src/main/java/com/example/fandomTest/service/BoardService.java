@@ -1,6 +1,8 @@
 package com.example.fandomTest.service;
 
 import com.example.fandomTest.dto.request.PostSaveRequestDTO;
+import com.example.fandomTest.dto.response.DetailBoardResponseDTO;
+import com.example.fandomTest.dto.response.ListBoardResponseDTO;
 import com.example.fandomTest.entity.Board;
 import com.example.fandomTest.entity.Idol;
 import com.example.fandomTest.entity.Member;
@@ -11,10 +13,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -38,10 +44,18 @@ public class BoardService {
         boardRepository.save(board);
     }
 
+    @Transactional
+    public ListBoardResponseDTO retrieve(Long idolID, Pageable pageable){
+        log.info("BoardList Service retrieve");
 
-//    public void findBoardLists(Long idolID, int page, int size) {
-//        Idol idol = idolRepository.findById(idolID).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않음"));
-//
-//        Page<Board> boardLists = boardRepository.findAllByIdolId_IdolIDOrderByBoardDateDesc(idolID, PageRequest.of(-1, size));
-//    }
+        Page<Board> listBoards = boardRepository.findAllByIdol_IdolIDOrderByBoardDateDesc(idolID, pageable);
+
+        List<DetailBoardResponseDTO> dtoList = listBoards.stream()
+                .map(DetailBoardResponseDTO::new)
+                .collect(Collectors.toList());
+
+        return ListBoardResponseDTO.builder()
+                .boards(dtoList)
+                .build();
+    }
 }

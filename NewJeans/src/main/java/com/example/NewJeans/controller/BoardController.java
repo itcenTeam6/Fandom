@@ -1,24 +1,18 @@
 package com.example.NewJeans.controller;
 
 
-import com.example.NewJeans.Entity.Member;
 import com.example.NewJeans.dto.request.CreateBoardRequestDTO;
 import com.example.NewJeans.dto.request.ModifyBoardRequestDTO;
-import com.example.NewJeans.dto.response.DetailBoardResponseDTO;
 import com.example.NewJeans.dto.response.DetailIdolResponseDTO;
 import com.example.NewJeans.dto.response.ListBoardResponseDTO;
 import com.example.NewJeans.service.BoardService;
 import com.example.NewJeans.service.IdolService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,7 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller

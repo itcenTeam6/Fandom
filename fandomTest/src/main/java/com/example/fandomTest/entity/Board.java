@@ -1,10 +1,12 @@
 package com.example.fandomTest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,6 +34,8 @@ public class Board {
 
     private int boardLike;
 
+    private String memNickName;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idolID")
     private Idol idol;
@@ -39,4 +43,8 @@ public class Board {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberID")
     private Member member;
+
+    @JsonIgnoreProperties({"Board"})
+    @OneToMany(mappedBy = "boardId",fetch = FetchType.EAGER,cascade =CascadeType.REMOVE)
+    private List<Comment> comments;
 }
