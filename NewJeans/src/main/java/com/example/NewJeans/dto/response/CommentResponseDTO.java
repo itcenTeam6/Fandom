@@ -2,6 +2,7 @@ package com.example.NewJeans.dto.response;
 
 
 import com.example.NewJeans.Entity.Comment;
+import com.example.NewJeans.Entity.Member;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
@@ -20,6 +21,8 @@ public class CommentResponseDTO {
 
     private Long boardId;
 
+    private Member member;
+
     private String memNickName;
 
     private String cmtContent;
@@ -33,6 +36,7 @@ public class CommentResponseDTO {
         this.boardId=comment.getBoardId().getBoardID();
         this.memNickName=comment.getBoardId().getMemNickName();
         this.cmtContent=comment.getCmtContent();
+        this.member=comment.getMemId();
     }
 
 

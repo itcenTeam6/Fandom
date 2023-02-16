@@ -12,4 +12,6 @@ import lombok.*;
 public class CommentSaveResponseDTO {
     private String userNickName;
     private String commentText;
+    private Long savedCmtID;
+    private String userEmail;
 }

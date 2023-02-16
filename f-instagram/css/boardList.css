@@ -103,7 +103,9 @@ body {
     display: flex;
     justify-content: end;
     align-items: center;
+    border-bottom: 1px solid #99999934;
     padding: 20px 10px 15px 0px;
+    margin-bottom: 10px;
 }
 
 .contents .bottom_icons .left_icons{
@@ -121,7 +123,7 @@ body {
     font-size: x-large;
 }
 
-.lnr-trash:hover{
+.bottom_icons .lnr-trash:hover{
     color: #f21a3f;
     font-size: x-large;
 }
@@ -219,6 +221,15 @@ body {
     /*pointer-events: none;*/
     opacity: 0.6;
     font-family: 'Noto Sans KR';
+}
+
+.commentTrash{
+    margin-left: 13px;
+}
+
+.commentTrash .lnr-trash:hover{
+    cursor: pointer;
+    color: #f21a3f;
 }
 
 /* ============================ */

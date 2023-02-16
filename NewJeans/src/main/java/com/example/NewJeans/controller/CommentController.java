@@ -72,34 +72,6 @@ public class CommentController {
         return commentService.retrieve(boardId);
     }
 
-
-
-    //댓글 삭제   //댓글 쓴 작성자, 게시글 작성자 삭제 가능
-    @DeleteMapping("/{idol-id}/{board-id}/comments/{comment-id}")
-    public ResponseEntity<?> deleteComment(
-            @PathVariable("board-id") Long boardId,
-            @PathVariable("comment-id") Long cmtId
-    )
-    {
-        log.info("/board/{}/comments/{} DELETE request!", boardId,cmtId);
-
-        if (boardId == null) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(ListBoardResponseDTO.builder().error("boardID를 전달해주세요"));
-        }
-
-        try {
-            commentService.delete(cmtId); //memId
-            return null; //게시판으로
-            // return ResponseEntity.ok().body(responseDTO);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError()
-                    .body(ListBoardResponseDTO.builder().error(e.getMessage()));
-        }
-    }
-
-
     //댓글 수정 댓글 쓴 작성자만 수정 가능
     @RequestMapping(
             value = "/{board-id}/comments/{comment-id}"
@@ -115,8 +87,6 @@ public class CommentController {
         return null;
 
     }
-
-
 
     @RequestMapping(value = "/commentSave", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity<?> commentSave(
@@ -137,6 +107,27 @@ public class CommentController {
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());
+        }
+    }
+
+    //댓글 삭제   //댓글 쓴 작성자, 게시글 작성자 삭제 가능
+    @DeleteMapping("/commentDelete")
+    public @ResponseBody ResponseEntity<?> deleteComment(
+            @Validated @RequestParam("commentId") Long commentId
+    )
+    {
+        log.info("commentDelete commentId is {}", commentId);
+
+        try {
+            commentService.delete(commentId); //memId
+            return ResponseEntity
+                    .ok()
+                    .body("delete Success");
+        } catch (Exception e) {
+            log.warn(e.getMessage());
+            return ResponseEntity
+                    .internalServerError()
+                    .body(ListBoardResponseDTO.builder().error(e.getMessage()));
         }
     }
 }

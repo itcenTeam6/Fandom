@@ -25,9 +25,6 @@
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 
     <script text="text/javascript">
-    
-
-
         function commentUpload(boardId, userEmail){
             const replyInput = document.getElementById("replyInput_" + boardId);
             const commentContainer = document.getElementById("showComment_" + boardId);
@@ -36,16 +33,11 @@
             const newCommentBox = document.createElement("div");
             const newCommentSet = document.createElement("div");
             const newCommentUser = document.createElement("div");
-            const newDivCommentId = document.createElement("div");
             const newCommentId = document.createElement("span");
             const newCommentContents = document.createElement("div");
+            const newCommentTrash = document.createElement("div");
+            const newCommentTrashSpan = document.createElement("span");
 
-            newCommentBox.setAttribute("class", "commentBox");
-            newCommentSet.setAttribute("class", "commentSet");
-            newDivCommentId.setAttribute("style", "white-space: nowrap;")
-            newCommentUser.setAttribute("class", "commentUser")
-            newCommentId.setAttribute("class", "commentId");
-            newCommentContents.setAttribute("class", "commentContents");
 
             $.ajax({
                 url: "${cpath}/comment/commentSave",
@@ -57,6 +49,18 @@
                 },
                 success: function(data){
 
+                    newCommentBox.setAttribute("class", "commentBox");
+                    newCommentBox.setAttribute("name", "commentBox_" + data.savedCmtID);
+
+                    newCommentSet.setAttribute("class", "commentSet");
+                    newCommentUser.setAttribute("class", "commentUser");
+                    newCommentId.setAttribute("class", "commentId");
+                    newCommentContents.setAttribute("class", "commentContents");
+                    newCommentTrash.setAttribute("class", "commentTrash");
+
+                    newCommentTrashSpan.setAttribute("class", "lnr lnr-trash");
+                    newCommentTrashSpan.setAttribute("onclick", "javascript:commentDelete('" + data.savedCmtID + "','" + data.userEmail + "'," + "'${userEmail}')")
+
                     newCommentId.innerText = data.userNickName;
                     newCommentContents.innerText = data.commentText;
 
@@ -65,6 +69,8 @@
                     newCommentSet.appendChild(newCommentUser);
                     newCommentUser.appendChild(newCommentId);
                     newCommentSet.appendChild(newCommentContents);
+                    newCommentSet.appendChild(newCommentTrash);
+                    newCommentTrash.appendChild(newCommentTrashSpan);
 
                     replyInput.value = "";
                 },
@@ -87,6 +93,31 @@
         function getUpdatePost(boardId) {
             alert("게시글을 수정하시겠습니까??")
             location.href = "${cpath}/board/updateForm?boardId=" + boardId + "&idolID=${idolID}";
+        }
+
+        function commentDelete(commentId, memEmail, userEmail){
+            if(memEmail != userEmail){
+                alert("권한이 없습니다!!")
+            }else{
+                console.log(commentId)
+                console.log(memEmail)
+                console.log(userEmail)
+
+                const destDeleteTag = document.getElementsByName("commentBox_" + commentId)[0];
+                $.ajax({
+                    url: "${cpath}/comment/commentDelete",
+                    method: "DELETE",
+                    data : {
+                        "commentId" : commentId
+                    },
+                    success: function(data){
+                        destDeleteTag.remove();
+                    },
+                    error: function(){
+                        alert("Error")
+                    }
+                })
+            }
         }
     </script>
 
@@ -138,19 +169,21 @@
                                     </c:if>
                                 </div>
                             </div>
-
                             <!-- Comment ============= -->
                             <div class="showComment" id="showComment_${ boardItem.boardId }">
                                 <c:forEach var="comment" items="${boardItem.comments}">
-                                    <div class="commentBox" id="commentBox_${ boardItem.boardId }">
-                                            <div class="commentSet" id="commentSet_${ boardItem.boardId }">
-                                                <div class="commentUser" id="commentUser_${ boardItem.boardId }">
-                                                    <span class="commentId" id="commentId_${ boardItem.boardId }">${ comment.memNickName }</span>
-                                                </div>
-                                                <div class="commentContents" id="commentContents_${ boardItem.boardId }">
-                                                    ${ comment.cmtContent }
-                                                </div>
+                                    <div class="commentBox" id="commentBox_${ boardItem.boardId }" name="commentBox_${ comment.cmtID }">
+                                        <div class="commentSet" id="commentSet_${ boardItem.boardId }" name="commentSet_${ comment.cmtID }">
+                                            <div class="commentUser" id="commentUser_${ boardItem.boardId }" name="commentUser_${ comment.cmtID }">
+                                                <span class="commentId" id="commentId_${ boardItem.boardId }" name="commentId_${ comment.cmtID }">${ comment.memNickName }</span>
                                             </div>
+                                            <div class="commentContents" id="commentContents_${ boardItem.boardId }" name="commentId_${ comment.cmtID }">
+                                                ${ comment.cmtContent }
+                                            </div>
+                                            <div class="commentTrash" name="commentTrash_${ comment.cmtID }">
+                                                <span class="lnr lnr-trash" onclick="javascript:commentDelete('${ comment.cmtID }', '${ comment.member.memEmail }', '${ userEmail }')"></span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </c:forEach>
                             </div>
