@@ -1,5 +1,6 @@
 package com.example.NewJeans.controller;
 
+import com.example.NewJeans.dto.response.CommentSaveResponseDTO;
 import com.example.NewJeans.dto.request.CommentRequestDTO;
 import com.example.NewJeans.dto.response.ListBoardResponseDTO;
 import com.example.NewJeans.Entity.Comment;
@@ -117,7 +118,25 @@ public class CommentController {
 
 
 
+    @RequestMapping(value = "/commentSave", method = RequestMethod.POST)
+    public @ResponseBody ResponseEntity<?> commentSave(
+            @Validated @RequestParam("boardId") Long boardId,
+            @Validated @RequestParam("userEmail") String userEmail,
+            @RequestParam("commentText") String commentText
+    ){
+        log.info("commentSave boardId is {}", boardId);
+        log.info("commentSave userEmail is {}", userEmail);
 
-
-
+        try {
+            CommentSaveResponseDTO commentSaveResponseDTO = commentService.commentSave(boardId, userEmail, commentText);
+            return ResponseEntity
+                    .ok()
+                    .body(commentSaveResponseDTO);
+        }catch (Exception e){
+            log.warn(e.getMessage());
+            return ResponseEntity
+                    .badRequest()
+                    .body(e.getMessage());
+        }
+    }
 }

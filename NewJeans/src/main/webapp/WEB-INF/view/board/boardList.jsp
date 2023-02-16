@@ -23,34 +23,75 @@
     <link rel="stylesheet" href="/css/innerPage.css">
     <link rel="stylesheet" href="/css/animate.min.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script text="text/javascript">
-        function commentUpload() {
-            document.getElementById("inputButton").click()
+    
+
+
+        function commentUpload(boardId, userEmail){
+            const replyInput = document.getElementById("replyInput_" + boardId);
+            const commentContainer = document.getElementById("showComment_" + boardId);
+
+            const commentText = replyInput.value;
+            const newCommentBox = document.createElement("div");
+            const newCommentSet = document.createElement("div");
+            const newCommentUser = document.createElement("div");
+            const newDivCommentId = document.createElement("div");
+            const newCommentId = document.createElement("span");
+            const newCommentContents = document.createElement("div");
+
+            newCommentBox.setAttribute("class", "commentBox");
+            newCommentSet.setAttribute("class", "commentSet");
+            newDivCommentId.setAttribute("style", "white-space: nowrap;")
+            newCommentUser.setAttribute("class", "commentUser")
+            newCommentId.setAttribute("class", "commentId");
+            newCommentContents.setAttribute("class", "commentContents");
+
+            $.ajax({
+                url: "${cpath}/comment/commentSave",
+                type: "POST",
+                data : {
+                    "boardId" : boardId,
+                    "userEmail" : userEmail,
+                    "commentText" : commentText
+                },
+                success: function(data){
+
+                    newCommentId.innerText = data.userNickName;
+                    newCommentContents.innerText = data.commentText;
+
+                    commentContainer.appendChild(newCommentBox);
+                    newCommentBox.appendChild(newCommentSet);
+                    newCommentSet.appendChild(newCommentUser);
+                    newCommentUser.appendChild(newCommentId);
+                    newCommentSet.appendChild(newCommentContents);
+
+                    replyInput.value = "";
+                },
+                error: function(){
+                    alert("Error")
+                }
+            })
         }
 
-        function JoinMemberShip(){
+        function JoinMemberShip() {
             alert("멤버십 가입하시겠습니까??")
             location.href = "${cpath}/idolImg/join?idol-id=" + "${idolID}";
         }
 
-        function getDeletePost(boardId){
+        function getDeletePost(boardId) {
             alert("게시글을 삭제하시겠습니까??")
             location.href = "${cpath}/board" + "/${idolID}/" + boardId;
         }
 
-        function getUpdatePost(boardId){
+        function getUpdatePost(boardId) {
             alert("게시글을 수정하시겠습니까??")
             location.href = "${cpath}/board/updateForm?boardId=" + boardId + "&idolID=${idolID}";
         }
-
-        $(document).ready(function(){
-            console.log("${listBoard.boards}");
-        })
     </script>
 
 </head>
+
 <body>
     <jsp:include page="../header/innerHeader.jsp" />
     <section id="container">
@@ -87,39 +128,38 @@
                                 <div class="left_icons">
                                     <c:if test="${boardItem.member.memEmail eq userEmail}">
                                         <div class="heart_btn">
-                                            <span class="lnr lnr-pencil" onclick="javascript:getUpdatePost(${ boardItem.boardId })"></span>
+                                            <span class="lnr lnr-pencil"
+                                                onclick="javascript:getUpdatePost(${ boardItem.boardId })"></span>
                                         </div>
                                         <div class="heart_btn">
-                                            <span class="lnr lnr-trash" onclick="javascript:getDeletePost(${ boardItem.boardId })"></span>
+                                            <span class="lnr lnr-trash"
+                                                onclick="javascript:getDeletePost(${ boardItem.boardId })"></span>
                                         </div>
                                     </c:if>
                                 </div>
                             </div>
 
                             <!-- Comment ============= -->
-                            <div class="showComment">
-                                <div class="commentBox" id="commentBox_${ boardItem.boardId }">
-                                    <c:forEach var="comment" items="${boardItem.comments}">
-                                        <div class="commentSet" id="commentSet_${ boardItem.boardId }">
-                                            <div class="commentUser" id="commentUser_${ boardItem.boardId }">
-                                                <span class="commentId" id="commentId_${ boardItem.boardId }">${ comment.memNickName }</span>
+                            <div class="showComment" id="showComment_${ boardItem.boardId }">
+                                <c:forEach var="comment" items="${boardItem.comments}">
+                                    <div class="commentBox" id="commentBox_${ boardItem.boardId }">
+                                            <div class="commentSet" id="commentSet_${ boardItem.boardId }">
+                                                <div class="commentUser" id="commentUser_${ boardItem.boardId }">
+                                                    <span class="commentId" id="commentId_${ boardItem.boardId }">${ comment.memNickName }</span>
+                                                </div>
+                                                <div class="commentContents" id="commentContents_${ boardItem.boardId }">
+                                                    ${ comment.cmtContent }
+                                                </div>
                                             </div>
-                                            <div class="commentContents" id="commentContents_${ boardItem.boardId }">
-                                                ${ comment.cmtContent }
-                                            </div>
-                                        </div>
-                                    </c:forEach>
-                                </div>
+                                    </div>
+                                </c:forEach>
                             </div>
 
                             <div class="comment_field" id="add-comment-post37">
                                 <div class="replyComment">
-                                    <form class="replyForm" action="">
-                                        <input class="replyInput" type="text" placeholder="댓글달기...">
-                                        <div class="upload_btn m_text" data-name="comment"
-                                            onclick="javascript:commentUpload()">게시</div>
-                                        <button id="inputButton" class="replyBtn" style="display: none;"></button>
-                                    </form>
+                                    <input class="replyInput" type="text" placeholder="댓글달기..." id="replyInput_${ boardItem.boardId }">
+                                    <div class="upload_btn m_text" data-name="comment" onclick="javascript:commentUpload('${ boardItem.boardId }', '${ userEmail }')">게시</div>
+                                    <button id="inputButton" class="replyBtn" style="display: none;" id="replyBtn_${ boardItem.boardId }"></button>
                                 </div>
                             </div>
                         </article>
@@ -138,8 +178,7 @@
                         </div>
                         <article class="recommend">
                             <div class="myprofile_thumb">
-                                <img
-                                    src="${ idol.idolSubImg }">
+                                <img src="${ idol.idolSubImg }">
                                 <h1 class="thumb_text">${ idol.idolName }</h1>
                                 <div class="thumb_box"></div>
                             </div>
@@ -154,62 +193,9 @@
     <footer>
         <a href="#top" class="go-top"><span class="lnr lnr-arrow-up"></span></a>
     </footer>
-
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/scrolla.jquery.min.js"></script>
-    <script src="/js/slick.min.js"></script>
-    <script src="/js/script.js"></script>
-    <script>
-        /*
-        대충 어케어케 현재 유저 닉네임이든 아이디든 받아서 넣을 수 있도록
-        대충 어케어케 게시글 pk 받아서 querySelector로 선택할 수 있도록
-        */
-        let replyInput = document.querySelector(".replyInput");
-        let replyBtn = document.querySelector(".replyBtn");
-        let commentBox = document.querySelector(".commentBox");
-        let commentContainer = document.querySelector(".showComment");
-
-        replyInput.addEventListener("keydown", submitEnter);
-        replyBtn.addEventListener("click", makeComment);
-
-        function submitEnter(event) {
-            if (event.keycode === 13) {
-                makeComment();
-            }
-        }
-
-        function makeComment(e) {
-            e.preventDefault();
-
-            let commentText = replyInput.value;
-            let newCommentBox = document.createElement("div");
-            let newCommentSet = document.createElement("div");
-            let newCommentUser = document.createElement("div")
-            let newCommentId = document.createElement("span");
-            let newCommentContents = document.createElement("div");
-
-            newCommentBox.setAttribute("class", "commentBox");
-            newCommentSet.setAttribute("class", "commentSet");
-            newCommentUser.setAttribute("class", "commentUser")
-            newCommentId.setAttribute("class", "commentId");
-            newCommentContents.setAttribute("class", "commentContents");
-
-            newCommentId.innerText = "${ userNick }";
-            newCommentContents.innerText = commentText;
-
-            commentContainer.appendChild(newCommentBox);
-            newCommentBox.appendChild(newCommentSet);
-            newCommentSet.appendChild(newCommentUser);
-            newCommentUser.appendChild(newCommentId);
-            newCommentSet.appendChild(newCommentContents);
-            initInput();
-        }
-
-        function initInput() {
-            replyInput.value = "";
-        }
-
-    </script>
 </body>
-
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/scrolla.jquery.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/script.js"></script>
 </html>

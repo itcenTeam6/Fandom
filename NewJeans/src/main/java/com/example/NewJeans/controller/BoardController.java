@@ -36,8 +36,6 @@ public class BoardController {
     private final BoardService boardService;
     private final IdolService idolService;
     private final IdolImgService idolImgService;
-    private final MemberServcie memberService;
-
 
     //게시글 조회  (무한스크롤 필요)
     @GetMapping("/{idol-id}")   //아이돌 번호에 따라 페이징

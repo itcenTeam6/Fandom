@@ -30,9 +30,6 @@ $(function() {
     });
 });
 
-
-
-
 //fix header
 var scrollTop = 0;
 scrollTop = $(document).scrollTop();
