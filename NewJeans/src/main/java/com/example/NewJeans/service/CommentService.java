@@ -1,6 +1,8 @@
 package com.example.NewJeans.service;
 
 
+import com.example.NewJeans.Entity.Member;
+import com.example.NewJeans.dto.response.CommentSaveResponseDTO;
 import com.example.NewJeans.dto.request.CommentRequestDTO;
 import com.example.NewJeans.Entity.Board;
 import com.example.NewJeans.Entity.Comment;
@@ -75,7 +77,25 @@ public class CommentService {
     }
 
 
+    public CommentSaveResponseDTO commentSave(
+            final Long boardId,
+            final String userEmail,
+            final String commentText
+    ) {
+        Member byMemEmail = memberRepository.findByMemEmail(userEmail);
+        Board board = boardRepository.findById(boardId).orElseThrow(() -> new RuntimeException("게시글 없음"));
 
+        Comment comment = Comment.builder()
+                .boardId(board)
+                .memId(byMemEmail)
+                .cmtContent(commentText)
+                .build();
 
+        commentRepository.save(comment);
 
+        return CommentSaveResponseDTO.builder()
+                .userNickName(byMemEmail.getMemNickname())
+                .commentText(commentText)
+                .build();
+    }
 }

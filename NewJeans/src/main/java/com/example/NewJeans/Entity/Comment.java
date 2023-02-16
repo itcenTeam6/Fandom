@@ -19,8 +19,9 @@ import java.time.LocalDateTime;
 public class Comment {
 
     @Id
-    @GeneratedValue(generator = "system-uuid") // 중복없는 랜덤문자로 pk 생성전략
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+//    @GeneratedValue(generator = "system-uuid") // 중복없는 랜덤문자로 pk 생성전략
+//    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cmtID;
 
     @ManyToOne(fetch = FetchType.LAZY)
