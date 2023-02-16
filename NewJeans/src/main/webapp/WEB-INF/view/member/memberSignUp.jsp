@@ -29,22 +29,22 @@
     <main class="login-body slider-bg">
         <div class="register-form">
             <h2>Register</h2>
-            <div class="form-input">
+            <div class="form-input" style="height :100px !important">
                 <label for="name">Email Address</label>
                 <input type="email" name="userEmail" id="memEmail" placeholder="Email Address">
                 <span id="memEmailRight"></span>
             </div>
-            <div class="form-input">
+             <div class="form-input" style="height :100px !important">
                 <label for="name">Nick Name</label>
                 <input type="text" name="userNickName" id="userNickName" placeholder="NickName">
                 <span id="memNickNameRight"></span>
             </div>
-            <div class="form-input">
+            <div class="form-input" style="height :100px !important">
                 <label for="name">Password</label>
                 <input type="password" name="userPw" id="memPassword" placeholder="Password">
                 <span id="memPasswordRight"></span>
             </div>
-            <div class="form-input">
+            <div class="form-input" style="height :70px !important">
                 <label for="name">Confirm Password</label>
                 <input type="password" name="userPw-confirm" id="memPasswordCheck" placeholder="Confirm Password">
                 <span id="memPasswordCheckRight"></span>
