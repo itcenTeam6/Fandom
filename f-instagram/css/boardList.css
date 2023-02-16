@@ -184,6 +184,8 @@ body {
     width: 480px;
     color: #999;
     line-height: 18px;
+    flex-wrap: wrap;
+    word-break:break-all
 }
 
 .contents .comment_field{
@@ -420,7 +422,7 @@ body {
 }
 
 .replyInput{
-    width: 530px;
+    width: 200px;
     height: 18px;
     border: 0;
     font-size: 14px;

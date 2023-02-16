@@ -55,6 +55,8 @@ dependencies {
 	// mysql JDBC 드라이버
 	implementation 'mysql:mysql-connector-java:8.0.28'
 
+	//gson
+	implementation 'com.google.code.gson:gson:2.8.6'
 
 }
 

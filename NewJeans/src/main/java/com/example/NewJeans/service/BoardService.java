@@ -90,7 +90,6 @@ public class BoardService {
                 throw new RuntimeException(e);
             }
         }
-
         return ListBoardResponseDTO.builder()
                 .boards(dtoList)
                 .build();

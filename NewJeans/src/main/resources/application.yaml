@@ -36,7 +36,7 @@ spring:
     hibernate:
       database: mysql
       generate-ddl: true
-      ddl-auto: update
+      ddl-auto: create
 
   # JSP
   mvc:
