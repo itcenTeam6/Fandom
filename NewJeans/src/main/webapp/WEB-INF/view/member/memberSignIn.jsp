@@ -29,12 +29,12 @@
     <main class="login-body slider-bg">
         <div class="login-form">
             <h2>Login</h2>
-            <div class="form-input">
+             <div class="form-input" style="height :80px !important">
                 <label for="name">Email</label>
                 <input type="email" name="userEmail" id="memEmail" placeholder="Input your Email">
                 <span id="memEmailRight"></span>
             </div>
-            <div class="form-input">
+            <div class="form-input" style="height :80px !important">
                 <label for="name">Password</label>
                 <input type="password" name="userPw" id="memPassword" placeholder="Input your Password">
                 <span id="memPasswordRight"></span>
@@ -101,7 +101,7 @@
                 fetch('/member/signin', {
                     method: 'POST',
                     headers: {
-                        'content-type': 'application/json'
+                        'content-type':'application/json; charset=utf-8;'
                     },
                     body: JSON.stringify(userValue)
                 }).then(t => t.json())
@@ -109,15 +109,11 @@
                         if (result.message) {
                             alert(result.message);
                         } else {
-                            var date = new Date();
-                            date.setTime(date.getTime() + 1 * 60 * 10000);
-
-                            document.cookie = "ACCESS_TOKEN=" + result.token + "; path=/; max-age=600";
-                            document.cookie = "LOGIN_USEREMAIL=" + result.memEmail + "; path=/; max-age=600";
-                            document.cookie = "LOGIN_USERNICK=" + result.memNickname + "; path=/; max-age=600";
-
-                            localStorage.clear()
-                            window.location.href = '/';
+                                document.cookie = "ACCESS_TOKEN="+result.token+"; path=/; max-age=1*60*30;"
+                                document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; path=/; max-age=1*60*30;"
+                                document.cookie = "LOGIN_NICKNAME="+result.memNickname+"; path=/; max-age=1*60*30;"
+                                localStorage.clear()
+                                window.location.href = '/';
                         }
                     })
             }
