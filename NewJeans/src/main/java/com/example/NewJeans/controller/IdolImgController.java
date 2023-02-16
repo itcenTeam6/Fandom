@@ -1,7 +1,6 @@
 package com.example.NewJeans.controller;
 
 
-import com.example.NewJeans.dto.response.ListIdolImgResponseDTO;
 import com.example.NewJeans.security.TokenProvider;
 import com.example.NewJeans.service.IdolImgService;
 import lombok.RequiredArgsConstructor;
@@ -38,13 +37,11 @@ public class IdolImgController {
         Long userId = null;
         if(authentication != null) userId = Long.parseLong((String) authentication.getPrincipal());
         log.info("현재 {}로 시작합니다.", userId);
-        boolean membership = idolImgService.isMemberShip(userId, idolId);
-        model.addAttribute("memberShip", membership);
+        model.addAttribute("memberShip", idolImgService.isMemberShip(userId, idolId));
         model.addAttribute("idolID", idolId);
 
         try {
-            ListIdolImgResponseDTO listIdolImgResponseDTO = idolImgService.findIdolImgs(idolId,page,size,sort);
-            model.addAttribute("idolImgList", listIdolImgResponseDTO);
+            model.addAttribute("idolImgList", idolImgService.findIdolImgs(idolId,page,size,sort));
             return "idol/idolImg";
         } catch (RuntimeException e) {
             log.warn("idolImage GET(리스트) 에러 : {}", e.getMessage());
@@ -55,7 +52,6 @@ public class IdolImgController {
 
     @GetMapping("/join")
     public String joinMemberShip(
-            Model model, HttpServletRequest request,
             @Positive @RequestParam("idol-id") Long idolId,
             @CookieValue(value = "LOGIN_USEREMAIL", required = false) Cookie userEmail
     ){

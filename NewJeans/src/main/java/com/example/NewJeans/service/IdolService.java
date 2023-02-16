@@ -1,15 +1,14 @@
 package com.example.NewJeans.service;
 
+import com.example.NewJeans.Entity.Idol;
 import com.example.NewJeans.dto.request.CreateIdolRequestDTO;
 import com.example.NewJeans.dto.request.ModifyIdolRequestDTO;
 import com.example.NewJeans.dto.response.DetailIdolResponseDTO;
 import com.example.NewJeans.dto.response.ListIdolResponseDTO;
-import com.example.NewJeans.Entity.Idol;
 import com.example.NewJeans.repository.IdolRepository;
 import com.example.NewJeans.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -26,33 +25,29 @@ public class IdolService {
     private static final String IMAGE_PATH = "E:\\image";
 
     public DetailIdolResponseDTO create(CreateIdolRequestDTO createIdolRequestDTO){
-
         //이미지 파일 -> 경로
-        String idolMainImg = FileUtils.uploadFile(createIdolRequestDTO.getImage(), IMAGE_PATH);
-        createIdolRequestDTO.setIdolMainImg(idolMainImg);
-
+        createIdolRequestDTO.setIdolMainImg( FileUtils.uploadFile(createIdolRequestDTO.getImage(), IMAGE_PATH));
         //DB에 아이돌 저장
-        Idol idol = createIdolRequestDTO.toEntity();
-        Idol savedIdol = idolRepository.save(idol);
+        Idol savedIdol = idolRepository.save(createIdolRequestDTO.toEntity());
 
         log.info("아이돌 save 완료 : {}",savedIdol);
         return new DetailIdolResponseDTO(savedIdol);
     }
 
     public ListIdolResponseDTO findIdols(int page, int size, String sort){
-        Page<Idol> foundIdols = idolRepository.findAll(PageRequest.of(page - 1, size, Sort.by(sort).descending()));
-        List<Idol> listIdols = foundIdols.getContent();
-
-        List<DetailIdolResponseDTO> responseDTOS =
-                listIdols.stream()
+        return ListIdolResponseDTO
+                .builder()
+                .idols(idolRepository
+                        .findAll(PageRequest.of(page - 1, size, Sort.by(sort).descending()))
+                        .getContent()
+                        .stream()
                         .map(DetailIdolResponseDTO::new)
-                        .collect(Collectors.toList());
-        return ListIdolResponseDTO.builder().idols(responseDTOS).build();
+                        .collect(Collectors.toList()))
+                .build();
     }
 
     public DetailIdolResponseDTO findIdol(Long idolId){
-        Idol verifiedIdol = findVerfiedIdol(idolId);
-        return new DetailIdolResponseDTO(verifiedIdol);
+        return new DetailIdolResponseDTO(findVerfiedIdol(idolId));
     }
 
     public DetailIdolResponseDTO updateIdol(Long idolId, ModifyIdolRequestDTO modifyIdolRequestDTO){
@@ -61,9 +56,7 @@ public class IdolService {
                 .ifPresent(verifiedIdol::setIdolName);
         Optional.ofNullable(modifyIdolRequestDTO.getImage())
                 .ifPresent(file -> verifiedIdol.setIdolMainImg(FileUtils.uploadFile(file,IMAGE_PATH)));
-
-        Idol savedIdol = idolRepository.save(verifiedIdol);
-        return new DetailIdolResponseDTO(savedIdol);
+        return new DetailIdolResponseDTO(idolRepository.save(verifiedIdol));
     }
 
     public DetailIdolResponseDTO removeIdol(Long idolId){
@@ -74,8 +67,7 @@ public class IdolService {
     }
 
     public Idol findVerfiedIdol(Long idolId){
-        Optional<Idol> optionalIdol = idolRepository.findById(idolId);
-        return optionalIdol.orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
+        return idolRepository.findById(idolId).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
     }
 
     public List<Idol> getIdolList() {
