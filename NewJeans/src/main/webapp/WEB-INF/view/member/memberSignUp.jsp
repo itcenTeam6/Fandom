@@ -46,7 +46,7 @@
             </div>
             <div class="form-input" style="height :70px !important">
                 <label for="name">Confirm Password</label>
-                <input type="password" name="userPw-confirm" id="memPasswordCheck" placeholder="Confirm Password">
+                <input type="password" name="userPw-confirm" id="memPasswordCheck" placeholder="Confirm Password" onkeyup="enterkey()">
                 <span id="memPasswordCheckRight"></span>
             </div>
             <div class="form-input">
@@ -160,14 +160,22 @@
                 })
                     .then(res => {
                         if (res.status === 200) {
-                            alert('회원가입을축하합니다.');
                             window.location.href = '/member/signin';
+                            alert('회원가입을축하합니다.');
                         } else {
                             alert('회원가입에 실패했습니다. 잠시 후 다시 시도해주세요.');
                         }
                     });
             }
-        }
+    }
+
+    $memPasswordCheck.addEventListener("keyup", function (event) {
+      if (event.keyCode === 13) {
+        $signUpBtn.click();
+      }
+    })
+
+
     </script>
 </body>
 
