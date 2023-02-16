@@ -109,7 +109,7 @@ public class BoardController {
             @RequestParam("file") List<MultipartFile> fileList,
             BindingResult result,
             HttpServletRequest request,
-            @CookieValue(value = "LOGIN_USERNICK", required = false) Cookie userNick
+            @CookieValue(value = "LOGIN_NICKNAME", required = false) Cookie userNick
     )
     throws Exception {
         Long userId = null;
