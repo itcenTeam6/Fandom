@@ -1,11 +1,10 @@
 package com.example.NewJeans.service;
 
-import com.example.NewJeans.dto.response.DetailIdolImgResponseDTO;
-import com.example.NewJeans.dto.response.ListIdolImgResponseDTO;
-import com.example.NewJeans.Entity.Idol;
 import com.example.NewJeans.Entity.IdolImg;
 import com.example.NewJeans.Entity.Member;
 import com.example.NewJeans.Entity.MemberShip;
+import com.example.NewJeans.dto.response.DetailIdolImgResponseDTO;
+import com.example.NewJeans.dto.response.ListIdolImgResponseDTO;
 import com.example.NewJeans.repository.IdolImgRepository;
 import com.example.NewJeans.repository.IdolRepository;
 import com.example.NewJeans.repository.MemberRepository;
@@ -31,14 +30,12 @@ public class IdolImgService {
     private final MemberRepository memberRepository;
 
     public ListIdolImgResponseDTO findIdolImgs(Long idolID, int page, int size, String sort) {
-        Idol idol = idolRepository.findById(idolID).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
-
+        idolRepository.findById(idolID).orElseThrow(() -> new RuntimeException("아이돌이 존재하지 않습니다."));
         // 페이징처리 + 목록 불러오기
         Page<IdolImg> pageImgs = idolImgRepository.findAllByIdolId_IdolID(idolID, PageRequest.of(page - 1, size, Sort.by(sort).descending()));
-
         // responseDTO 리스트로 변환
-        List<IdolImg> listImgs = pageImgs.getContent();
-        List<DetailIdolImgResponseDTO> listImgResponseDTOs = listImgs
+        List<DetailIdolImgResponseDTO> listImgResponseDTOs = pageImgs
+                .getContent()
                 .stream()
                 .map(DetailIdolImgResponseDTO::new)
                 .collect(Collectors.toList());
@@ -60,31 +57,32 @@ public class IdolImgService {
     }
 
     public boolean isMemberShip(Long memId, Long idolId) {
-        Optional<MemberShip> optionalMemberShip = memberShipRepository.findByMem_MemIDAndIdol_IdolID(memId, idolId);
-        if(optionalMemberShip.isEmpty()) return false; //커뮤니티 멤버가 아니면 거짓
-        MemberShip memberShip = optionalMemberShip.get();
-        return memberShip.getMsType().equals("yes"); //멤버쉽 회원이면 참, 멤버쉽 회원이 아니면 거짓
+        //멤버쉽 회원이면 참, 멤버쉽 회원이 아니면 거짓
+        //커뮤니티 멤버가 아니면 거짓
+        return memberShipRepository
+                .findByMem_MemIDAndIdol_IdolID(memId, idolId)
+                .map(memberShip -> memberShip.getMsType().equals("yes"))
+                .orElse(false);
     }
 
     public boolean isMemberShipForBoard(String userEmail, Long idolId) {
-        Member byMemEmail = memberRepository.findByMemEmail(userEmail);
-        Optional<MemberShip> optionalMemberShip = memberShipRepository.findByMem_MemIDAndIdol_IdolID(byMemEmail.getMemID(), idolId);
-        if(optionalMemberShip.isEmpty()) return false; //커뮤니티 멤버가 아니면 거짓
-        MemberShip memberShip = optionalMemberShip.get();
-        return memberShip.getMsType().equals("yes"); //멤버쉽 회원이면 참, 멤버쉽 회원이 아니면 거짓
+        //커뮤니티 멤버가 아니면 거짓
+        //멤버쉽 회원이면 참, 멤버쉽 회원이 아니면 거짓
+        return memberShipRepository
+                .findByMem_MemIDAndIdol_IdolID(memberRepository.findByMemEmail(userEmail).getMemID(), idolId)
+                .map(memberShip -> memberShip.getMsType().equals("yes"))
+                .orElse(false);
     }
 
     public void addMemberShip(String userEmail, Long idolId) {
         Member byMemEmail = memberRepository.findByMemEmail(userEmail);
-        Idol byIdolID = idolRepository.findById(idolId).orElseThrow(() -> new RuntimeException("아이돌 없따"));
-
         Optional<MemberShip> optionalMemberShip = memberShipRepository.findByMem_MemIDAndIdol_IdolID(byMemEmail.getMemID(), idolId);
 
         if (optionalMemberShip.isEmpty()) {
             memberShipRepository.save(MemberShip.builder()
                     .msType("yes")
                     .mem(byMemEmail)
-                    .idol(byIdolID)
+                    .idol(idolRepository.findById(idolId).orElseThrow(() -> new RuntimeException("아이돌 없따")))
                     .build());
         }else {
             MemberShip memberShip = optionalMemberShip.orElseThrow(() -> new RuntimeException("존재하지 않는 멤버회원입니다."));
