@@ -56,26 +56,20 @@ public class CommentService {
 
     }
 
-
     //댓글 삭제
     public void delete(Long cmtId) {
-
         Comment comment = commentRepository.findById(cmtId).orElseThrow(() ->
                 new IllegalArgumentException("해당 댓글이 존재하지 않습니다. id=" + cmtId));
-
         commentRepository.delete(comment);
     }
 
-
     //댓글 수정
-
     public void update(Long cmtId, CommentRequestDTO requestDTO) {
         Comment comment = commentRepository.findById(cmtId).orElseThrow(() ->
                 new IllegalArgumentException("해당 댓글이 존재하지 않습니다. " + cmtId));
 
         comment.update(requestDTO.getCmtContent());
     }
-
 
     public CommentSaveResponseDTO commentSave(
             final Long boardId,
@@ -91,11 +85,13 @@ public class CommentService {
                 .cmtContent(commentText)
                 .build();
 
-        commentRepository.save(comment);
+        Comment save = commentRepository.save(comment);
 
         return CommentSaveResponseDTO.builder()
                 .userNickName(byMemEmail.getMemNickname())
                 .commentText(commentText)
+                .savedCmtID(save.getCmtID())
+                .userEmail(save.getMemId().getMemEmail())
                 .build();
     }
 }
