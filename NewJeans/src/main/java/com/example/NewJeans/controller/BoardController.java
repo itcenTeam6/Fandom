@@ -46,7 +46,7 @@ public class BoardController {
             Authentication authentication,
             @PathVariable("idol-id") Long idolId,
             @CookieValue(value = "LOGIN_USEREMAIL", required = false) Cookie userEmail,
-            @CookieValue(value = "LOGIN_USERNICK", required = false) Cookie userNick,
+            @CookieValue(value = "LOGIN_NICKNAME", required = false) Cookie userNick,
             @PageableDefault(size = 10, sort = "boardID", direction = Sort.Direction.DESC) Pageable pageable,
             HttpServletRequest request
     )

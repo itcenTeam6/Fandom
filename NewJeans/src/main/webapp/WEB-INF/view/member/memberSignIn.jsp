@@ -98,6 +98,7 @@
                     memEmail: $memEmail.value,
                     memPassword: $memPassword.value
                 }
+
                 fetch('/member/signin', {
                     method: 'POST',
                     headers: {
@@ -105,18 +106,22 @@
                     },
                     body: JSON.stringify(userValue)
                 }).then(t => t.json())
-                    .then(result => {
-                        if (result.message) {
-                            alert(result.message);
-                        } else {
-                                document.cookie = "ACCESS_TOKEN="+result.token+"; path=/; max-age=1*60*30;"
-                                document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; path=/; max-age=1*60*30;"
-                                document.cookie = "LOGIN_NICKNAME="+result.memNickname+"; path=/; max-age=1*60*30;"
-                                localStorage.clear()
-                                window.location.href = '/';
-                        }
-                    })
+                  .then(result => {
+                    if (result.message) {
+                        alert('로그인에 실패하였습니다. 다시 시도해주세요');
+                    } else {
+                        document.cookie = "ACCESS_TOKEN="+result.token+"; path=/; max-age=1*60*30;"
+                        document.cookie = "LOGIN_USEREMAIL="+result.memEmail+"; path=/; max-age=1*60*30;"
+                        document.cookie = "LOGIN_NICKNAME="+result.memNickname+"; path=/; max-age=1*60*30;"
+                        localStorage.clear()
+                         window.location.href = '/';
+                    }
+                  })
+
             }
+
+
+
         }
     </script>
 </body>

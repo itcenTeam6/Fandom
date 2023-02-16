@@ -22,9 +22,13 @@ public class LoginResponseDTO {
 
     private String memNickname;
 
+    private String message;
     public LoginResponseDTO(Member member, String token){
         this.memEmail=member.getMemEmail();
         this.token=token;
         this.memNickname=member.getMemNickname();
+    }
+    public LoginResponseDTO(String message){
+        this.message=message;
     }
 }
