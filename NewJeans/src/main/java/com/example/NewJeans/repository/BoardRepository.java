@@ -16,6 +16,7 @@ public interface BoardRepository extends JpaRepository<Board,Long> {
     @Query("select t from Board t where t.member=:member")
     void findByUserId(@Param("member") Long userId);
 
+//    Page<Board> findAllByIdol_IdolIDOrderByBoardDateDesc(Long idolId, Pageable pageable);
 
     /// List<Board> findByIdolContaining(Long idol, Pageable pageable);
 

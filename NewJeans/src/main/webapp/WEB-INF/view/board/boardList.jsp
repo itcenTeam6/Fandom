@@ -44,6 +44,10 @@
             alert("게시글을 수정하시겠습니까??")
             location.href = "${cpath}/board/updateForm?boardId=" + boardId + "&idolID=${idolID}";
         }
+
+        $(document).ready(function(){
+            console.log("${listBoard.boards}");
+        })
     </script>
 
 </head>

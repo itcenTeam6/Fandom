@@ -36,9 +36,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
-//    private static final String IMAGE_PATH = "E:\\image";
-    @Value("${file.dir}")
-    private String IMAGE_PATH;
+    private static final String IMAGE_PATH = "E:\\image";
 
     //게시판 목록 조회  페이징 처리 필요
     @Transactional
@@ -92,6 +90,7 @@ public class BoardService {
                 throw new RuntimeException(e);
             }
         }
+
         return ListBoardResponseDTO.builder()
                 .boards(dtoList)
                 .build();
