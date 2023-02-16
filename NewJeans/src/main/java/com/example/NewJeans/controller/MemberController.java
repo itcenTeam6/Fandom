@@ -7,6 +7,8 @@ import com.example.NewJeans.dto.response.SignUpResponseDTO;
 import com.example.NewJeans.exception.DuplicatedEmailException;
 import com.example.NewJeans.exception.NoRegisteredArgumentsException;
 import com.example.NewJeans.service.MemberServcie;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -60,7 +62,7 @@ public class MemberController {
     public @ResponseBody ResponseEntity<?> signIn(
             @Validated @RequestBody LoginRequestDTO loginRequestDTO,
             HttpServletResponse response, Authentication authentication
-    ) {
+    ) throws JsonProcessingException {
         try {
             LoginResponseDTO loginResponseDTO = memberServcie.getByCredentials(loginRequestDTO.getMemEmail(), loginRequestDTO.getMemPassword());
             String token = loginResponseDTO.getToken();
@@ -69,9 +71,12 @@ public class MemberController {
                     .ok()
                     .body(loginResponseDTO);
         } catch (RuntimeException e) {
+            ObjectMapper om= new ObjectMapper();
+            LoginResponseDTO loginResponseDTO2=new LoginResponseDTO("fail");
+            String s = om.writeValueAsString(loginResponseDTO2);
             return ResponseEntity
-                    .badRequest()
-                    .build();
+                    .ok()
+                    .body(loginResponseDTO2);
         }
     }
 
