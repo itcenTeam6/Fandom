@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
-    private static final String IMAGE_PATH = "E:\\image";
+    private static final String IMAGE_PATH = "/home/ec2-user/image";
 
     //게시판 목록 조회  페이징 처리 필요
     @Transactional
