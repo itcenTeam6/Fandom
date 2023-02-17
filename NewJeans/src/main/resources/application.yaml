@@ -1,5 +1,5 @@
 server:
-  port: 8085
+  port: 8181
   servlet:
     jsp:
       init-parameters:
@@ -16,10 +16,15 @@ logging:
 
 spring:
   # DB source
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+
   datasource:
-    url: jdbc:mariadb://localhost:3306/newjeans
+    url: jdbc:mariadb://fandom-database.ccep9xkwszxq.ap-northeast-2.rds.amazonaws.com:3306/newjeans
     username: root
-    password: mariadb
+    password: mariadb!
 
   # JPA config
   jpa:
@@ -31,7 +36,7 @@ spring:
     hibernate:
       database: mysql
       generate-ddl: true
-      ddl-auto: create
+      ddl-auto: none
 
   # JSP
   mvc:
@@ -44,3 +49,6 @@ spring:
 #    prefix: classpath:/templates/
 #    suffix: .html
 #    cache: false
+file:
+  dir:
+    "/home/ec2-user"

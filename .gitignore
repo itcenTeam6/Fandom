@@ -34,3 +34,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# json 제외
+# *.json
+
+# foler 제외
+/userImg/

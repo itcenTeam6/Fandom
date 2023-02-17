@@ -1,0 +1,56 @@
+server:
+  port: 8086
+  servlet:
+    jsp:
+      init-parameters:
+        development: true
+
+logging:
+  level:
+    root:
+      info
+    com:
+      example:
+        fandomTest:
+          trace
+    org:
+      hibernate:
+        info
+
+spring:
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/workspace
+    username: myEdu
+    password: q1w2e3r4
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        direct: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+    hibernate:
+      database: mysql
+      generate-ddl: true
+      ddl-auto: update
+      naming:
+        physical-strategy=org:
+          hibernate:
+            boot:
+              model:
+                naming:
+                  PhysicalNamingStrategyStandardImpl:# JSP
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
+
+file:
+  dir:
+    D:/Fandom/image/
