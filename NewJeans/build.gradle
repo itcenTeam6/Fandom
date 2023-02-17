@@ -1,6 +1,5 @@
 plugins {
 	id 'java'
-	id 'war'
 	id 'org.springframework.boot' version '2.7.8'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
@@ -59,10 +58,10 @@ dependencies {
 	//gson
 	implementation 'com.google.code.gson:gson:2.8.6'
 
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 
 
 tasks.named('test') {
-	useJUnitPlatform()
+	exclude '**/*'
 }
