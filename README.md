@@ -22,7 +22,43 @@
 
 ## 💻 실사용 화면
 
-<-- 실사용 화면 GIF -->
+- 회원가입
+<img src="./docs/img/회원가입.gif" alt="회원가입">
+
+<br>
+
+- 로그인
+<img src="./docs/img/로그인.gif" alt="로그인">
+
+<br>
+
+- 로그아웃
+<img src="./docs/img/로그아웃.gif" alt="로그아웃">
+
+<br>
+
+- 메인화면
+<img src="./docs/img/메인화면.gif" alt="메인화면">
+
+<br>
+
+- 아이돌
+<img src="./docs/img/아이돌.gif" alt="아이돌">
+
+<br>
+
+- 게시글
+<img src="./docs/img/게시글.gif" alt="게시글">
+
+<br>
+
+- 댓글
+<img src="./docs/img/댓글.gif" alt="댓글">
+
+<br>
+
+- 멤버쉽
+<img src="./docs/img/멤버쉽.gif" alt="멤버쉽">
 
 <br>
 
@@ -86,25 +122,6 @@
 - 라이브 스트리밍
 - 유튜브, 인스타 등 다른 플랫폼 컨텐츠
 
-
-<br>
-
-## 🙋 맡은 역할
-
-
-### 🙌 정충근
-
-
-
-### 🙌 김기태
-
-  
-
-### 🙌 나경민
-  
-
-  
-### 🙌 유태형
 
 <br>
 
